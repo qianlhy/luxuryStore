@@ -1,0 +1,151 @@
+
+.index-container { padding-bottom: 30rpx; background: #F8F8F8;
+}
+.top-header {
+    display: flex;
+    align-items: center;
+    padding: 20rpx 30rpx;
+    background: #fff;
+}
+.logo-text { font-size: 36rpx; font-weight: bold; color: #1A1A1A; margin-right: 20rpx;
+}
+.search-input-box {
+    flex: 1;
+    background: #F5F5F5;
+    border-radius: 36rpx;
+    height: 64rpx;
+    display: flex;
+    align-items: center;
+    padding: 0 24rpx;
+}
+.search-icon { font-size: 24rpx; margin-right: 8rpx;
+}
+.search-placeholder { color: #999; font-size: 26rpx;
+}
+.nav-tabs { white-space: nowrap; padding: 16rpx 30rpx; background: #fff;
+}
+.nav-tab {
+    display: inline-block;
+    padding: 10rpx 24rpx;
+    font-size: 28rpx;
+    color: #666;
+    margin-right: 10rpx;
+}
+.nav-tab.active { color: #1A1A1A; font-weight: bold; border-bottom: 4rpx solid #C5A36A;
+}
+.banner { width: 100%; height: 380rpx; position: relative;
+}
+.banner-image { width: 100%; height: 100%;
+}
+.banner-overlay {
+    position: absolute;
+    bottom: 60rpx;
+    left: 40rpx;
+}
+.banner-title { color: #fff; font-size: 40rpx; font-weight: bold; display: block; text-shadow: 0 2rpx 8rpx rgba(0,0,0,0.3);
+}
+.banner-sub { color: rgba(255,255,255,0.9); font-size: 24rpx; margin-top: 8rpx; display: block;
+}
+.category-tiles { display: flex; padding: 20rpx; gap: 16rpx;
+}
+.tile-item { flex: 1; position: relative; border-radius: 12rpx; overflow: hidden; height: 240rpx;
+}
+.tile-img { width: 100%; height: 100%;
+}
+.tile-name {
+    position: absolute;
+    bottom: 20rpx;
+    left: 0; right: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 26rpx;
+    font-weight: bold;
+    text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.5);
+}
+.brand-section { padding: 20rpx 0; background: #fff; margin: 20rpx 0;
+}
+.brand-scroll { white-space: nowrap; padding: 0 20rpx;
+}
+.brand-circle {
+    display: inline-block;
+    width: 140rpx;
+    text-align: center;
+    margin-right: 20rpx;
+}
+.brand-logo { width: 100rpx; height: 100rpx; border-radius: 50%; background: #f5f5f5;
+}
+.brand-name { font-size: 22rpx; color: #666; display: block; margin-top: 8rpx;
+}
+.section { background: #fff; margin: 20rpx; padding: 30rpx; border-radius: 16rpx;
+}
+.section-header { margin-bottom: 20rpx;
+}
+.section-title { font-size: 32rpx; font-weight: bold; color: #1A1A1A;
+}
+.section-sub { font-size: 22rpx; color: #999; margin-left: 16rpx;
+}
+.section-more { float: right; font-size: 24rpx; color: #C5A36A;
+}
+.hot-grid { display: flex; flex-wrap: wrap; gap: 16rpx;
+}
+.hot-card { width: calc(50% - 8rpx); border-radius: 12rpx; overflow: hidden; background: #FAFAFA;
+}
+.hot-img { width: 100%; height: 240rpx;
+}
+.hot-info { padding: 16rpx;
+}
+.hot-name { font-size: 24rpx; display: block; margin-bottom: 8rpx;
+}
+.hot-price { font-size: 28rpx; color: #C5A36A; font-weight: bold;
+}
+.product-list { margin-top: 10rpx;
+}
+.product-item {
+    display: flex;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #f5f5f5;
+}
+.product-image { width: 160rpx; height: 160rpx; border-radius: 12rpx; margin-right: 20rpx;
+}
+.product-info { flex: 1; display: flex; flex-direction: column; justify-content: center;
+}
+.product-name { font-size: 28rpx; font-weight: bold; margin-bottom: 10rpx;
+}
+.price { color: #C5A36A; font-weight: bold; font-size: 32rpx;
+}
+.float-service {
+    position: fixed;
+    right: 20rpx;
+    bottom: 200rpx;
+    background: #fff;
+    border-radius: 40rpx;
+    padding: 16rpx 24rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    z-index: 99;
+}
+.float-icon { font-size: 28rpx; margin-right: 8rpx;
+}
+.float-text { font-size: 22rpx; color: #666;
+}
+.toast-container {
+    position: fixed;
+    bottom: 200rpx;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+}
+.toast-content {
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    border-radius: 8rpx;
+    padding: 16rpx 30rpx;
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+}
+.toast-content text { margin-left: 10rpx;
+}
+
