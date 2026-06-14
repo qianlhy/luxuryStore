@@ -2,7 +2,9 @@
     <!-- pages/login/login.wxml -->
     <view class="login-container">
         <view class="login-header">
-            <image class="logo" src="https://img1.baidu.com/it/u=3937158862,3439944525&fm=253&app=138&f=JPEG?w=800&h=1067" mode="aspectFit"></image>
+            <view class="logo">
+                <text class="logo-text">名品汇</text>
+            </view>
             <text class="title">欢迎来到名品汇商城</text>
         </view>
 
@@ -52,7 +54,6 @@
 
             <!-- 微信登录 -->
             <button :class="'wx-login-btn ' + (isLoading ? 'loading' : '')" @tap="wxLogin" :disabled="isLoading">
-                <image class="wx-icon" src="/static/images/icons/wechat.png" mode="aspectFit"></image>
                 微信一键登录
             </button>
 
@@ -389,11 +390,11 @@ export default {
         },
 
         goToUserAgreement() {
-            console.log('占位：函数 goToUserAgreement 未声明');
+            uni.navigateTo({ url: '/pages/agreement/user' });
         },
 
         goToPrivacyPolicy() {
-            console.log('占位：函数 goToPrivacyPolicy 未声明');
+            uni.navigateTo({ url: '/pages/agreement/privacy' });
         }
     }
 };
@@ -435,10 +436,19 @@ export default {
     width: 160rpx;
     height: 160rpx;
     margin-bottom: 30rpx;
-    background-color: #fff;
+    background: linear-gradient(135deg, #D4AF37, #C5A36A);
     border-radius: 50%;
-    padding: 20rpx;
-    box-shadow: 0 10rpx 40rpx rgba(102, 126, 234, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10rpx 40rpx rgba(197, 163, 106, 0.4);
+}
+
+.logo-text {
+    color: #fff;
+    font-size: 40rpx;
+    font-weight: bold;
+    letter-spacing: 2rpx;
 }
 
 .title {

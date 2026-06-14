@@ -7,9 +7,9 @@
         </view>
         <view class="points-list">
             <view class="list-title">积分明细</view>
-            <view class="empty" v-if="logs.length === 0">
-                <text>暂无积分记录</text>
-            </view>
+            <loading-state v-if="loading" />
+            <empty-state v-else-if="logs.length === 0" text="暂无积分记录" sub-text="下单即可获赠积分" />
+            <block v-else>
             <view class="log-item" v-for="(item, index) in logs" :key="index">
                 <view class="log-left">
                     <text class="log-remark">{{ item.remark || getTypeName(item.type) }}</text>
@@ -19,6 +19,7 @@
                     {{ item.points > 0 ? '+' : '' }}{{ item.points }}
                 </text>
             </view>
+            </block>
         </view>
     </view>
 </template>
@@ -29,7 +30,8 @@ export default {
     data() {
         return {
             balance: 0,
-            logs: []
+            logs: [],
+            loading: true
         };
     },
     onShow() {
@@ -42,12 +44,24 @@ export default {
                 uni.navigateTo({ url: '/pages/login/login' });
                 return;
             }
-            pointsApi.getBalance().then((data) => {
-                this.setData({ balance: data || 0 });
-            });
-            pointsApi.getLogs().then((data) => {
-                this.setData({ logs: data || [] });
-            });
+            this.setData({ loading: true });
+            pointsApi
+                .getBalance()
+                .then((data) => {
+                    this.setData({ balance: data || 0 });
+                })
+                .catch((err) => {
+                    console.error('获取积分余额失败', err);
+                });
+            pointsApi
+                .getLogs()
+                .then((data) => {
+                    this.setData({ logs: data || [], loading: false });
+                })
+                .catch((err) => {
+                    console.error('获取积分明细失败', err);
+                    this.setData({ loading: false });
+                });
         },
         getTypeName(type) {
             const map = { 1: '下单获赠', 2: '兑换消费', 3: '管理员调整' };

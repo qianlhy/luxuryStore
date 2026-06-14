@@ -6,9 +6,20 @@
           <el-icon><Plus /></el-icon>
           <span>添加分类</span>
         </el-button>
+        <div class="toolbar-right">
+          <el-input
+            v-model="queryParams.name"
+            placeholder="搜索分类名称"
+            style="width: 240px"
+            clearable
+            @keyup.enter="handleSearch"
+            @clear="handleSearch"
+          />
+          <el-button type="primary" @click="handleSearch"><el-icon><Search /></el-icon> 搜索</el-button>
+        </div>
       </div>
 
-      <el-table :data="tableData" border style="margin-top: 20px">
+      <el-table v-loading="loading" :data="tableData" border style="margin-top: 20px">
         <el-table-column prop="id" label="ID" width="80" />
         <el-table-column prop="name" label="分类名称" />
         <el-table-column prop="icon" label="图标" width="100">
@@ -30,6 +41,9 @@
             <el-button type="danger" text @click="handleDelete(row)">删除</el-button>
           </template>
         </el-table-column>
+        <template #empty>
+          <el-empty description="暂无分类数据" />
+        </template>
       </el-table>
 
       <el-pagination
@@ -113,6 +127,7 @@ const queryParams = ref({
 
 const tableData = ref([])
 const total = ref(0)
+const loading = ref(false)
 
 const dialogVisible = ref(false)
 const dialogTitle = ref('添加分类')
@@ -138,13 +153,22 @@ const uploadHeaders = computed(() => ({
 }))
 
 const fetchData = async () => {
+  loading.value = true
   try {
     const res = await getCategoryPage(queryParams.value)
     tableData.value = res.data.records
     total.value = res.data.total
   } catch (error) {
-    console.error(error)
+    tableData.value = []
+    total.value = 0
+  } finally {
+    loading.value = false
   }
+}
+
+const handleSearch = () => {
+  queryParams.value.current = 1
+  fetchData()
 }
 
 const handleAdd = () => {
@@ -245,6 +269,10 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.toolbar-right {
+  display: flex;
+  gap: 10px;
 }
 
 .icon-uploader :deep(.el-upload) {

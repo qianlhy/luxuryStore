@@ -1,26 +1,32 @@
 <template>
     <!-- pages/cart/cart.wxml -->
     <view class="cart-container">
-        <!-- 未登录提示 -->
-        <view class="login-tip" v-if="!isLogin">
-            <text>登录后才能同步购物车哦</text>
-            <view class="login-btn" @tap="goToLogin">去登录</view>
+        <!-- 未登录状态 -->
+        <view class="empty-cart" v-if="!isLogin">
+            <empty-state icon="cart" text="登录后查看购物车" sub-text="同步多端购物车，方便快捷">
+                <button class="go-shopping-btn" @tap="goToLogin">去登录</button>
+            </empty-state>
         </view>
+
+        <!-- 加载中 -->
+        <loading-state v-else-if="isLoading" />
 
         <!-- 购物车为空 -->
-        <view class="empty-cart" v-if="isEmpty">
-            <image src="/static/images/icons/empty-cart.png" mode="aspectFit" class="empty-icon"></image>
-            <text class="empty-text">购物车还是空的</text>
-            <button class="go-shopping-btn" @tap="goToShopping">去逛逛</button>
+        <view class="empty-cart" v-else-if="isEmpty">
+            <empty-state icon="cart" text="购物车还是空的">
+                <button class="go-shopping-btn" @tap="goToShopping">去逛逛</button>
+            </empty-state>
         </view>
 
+        <!-- 已登录且有商品 -->
+        <block v-else>
         <!-- 失效商品提示 -->
         <view class="invalid-tip" v-if="invalidCount > 0">
             <text>{{ invalidCount }}件商品已失效，将自动归类</text>
         </view>
 
         <!-- 购物车商品列表 -->
-        <view class="cart-list" v-if="!isEmpty">
+        <view class="cart-list">
             <view :class="'cart-item ' + (item.invalid ? 'invalid-item' : '')" v-for="(item, index) in cartList" :key="index">
                 <view class="select-box" @tap="toggleSelect" :data-index="index">
                     <view :class="'select-icon ' + (item.selected && !item.invalid ? 'selected' : '')"></view>
@@ -59,7 +65,7 @@
         </view>
 
         <!-- 底部结算栏 -->
-        <view class="cart-footer" v-if="!isEmpty">
+        <view class="cart-footer">
             <view class="select-all" @tap="toggleSelectAll">
                 <view :class="'select-icon ' + (isAllSelected ? 'selected' : '')"></view>
                 <text>全选</text>
@@ -77,6 +83,7 @@
             </view>
             <button class="checkout-btn" @tap="goToCheckout">结算({{ totalCount }})</button>
         </view>
+        </block>
     </view>
 </template>
 
@@ -94,6 +101,7 @@ export default {
             isAllSelected: true,
             isEmpty: true,
             isLogin: false,
+            isLoading: false,
             invalidCount: 0,
             salesList: []
         };
@@ -126,10 +134,12 @@ export default {
 
         // 获取购物车数据
         getCartData: function () {
+            this.setData({ isLoading: true });
             cartApi
                 .getCartList()
                 .then((data) => {
-                    const cartList = data.map((item) => ({
+                    const list = data || [];
+                    const cartList = list.map((item) => ({
                         ...item,
                         selected: !item.invalid
                     }));
@@ -140,11 +150,16 @@ export default {
                         totalPrice,
                         totalCount,
                         isEmpty: cartList.length === 0,
-                        invalidCount
+                        invalidCount,
+                        isLoading: false
                     });
                 })
                 .catch((err) => {
                     console.error('获取购物车失败', err);
+                    this.setData({
+                        isLoading: false,
+                        isEmpty: this.cartList.length === 0
+                    });
                 });
         },
 

@@ -35,6 +35,8 @@ public class ShareController {
             Long salesId = params.get("salesId") != null ? Long.valueOf(params.get("salesId").toString()) : null;
             ShareRecord record = shareService.createShare(userId, shareType, productIds, salesId);
             return Result.success(record);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -50,6 +52,8 @@ public class ShareController {
         try {
             Long userId = jwtUtils.getUserIdFromToken(token);
             return Result.success(shareService.getUserShareList(userId));
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

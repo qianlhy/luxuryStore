@@ -4,7 +4,7 @@
       <div class="toolbar">
         <el-button type="primary" @click="handleAdd"><el-icon><Plus /></el-icon> 添加销售</el-button>
       </div>
-      <el-table :data="tableData" border style="margin-top: 20px">
+      <el-table v-loading="loading" :data="tableData" border style="margin-top: 20px">
         <el-table-column prop="id" label="ID" width="80" />
         <el-table-column prop="name" label="姓名" />
         <el-table-column prop="phone" label="手机号" />
@@ -21,37 +21,57 @@
             <el-button type="danger" text @click="handleDelete(row)">删除</el-button>
           </template>
         </el-table-column>
+        <template #empty>
+          <el-empty description="暂无销售人员" />
+        </template>
       </el-table>
+      <el-pagination
+        v-model:current-page="queryParams.current"
+        v-model:page-size="queryParams.size"
+        :total="total"
+        :page-sizes="[10, 20, 50]"
+        layout="total, sizes, prev, pager, next, jumper"
+        @current-change="fetchData"
+        @size-change="handleSearch"
+        style="margin-top: 20px"
+      />
     </el-card>
     <el-dialog v-model="dialogVisible" :title="dialogTitle" width="400px">
-      <el-form :model="form" label-width="100px">
-        <el-form-item label="姓名"><el-input v-model="form.name" /></el-form-item>
-        <el-form-item label="手机号"><el-input v-model="form.phone" /></el-form-item>
+      <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
+        <el-form-item label="姓名" prop="name"><el-input v-model="form.name" /></el-form-item>
+        <el-form-item label="手机号" prop="phone"><el-input v-model="form.phone" maxlength="11" /></el-form-item>
         <el-form-item label="微信号"><el-input v-model="form.wechat" /></el-form-item>
         <el-form-item label="绑定用户ID"><el-input v-model="form.userId" /></el-form-item>
         <el-form-item label="状态"><el-switch v-model="form.status" :active-value="1" :inactive-value="0" /></el-form-item>
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="handleSubmit">确定</el-button>
+        <el-button type="primary" :loading="submitLoading" @click="handleSubmit">确定</el-button>
       </template>
     </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getSalesPage, addSales, updateSales, deleteSales } from '@/api/sales'
+import { useTablePage } from '@/composables/useTablePage'
 
-const tableData = ref([])
+const { tableData, total, loading, queryParams, fetchData, handleSearch } = useTablePage(getSalesPage)
+
 const dialogVisible = ref(false)
 const dialogTitle = ref('添加销售')
+const submitLoading = ref(false)
+const formRef = ref()
 const form = ref({ name: '', phone: '', wechat: '', userId: null, status: 1 })
 
-const fetchData = async () => {
-  const res = await getSalesPage({ current: 1, size: 100 })
-  tableData.value = res.data.records
+const rules = {
+  name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
+  phone: [
+    { required: true, message: '请输入手机号', trigger: 'blur' },
+    { pattern: /^1\d{10}$/, message: '手机号格式不正确', trigger: 'blur' }
+  ]
 }
 
 const handleAdd = () => {
@@ -66,21 +86,33 @@ const handleEdit = (row) => {
   dialogVisible.value = true
 }
 
-const handleSubmit = async () => {
-  if (form.value.id) await updateSales(form.value)
-  else await addSales(form.value)
-  ElMessage.success('操作成功')
-  dialogVisible.value = false
-  fetchData()
-}
-
-const handleDelete = (row) => {
-  ElMessageBox.confirm('确定删除？').then(async () => {
-    await deleteSales(row.id)
-    ElMessage.success('删除成功')
-    fetchData()
+const handleSubmit = () => {
+  formRef.value.validate(async (valid) => {
+    if (!valid) return
+    submitLoading.value = true
+    try {
+      if (form.value.id) await updateSales(form.value)
+      else await addSales(form.value)
+      ElMessage.success('操作成功')
+      dialogVisible.value = false
+      fetchData()
+    } finally {
+      submitLoading.value = false
+    }
   })
 }
 
-onMounted(fetchData)
+const handleDelete = (row) => {
+  ElMessageBox.confirm(`确定删除销售「${row.name}」吗？`, '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(async () => {
+      await deleteSales(row.id)
+      ElMessage.success('删除成功')
+      fetchData()
+    })
+    .catch(() => {})
+}
 </script>

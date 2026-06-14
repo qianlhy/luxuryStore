@@ -1,5 +1,6 @@
 package com.flowerstore.util;
 
+import com.flowerstore.common.UnauthorizedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -60,13 +61,17 @@ public class JwtUtils {
 
     /**
      * 从Token中获取用户ID
+     * token 缺失/无效/过期时抛出 UnauthorizedException，由全局异常处理器统一返回 401
      */
     public Long getUserIdFromToken(String token) {
-        Claims claims = getClaimsFromToken(token);
-        if (claims != null) {
-            return Long.valueOf(claims.get("userId").toString());
+        if (token == null || token.trim().isEmpty()) {
+            throw new UnauthorizedException("请先登录");
         }
-        return null;
+        Claims claims = getClaimsFromToken(token);
+        if (claims == null || claims.get("userId") == null) {
+            throw new UnauthorizedException("登录已过期，请重新登录");
+        }
+        return Long.valueOf(claims.get("userId").toString());
     }
 
     /**

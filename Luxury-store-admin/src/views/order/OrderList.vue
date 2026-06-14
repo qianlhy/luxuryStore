@@ -24,7 +24,7 @@
         />
       </div>
 
-      <el-table :data="tableData" border style="margin-top: 20px">
+      <el-table v-loading="loading" :data="tableData" border style="margin-top: 20px">
         <el-table-column prop="orderNo" label="订单号" width="180" />
         <el-table-column prop="receiverName" label="收货人" width="100" />
         <el-table-column prop="receiverPhone" label="联系电话" width="120" />
@@ -67,6 +67,9 @@
             </el-button>
           </template>
         </el-table-column>
+        <template #empty>
+          <el-empty description="暂无订单数据" />
+        </template>
       </el-table>
 
       <el-pagination
@@ -100,14 +103,19 @@ const queryParams = ref({
 
 const tableData = ref([])
 const total = ref(0)
+const loading = ref(false)
 
 const fetchData = async () => {
+  loading.value = true
   try {
     const res = await getOrderPage(queryParams.value)
     tableData.value = res.data.records
     total.value = res.data.total
   } catch (error) {
-    console.error(error)
+    tableData.value = []
+    total.value = 0
+  } finally {
+    loading.value = false
   }
 }
 

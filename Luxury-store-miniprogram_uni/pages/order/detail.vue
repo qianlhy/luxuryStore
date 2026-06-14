@@ -2,6 +2,18 @@
     <!-- pages/order/detail.wxml -->
     <view class="order-detail-container">
         <!-- 加载中 -->
+        <view class="loading-container" v-if="isLoading">
+            <view class="loading"></view>
+            <text class="loading-text">加载中...</text>
+        </view>
+
+        <block v-else-if="orderInfo">
+        <!-- 订单状态 -->
+        <view class="status-section">
+            <view class="status">{{ statusText }}</view>
+            <view class="status-desc">{{ statusDesc }}</view>
+        </view>
+
         <!-- 收货地址 -->
         <view class="address-section">
             <view class="section-title">收货地址</view>
@@ -38,7 +50,7 @@
             <view class="order-info-item">
                 <text class="label">订单编号</text>
                 <view class="value-copy">
-                    <text class="value">{{ orderId }}</text>
+                    <text class="value">{{ orderInfo.order.orderNo || orderId }}</text>
                     <view class="copy-btn" @tap="copyOrderId">复制</view>
                 </view>
             </view>
@@ -75,26 +87,33 @@
         <!-- 底部操作按钮 -->
         <view class="footer">
             <!-- 待付款 -->
-            <block v-if="orderInfo.status === '待付款'">
+            <block v-if="orderStatus === 1">
                 <button class="btn cancel" @tap="cancelOrder">取消订单</button>
                 <button class="btn primary" @tap="goToPay">去支付</button>
             </block>
 
             <!-- 待发货 -->
-            <block v-else-if="orderInfo.status === '待发货'">
+            <block v-else-if="orderStatus === 2">
                 <button class="btn" @tap="contactService">联系客服</button>
             </block>
 
-            <!-- 待收货 -->
-            <block v-else-if="orderInfo.status === '待收货'">
+            <!-- 待收货（已发货） -->
+            <block v-else-if="orderStatus === 3">
                 <button class="btn" @tap="checkLogistics">查看物流</button>
                 <button class="btn primary" @tap="confirmReceipt">确认收货</button>
             </block>
 
             <!-- 已完成 -->
-            <block v-else-if="orderInfo.status === '已完成'">
+            <block v-else-if="orderStatus === 4">
                 <button class="btn" @tap="contactService">联系客服</button>
             </block>
+        </view>
+        </block>
+
+        <!-- 加载失败 -->
+        <view class="error-container" v-else>
+            <text class="error-text">订单信息加载失败</text>
+            <button class="btn primary retry-btn" @tap="getOrderDetail(orderId)">重新加载</button>
         </view>
     </view>
 </template>
@@ -120,6 +139,29 @@ export default {
             freight: '',
             actualPayment: ''
         };
+    },
+    computed: {
+        orderStatus() {
+            return this.orderInfo && this.orderInfo.order ? Number(this.orderInfo.order.status) : 0;
+        },
+        statusText() {
+            const map = { 1: '待付款', 2: '待发货', 3: '待收货', 4: '已完成', 5: '已取消' };
+            // 优先使用后端返回的 statusText
+            if (this.orderInfo && this.orderInfo.order && this.orderInfo.order.statusText) {
+                return this.orderInfo.order.statusText;
+            }
+            return map[this.orderStatus] || '未知状态';
+        },
+        statusDesc() {
+            const map = {
+                1: '请尽快完成支付',
+                2: '商家正在备货，请耐心等待',
+                3: '商品已发出，请注意查收',
+                4: '订单已完成，感谢您的购买',
+                5: '订单已取消'
+            };
+            return map[this.orderStatus] || '';
+        }
     },
     onLoad: function (options) {
         const { id } = options;
@@ -182,8 +224,9 @@ export default {
 
         // 复制订单号
         copyOrderId: function () {
+            const orderNo = (this.orderInfo && this.orderInfo.order && this.orderInfo.order.orderNo) || this.orderId;
             uni.setClipboardData({
-                data: this.orderInfo.orderNo,
+                data: orderNo,
                 success: () => {
                     uni.showToast({
                         title: '订单号已复制',
@@ -222,8 +265,9 @@ export default {
         // 去支付
         goToPay: function () {
             const { orderId, orderInfo } = this;
+            const amount = (orderInfo && orderInfo.order && orderInfo.order.actualPayment) || 0;
             uni.navigateTo({
-                url: `/pages/order/payment?id=${orderId}&amount=${orderInfo.actualPayment}`
+                url: `/pages/order/payment?id=${orderId}&amount=${amount}`
             });
         },
 
@@ -282,6 +326,7 @@ export default {
 /* 加载中 */
 .loading-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -291,9 +336,34 @@ export default {
     width: 80rpx;
     height: 80rpx;
     border: 6rpx solid #f3f3f3;
-    border-top: 6rpx solid #ff6b81;
+    border-top: 6rpx solid #C5A36A;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    margin-top: 20rpx;
+    font-size: 26rpx;
+    color: #999;
+}
+
+/* 加载失败 */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.error-text {
+    font-size: 28rpx;
+    color: #999;
+    margin-bottom: 40rpx;
+}
+
+.retry-btn {
+    padding: 0 60rpx;
 }
 
 @keyframes spin {
@@ -315,7 +385,7 @@ export default {
 
 /* 订单状态 */
 .status-section {
-    background-color: #ff6b81;
+    background-color: #C5A36A;
     color: #fff;
     padding: 40rpx 30rpx;
 }
@@ -414,7 +484,7 @@ export default {
 
 .goods-price {
     font-size: 30rpx;
-    color: #ff6b81;
+    color: #C5A36A;
     font-weight: 500;
 }
 
@@ -453,7 +523,7 @@ export default {
 
 .copy-btn {
     margin-left: 20rpx;
-    color: #ff6b81;
+    color: #C5A36A;
     font-size: 26rpx;
 }
 
@@ -481,7 +551,7 @@ export default {
 .amount-item.total .value {
     font-size: 32rpx;
     font-weight: bold;
-    color: #ff6b81;
+    color: #C5A36A;
 }
 
 /* 底部按钮 */
@@ -509,7 +579,7 @@ export default {
 }
 
 .btn.primary {
-    background-color: #ff6b81;
+    background-color: #C5A36A;
     color: #fff;
 }
 

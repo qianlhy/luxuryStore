@@ -1,10 +1,12 @@
 <template>
     <!-- pages/address/list.wxml -->
     <view class="address-container">
+        <!-- 加载中 -->
+        <loading-state v-if="isLoading" />
+
         <!-- 地址为空提示 -->
-        <view class="empty-address" v-if="isEmpty">
-            <image src="/static/images/icons/empty-address.png" class="empty-icon"></image>
-            <text class="empty-text">暂无收货地址</text>
+        <view class="empty-address" v-else-if="isEmpty">
+            <empty-state icon="address" text="暂无收货地址" sub-text="添加地址，购物更省心" />
         </view>
 
         <!-- 地址列表 -->
@@ -54,7 +56,8 @@ export default {
     data() {
         return {
             addressList: [],
-            isEmpty: true
+            isEmpty: true,
+            isLoading: true
         };
     }
     /**
@@ -72,23 +75,34 @@ export default {
     methods: {
         // 获取地址列表
         getAddressList: function () {
+            this.setData({ isLoading: true });
             addressApi
                 .getAddressList()
                 .then((data) => {
+                    const list = data || [];
                     this.setData({
-                        addressList: data,
-                        isEmpty: data.length === 0
+                        addressList: list,
+                        isEmpty: list.length === 0,
+                        isLoading: false
                     });
                 })
                 .catch((err) => {
                     console.error('获取地址列表失败', err);
+                    this.setData({
+                        isLoading: false,
+                        isEmpty: this.addressList.length === 0
+                    });
                 });
         },
 
         // 选择地址
         selectAddress: function (e) {
-            const { index } = e.currentTarget.dataset;
-            const address = this.addressList[index];
+            const { id } = e.currentTarget.dataset;
+            const address = this.addressList.find((item) => item.id === id);
+            if (!address) {
+                uni.showToast({ title: '地址不存在', icon: 'none' });
+                return;
+            }
 
             // 存储选中的地址
             uni.setStorageSync('selectedAddress', address);
@@ -137,8 +151,23 @@ export default {
             });
         },
 
-        setDefault() {
-            console.log('占位：函数 setDefault 未声明');
+        // 设为默认地址
+        setDefault: function (e) {
+            const { id } = e.currentTarget.dataset;
+            const address = this.addressList.find((item) => item.id === id);
+            if (!address) return;
+            addressApi
+                .updateAddress({ ...address, isDefault: 1 })
+                .then(() => {
+                    uni.showToast({
+                        title: '设置成功',
+                        icon: 'success'
+                    });
+                    this.getAddressList();
+                })
+                .catch((err) => {
+                    console.error('设置默认地址失败', err);
+                });
         }
     }
 };

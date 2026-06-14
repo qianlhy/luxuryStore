@@ -1,10 +1,10 @@
 <template>
     <view class="footprint-container">
-        <view class="empty" v-if="list.length === 0">
-            <text>暂无浏览足迹</text>
-        </view>
+        <loading-state v-if="loading" />
+        <empty-state v-else-if="list.length === 0" text="暂无浏览足迹" sub-text="快去挑选心仪好物吧" />
+        <block v-else>
         <view class="foot-item" v-for="(item, index) in list" :key="index" @tap="goDetail" :data-id="item.productId">
-            <image class="foot-img" :src="item.image" mode="aspectFill"></image>
+            <image class="foot-img" :src="item.image" mode="aspectFill" lazy-load></image>
             <view class="foot-info">
                 <text class="foot-name">{{ item.name }}</text>
                 <text class="foot-price">¥{{ item.price }}</text>
@@ -12,6 +12,7 @@
             </view>
             <view class="foot-delete" @tap.stop="removeItem" :data-id="item.productId">删除</view>
         </view>
+        </block>
     </view>
 </template>
 
@@ -19,7 +20,7 @@
 const footprintApi = require('../../api/footprint');
 export default {
     data() {
-        return { list: [] };
+        return { list: [], loading: true };
     },
     onShow() {
         this.loadList();
@@ -31,9 +32,16 @@ export default {
                 uni.navigateTo({ url: '/pages/login/login' });
                 return;
             }
-            footprintApi.getList().then((data) => {
-                this.setData({ list: data || [] });
-            });
+            this.setData({ loading: true });
+            footprintApi
+                .getList()
+                .then((data) => {
+                    this.setData({ list: data || [], loading: false });
+                })
+                .catch((err) => {
+                    console.error('获取足迹失败', err);
+                    this.setData({ loading: false });
+                });
         },
         goDetail(e) {
             uni.navigateTo({ url: '/pages/product/detail?id=' + e.currentTarget.dataset.id });

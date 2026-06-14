@@ -32,6 +32,8 @@ public class FavoriteController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             List<Product> list = favoriteService.getListByUserId(userId);
             return Result.success(list);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -48,6 +50,8 @@ public class FavoriteController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             boolean isFavorite = favoriteService.isFavorite(userId, productId);
             return Result.success(isFavorite);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -65,6 +69,8 @@ public class FavoriteController {
             Long productId = Long.valueOf(params.get("productId").toString());
             favoriteService.add(userId, productId);
             return Result.success("收藏成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -81,6 +87,8 @@ public class FavoriteController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             favoriteService.remove(userId, productId);
             return Result.success("取消收藏成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

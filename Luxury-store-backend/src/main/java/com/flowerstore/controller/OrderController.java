@@ -55,6 +55,8 @@ public class OrderController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             List<Map<String, Object>> list = orderService.getListByUserId(userId, status);
             return Result.success(list);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -69,6 +71,8 @@ public class OrderController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             Map<String, Long> statistics = orderService.getStatistics(userId);
             return Result.success(statistics);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -123,6 +127,8 @@ public class OrderController {
             OrderNotificationWebSocket.sendNewOrderNotification(notificationData);
             
             return Result.success(newOrder);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -138,6 +144,8 @@ public class OrderController {
         try {
             orderService.updateStatus(id, status);
             return Result.success("更新成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -151,6 +159,8 @@ public class OrderController {
         try {
             orderService.cancelOrder(id);
             return Result.success("取消成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

@@ -31,6 +31,8 @@ public class AddressController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             List<Address> list = addressService.getListByUserId(userId);
             return Result.success(list);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -54,6 +56,8 @@ public class AddressController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             Address address = addressService.getDefaultAddress(userId);
             return Result.success(address);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -71,6 +75,8 @@ public class AddressController {
             address.setUserId(userId);
             addressService.add(address);
             return Result.success("添加成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -84,6 +90,8 @@ public class AddressController {
         try {
             addressService.update(address);
             return Result.success("更新成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -97,6 +105,8 @@ public class AddressController {
         try {
             addressService.delete(id);
             return Result.success("删除成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

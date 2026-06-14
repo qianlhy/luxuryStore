@@ -1,11 +1,14 @@
 package com.flowerstore.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 商品实体
@@ -86,5 +89,25 @@ public class Product implements Serializable {
     /** 逻辑删除 */
     @TableLogic
     private Integer deleted;
+
+    /**
+     * 轮播图数组（由 images 逗号串拆分而来，前端无需重复 split）
+     */
+    @JsonProperty("imageList")
+    public List<String> getImageList() {
+        List<String> list = new ArrayList<>();
+        if (images != null && !images.trim().isEmpty()) {
+            for (String url : images.split(",")) {
+                if (url != null && !url.trim().isEmpty()) {
+                    list.add(url.trim());
+                }
+            }
+        }
+        // 兜底：无轮播图时使用主图
+        if (list.isEmpty() && image != null && !image.trim().isEmpty()) {
+            list.add(image.trim());
+        }
+        return list;
+    }
 }
 

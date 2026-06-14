@@ -3,7 +3,7 @@
         <!-- 搜索栏 -->
         <view class="search-bar">
             <view class="search-box" @tap="goSearch">
-                <text class="search-icon">🔍</text>
+                <view class="search-icon"></view>
                 <text class="search-placeholder">请搜索您想要的商品</text>
             </view>
         </view>
@@ -36,16 +36,19 @@
                 </scroll-view>
 
                 <scroll-view :scroll-y="true" class="product-scroll">
-                    <view class="no-data" v-if="products.length === 0">
-                        <text>暂无商品</text>
+                    <loading-state v-if="productsLoading" />
+                    <view class="no-data" v-else-if="products.length === 0">
+                        <empty-state text="该分类暂无商品" sub-text="看看其他分类吧" />
                     </view>
+                    <block v-else>
                     <view class="product-item" @tap="onTapProduct" :data-id="item.id" v-for="(item, index) in products" :key="index">
-                        <image class="product-image" :src="item.image" mode="aspectFill"></image>
+                        <image class="product-image" :src="item.image" mode="aspectFill" lazy-load></image>
                         <view class="product-info">
                             <text class="product-name">{{ item.name }}</text>
                             <text class="product-price">¥{{ item.price }}</text>
                         </view>
                     </view>
+                    </block>
                 </scroll-view>
             </view>
         </view>
@@ -75,6 +78,7 @@ export default {
             products: [],
             currentCategory: null,
             currentSubCategory: null,
+            productsLoading: false,
             cartTotal: '0'
         };
     },
@@ -100,12 +104,17 @@ export default {
     },
     methods: {
         getCategories() {
-            categoryApi.getCategoryList().then((categories) => {
-                if (categories && categories.length > 0) {
-                    this.setData({ categories, currentCategory: categories[0] });
-                    this.loadSubCategories(categories[0].id);
-                }
-            });
+            categoryApi
+                .getCategoryList()
+                .then((categories) => {
+                    if (categories && categories.length > 0) {
+                        this.setData({ categories, currentCategory: categories[0] });
+                        this.loadSubCategories(categories[0].id);
+                    }
+                })
+                .catch((err) => {
+                    console.error('获取分类失败', err);
+                });
         },
         loadSubCategories(categoryId) {
             subCategoryApi.getSubCategoryList(categoryId).then((data) => {
@@ -122,14 +131,24 @@ export default {
         },
         loadProducts() {
             if (!this.currentCategory) return;
+            this.setData({ productsLoading: true });
             const subId = this.currentSubCategory;
-            productApi.getProductsBySubCategory(this.currentCategory.id, subId).then((data) => {
-                this.setData({ products: data || [] });
-            }).catch(() => {
-                productApi.getProductsByCategory(this.currentCategory.id).then((data) => {
-                    this.setData({ products: data || [] });
+            productApi
+                .getProductsBySubCategory(this.currentCategory.id, subId)
+                .then((data) => {
+                    this.setData({ products: data || [], productsLoading: false });
+                })
+                .catch(() => {
+                    productApi
+                        .getProductsByCategory(this.currentCategory.id)
+                        .then((data) => {
+                            this.setData({ products: data || [], productsLoading: false });
+                        })
+                        .catch((err) => {
+                            console.error('获取分类商品失败', err);
+                            this.setData({ products: [], productsLoading: false });
+                        });
                 });
-            });
         },
         switchCategory(e) {
             const categoryId = e.currentTarget.dataset.id;
@@ -179,7 +198,26 @@ export default {
     align-items: center;
     padding: 0 24rpx;
 }
-.search-icon { font-size: 24rpx; margin-right: 8rpx; }
+.search-icon {
+    width: 26rpx;
+    height: 26rpx;
+    border: 3rpx solid #999;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 14rpx;
+    flex-shrink: 0;
+}
+.search-icon::after {
+    content: '';
+    position: absolute;
+    width: 12rpx;
+    height: 3rpx;
+    background: #999;
+    border-radius: 2rpx;
+    transform: rotate(45deg);
+    bottom: -3rpx;
+    right: -7rpx;
+}
 .search-placeholder { color: #999; font-size: 26rpx; }
 .category-container { flex: 1; display: flex; overflow: hidden; padding-bottom: 100rpx; }
 .category-sidebar { width: 180rpx; background: #F5F5F5; flex-shrink: 0; }

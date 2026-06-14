@@ -46,16 +46,11 @@
         <!-- 搜索结果 -->
         <view class="search-results" v-if="isSearching">
             <!-- 加载中 -->
-            <view class="loading" v-if="isLoading">
-                <image class="loading-icon" src="/static/images/icons/loading.png" mode="aspectFit"></image>
-                <text>搜索中...</text>
-            </view>
+            <loading-state v-if="isLoading" text="搜索中..." />
 
             <!-- 空结果 -->
             <view class="empty-result" v-else-if="isEmpty">
-                <image class="empty-icon" src="/static/images/icons/empty.png" mode="aspectFit"></image>
-                <view class="empty-tip">未找到相关商品</view>
-                <view class="suggestion">换个关键词试试吧</view>
+                <empty-state icon="search" text="未找到相关商品" sub-text="换个关键词试试吧" />
             </view>
 
             <!-- 结果列表 -->

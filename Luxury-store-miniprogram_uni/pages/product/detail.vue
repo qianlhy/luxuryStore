@@ -64,10 +64,7 @@
 
         <!-- 加载状态 -->
         <view class="loading-container" v-if="isLoading">
-            <view class="loading">
-                <image src="/static/images/icons/loading.png" mode="aspectFit" class="loading-icon"></image>
-                <text>加载中...</text>
-            </view>
+            <loading-state />
         </view>
 
         <!-- 底部操作栏 -->

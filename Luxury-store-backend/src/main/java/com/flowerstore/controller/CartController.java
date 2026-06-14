@@ -31,6 +31,8 @@ public class CartController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             List<Map<String, Object>> list = cartService.getListByUserId(userId);
             return Result.success(list);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -49,6 +51,8 @@ public class CartController {
             Integer count = Integer.valueOf(params.get("count").toString());
             cartService.add(userId, productId, count);
             return Result.success("添加成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -64,6 +68,8 @@ public class CartController {
         try {
             cartService.updateCount(id, count);
             return Result.success("更新成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -77,6 +83,8 @@ public class CartController {
         try {
             cartService.delete(id);
             return Result.success("删除成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -91,6 +99,8 @@ public class CartController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             cartService.clear(userId);
             return Result.success("清空成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

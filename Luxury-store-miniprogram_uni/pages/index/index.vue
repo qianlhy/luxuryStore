@@ -7,7 +7,7 @@
                     <text class="logo-text">名品汇</text>
                 </view>
                 <view class="search-input-box" @tap="onTapSearch">
-                    <text class="search-icon">🔍</text>
+                    <view class="search-icon"></view>
                     <text class="search-placeholder">请输入关键词</text>
                 </view>
             </view>
@@ -47,15 +47,26 @@
                 </scroll-view>
             </view>
 
+            <!-- 商品区加载中 -->
+            <loading-state v-if="loading" skeleton :count="3" />
+
+            <!-- 商品区加载失败 -->
+            <view class="section" v-else-if="loadError">
+                <empty-state text="加载失败" sub-text="网络似乎开小差了">
+                    <button class="retry-btn" @tap="loadProducts">点击重试</button>
+                </empty-state>
+            </view>
+
+            <block v-else>
             <!-- 超值爆款 -->
-            <view class="section">
+            <view class="section" v-if="recommendProducts.length">
                 <view class="section-header">
                     <text class="section-title">超值爆款</text>
                     <text class="section-sub">为您精选爆款</text>
                 </view>
                 <view class="hot-grid">
                     <view class="hot-card" @tap="onTapProduct" :data-id="item.id" v-for="(item, index) in recommendProducts" :key="index">
-                        <image class="hot-img" :src="item.image" mode="aspectFill"></image>
+                        <image class="hot-img" :src="item.image" mode="aspectFill" lazy-load></image>
                         <view class="hot-info">
                             <text class="hot-name text-ellipsis">{{ item.name }}</text>
                             <text class="hot-price">¥{{ item.price }}</text>
@@ -65,14 +76,14 @@
             </view>
 
             <!-- 最近上新 -->
-            <view class="section">
+            <view class="section" v-if="newProducts.length">
                 <view class="section-header">
                     <text class="section-title">最近上新</text>
                     <text class="section-more" @tap="onTapMore">去看看 ></text>
                 </view>
                 <view class="product-list">
                     <view class="product-item" @tap="onTapProduct" :data-id="item.id" v-for="(item, index) in newProducts" :key="index">
-                        <image class="product-image" :src="item.image" mode="aspectFill"></image>
+                        <image class="product-image" :src="item.image" mode="aspectFill" lazy-load></image>
                         <view class="product-info">
                             <text class="product-name text-ellipsis">{{ item.name }}</text>
                             <view class="product-price-box">
@@ -82,6 +93,12 @@
                     </view>
                 </view>
             </view>
+
+            <!-- 商品区为空 -->
+            <view class="section" v-if="!recommendProducts.length && !newProducts.length">
+                <empty-state text="暂无商品" sub-text="敬请期待更多好物" />
+            </view>
+            </block>
         </view>
 
         <!-- 联系客服悬浮按钮 -->
@@ -124,6 +141,8 @@ export default {
             ],
             recommendProducts: [],
             newProducts: [],
+            loading: true,
+            loadError: false,
             showToast: false,
             servicePhone: '400-888-9999'
         };
@@ -131,44 +150,55 @@ export default {
     onLoad() {
         this.getCategories();
         this.getBrands();
-        this.getRecommendProducts();
-        this.getNewProducts();
+        this.loadProducts();
         configApi.getValue('service_phone').then((phone) => {
             if (phone) this.setData({ servicePhone: phone });
         }).catch(() => {});
     },
     methods: {
         getCategories() {
-            categoryApi.getCategoryList().then((data) => {
-                this.setData({ categories: data || [] });
-            });
+            categoryApi
+                .getCategoryList()
+                .then((data) => {
+                    this.setData({ categories: data || [] });
+                })
+                .catch((err) => {
+                    console.error('获取分类失败', err);
+                });
         },
         getBrands() {
-            brandApi.getBrandList().then((data) => {
-                const brands = (data || []).map((item) => ({
-                    ...item,
-                    coverImage: resolveImage(item.coverImage)
-                }));
-                this.setData({ brands });
-            });
+            brandApi
+                .getBrandList()
+                .then((data) => {
+                    const brands = (data || []).map((item) => ({
+                        ...item,
+                        coverImage: resolveImage(item.coverImage)
+                    }));
+                    this.setData({ brands });
+                })
+                .catch((err) => {
+                    console.error('获取品牌失败', err);
+                });
         },
-        getRecommendProducts() {
-            productApi.getHotProducts(4).then((data) => {
-                const recommendProducts = (data || []).map((item) => ({
-                    ...item,
-                    image: resolveImage(item.image)
-                }));
-                this.setData({ recommendProducts });
-            });
-        },
-        getNewProducts() {
-            productApi.getNewProducts(6).then((data) => {
-                const newProducts = (data || []).map((item) => ({
-                    ...item,
-                    image: resolveImage(item.image)
-                }));
-                this.setData({ newProducts });
-            });
+        // 加载商品区（爆款 + 上新）
+        loadProducts() {
+            this.setData({ loading: true, loadError: false });
+            Promise.all([productApi.getHotProducts(4), productApi.getNewProducts(6)])
+                .then(([hot, news]) => {
+                    const recommendProducts = (hot || []).map((item) => ({
+                        ...item,
+                        image: resolveImage(item.image)
+                    }));
+                    const newProducts = (news || []).map((item) => ({
+                        ...item,
+                        image: resolveImage(item.image)
+                    }));
+                    this.setData({ recommendProducts, newProducts, loading: false });
+                })
+                .catch((err) => {
+                    console.error('获取商品失败', err);
+                    this.setData({ loading: false, loadError: true });
+                });
         },
         onTapSearch() {
             uni.navigateTo({ url: '/pages/search/search' });
@@ -229,7 +259,26 @@ export default {
     align-items: center;
     padding: 0 24rpx;
 }
-.search-icon { font-size: 24rpx; margin-right: 8rpx; }
+.search-icon {
+    width: 26rpx;
+    height: 26rpx;
+    border: 3rpx solid #999;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 14rpx;
+    flex-shrink: 0;
+}
+.search-icon::after {
+    content: '';
+    position: absolute;
+    width: 12rpx;
+    height: 3rpx;
+    background: #999;
+    border-radius: 2rpx;
+    transform: rotate(45deg);
+    bottom: -3rpx;
+    right: -7rpx;
+}
 .search-placeholder { color: #999; font-size: 26rpx; }
 .nav-tabs { white-space: nowrap; padding: 16rpx 30rpx; background: #fff; }
 .nav-tab {
@@ -325,4 +374,13 @@ export default {
     font-size: 28rpx;
 }
 .toast-content text { margin-left: 10rpx; }
+.retry-btn {
+    background-color: #C5A36A;
+    color: #fff;
+    font-size: 28rpx;
+    padding: 0 48rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    border-radius: 36rpx;
+}
 </style>

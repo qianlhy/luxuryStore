@@ -82,6 +82,19 @@ import { getOrderStatistics } from '@/api/order'
 const statistics = ref({})
 const wsConnected = ref(false)
 let ws = null
+let manualClose = false
+let reconnectTimer = null
+
+// 根据环境推导 WebSocket 地址：
+// 1. 优先使用环境变量 VITE_WS_BASE_URL
+// 2. 开发环境默认连后端 8080
+// 3. 生产环境根据当前页面协议/域名自动推导（https -> wss）
+const getWsBase = () => {
+  if (import.meta.env.VITE_WS_BASE_URL) return import.meta.env.VITE_WS_BASE_URL
+  if (import.meta.env.DEV) return 'ws://localhost:8080'
+  const protocol = location.protocol === 'https:' ? 'wss' : 'ws'
+  return `${protocol}://${location.host}`
+}
 
 // 获取订单统计
 const fetchStatistics = async () => {
@@ -95,7 +108,12 @@ const fetchStatistics = async () => {
 
 // 连接WebSocket
 const connectWebSocket = () => {
-  const wsUrl = 'ws://localhost:8080/api/ws/order/notification'
+  manualClose = false
+  if (reconnectTimer) {
+    clearTimeout(reconnectTimer)
+    reconnectTimer = null
+  }
+  const wsUrl = `${getWsBase()}/api/ws/order/notification`
   ws = new WebSocket(wsUrl)
   
   ws.onopen = () => {
@@ -134,6 +152,10 @@ const connectWebSocket = () => {
   ws.onclose = () => {
     console.log('WebSocket连接已关闭')
     wsConnected.value = false
+    // 非主动关闭时自动重连
+    if (!manualClose) {
+      reconnectTimer = setTimeout(connectWebSocket, 5000)
+    }
   }
 }
 
@@ -143,6 +165,8 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  manualClose = true
+  if (reconnectTimer) clearTimeout(reconnectTimer)
   if (ws) {
     ws.close()
   }

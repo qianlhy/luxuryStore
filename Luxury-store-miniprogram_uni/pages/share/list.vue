@@ -1,8 +1,8 @@
 <template>
     <view class="share-container">
-        <view class="empty" v-if="list.length === 0">
-            <text>暂无分享记录</text>
-        </view>
+        <loading-state v-if="loading" />
+        <empty-state v-else-if="list.length === 0" text="暂无分享记录" sub-text="在购物车分享好物给好友吧" />
+        <block v-else>
         <view class="share-item" v-for="(item, index) in list" :key="index">
             <view class="share-header">
                 <text class="share-type">{{ item.shareTypeName }}</text>
@@ -14,6 +14,7 @@
                 <text class="share-views">查看 {{ item.viewCount }} 次</text>
             </view>
         </view>
+        </block>
     </view>
 </template>
 
@@ -21,7 +22,7 @@
 const shareApi = require('../../api/share');
 export default {
     data() {
-        return { list: [] };
+        return { list: [], loading: true };
     },
     onShow() {
         const token = uni.getStorageSync('token');
@@ -29,9 +30,16 @@ export default {
             uni.navigateTo({ url: '/pages/login/login' });
             return;
         }
-        shareApi.getMyShares().then((data) => {
-            this.setData({ list: data || [] });
-        });
+        this.setData({ loading: true });
+        shareApi
+            .getMyShares()
+            .then((data) => {
+                this.setData({ list: data || [], loading: false });
+            })
+            .catch((err) => {
+                console.error('获取分享记录失败', err);
+                this.setData({ loading: false });
+            });
     }
 };
 </script>

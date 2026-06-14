@@ -33,10 +33,6 @@
           </el-button>
         </el-form-item>
       </el-form>
-      <div class="tips">
-        <p>默认账号：admin</p>
-        <p>默认密码：123456</p>
-      </div>
     </div>
   </div>
 </template>
@@ -52,8 +48,8 @@ const router = useRouter()
 const userStore = useUserStore()
 
 const loginForm = ref({
-  username: 'admin',
-  password: '123456'
+  username: '',
+  password: ''
 })
 
 const rules = {
@@ -91,10 +87,7 @@ const handleLogin = () => {
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2620 55%, #3a3024 100%);
   position: relative;
 }
 

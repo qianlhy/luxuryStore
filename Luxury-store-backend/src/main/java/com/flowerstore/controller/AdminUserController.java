@@ -28,11 +28,16 @@ public class AdminUserController {
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(required = false) String phone,
             @RequestParam(required = false) String nickname,
+            @RequestParam(required = false) String keyword,
             @RequestParam(required = false) Integer status) {
         
         Page<User> page = new Page<>(current, size);
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         
+        // 关键字模糊搜索（昵称或手机号）
+        if (keyword != null && !keyword.isEmpty()) {
+            wrapper.and(w -> w.like(User::getNickname, keyword).or().like(User::getPhone, keyword));
+        }
         // 条件查询
         if (phone != null && !phone.isEmpty()) {
             wrapper.like(User::getPhone, phone);

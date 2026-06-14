@@ -6,16 +6,20 @@
           <el-icon><Plus /></el-icon>
           <span>添加商品</span>
         </el-button>
-        <el-input
-          v-model="queryParams.name"
-          placeholder="搜索商品名称"
-          style="width: 300px"
-          clearable
-          @change="fetchData"
-        />
+        <div class="toolbar-right">
+          <el-input
+            v-model="queryParams.name"
+            placeholder="搜索商品名称"
+            style="width: 240px"
+            clearable
+            @keyup.enter="handleSearch"
+            @clear="handleSearch"
+          />
+          <el-button type="primary" @click="handleSearch"><el-icon><Search /></el-icon> 搜索</el-button>
+        </div>
       </div>
 
-      <el-table :data="tableData" border style="margin-top: 20px">
+      <el-table v-loading="loading" :data="tableData" border style="margin-top: 20px">
         <el-table-column prop="id" label="ID" width="80" />
         <el-table-column prop="image" label="商品图片" width="100">
           <template #default="{ row }">
@@ -43,6 +47,9 @@
             <el-button type="danger" text @click="handleDelete(row)">删除</el-button>
           </template>
         </el-table-column>
+        <template #empty>
+          <el-empty description="暂无商品数据" />
+        </template>
       </el-table>
 
       <el-pagination
@@ -177,6 +184,7 @@ const queryParams = ref({
 
 const tableData = ref([])
 const total = ref(0)
+const loading = ref(false)
 const categories = ref([])
 const brands = ref([])
 
@@ -217,13 +225,22 @@ const uploadHeaders = computed(() => ({
 const imageFileList = ref([])
 
 const fetchData = async () => {
+  loading.value = true
   try {
     const res = await getProductPage(queryParams.value)
     tableData.value = res.data.records
     total.value = res.data.total
   } catch (error) {
-    console.error(error)
+    tableData.value = []
+    total.value = 0
+  } finally {
+    loading.value = false
   }
+}
+
+const handleSearch = () => {
+  queryParams.value.current = 1
+  fetchData()
 }
 
 const fetchCategories = async () => {
@@ -385,6 +402,10 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.toolbar-right {
+  display: flex;
+  gap: 10px;
 }
 
 .image-uploader :deep(.el-upload) {

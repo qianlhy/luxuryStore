@@ -13,17 +13,11 @@
         <!-- 订单列表 -->
         <scroll-view :scroll-y="true" class="order-scroll" :enable-back-to-top="true" @scrolltolower="loadMoreOrders">
             <!-- 加载中 -->
-            <view class="loading-container" v-if="isLoading">
-                <view class="loading">
-                    <image class="loading-icon" src="/static/images/icons/loading.png" mode="aspectFit"></image>
-                    <text>加载中...</text>
-                </view>
-            </view>
+            <loading-state v-if="isLoading" />
 
             <!-- 空状态 -->
             <view class="empty-container" v-if="!isLoading && isEmpty">
-                <image class="empty-icon" src="/static/images/icons/empty.png" mode="aspectFit"></image>
-                <text>暂无订单</text>
+                <empty-state icon="order" text="暂无订单" sub-text="快去挑选心仪好物吧" />
             </view>
 
             <!-- 订单项 -->

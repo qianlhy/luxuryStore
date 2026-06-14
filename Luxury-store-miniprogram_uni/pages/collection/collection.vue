@@ -3,24 +3,21 @@
     <view class="collection-container">
         <!-- 未登录状态 -->
         <view class="not-login" v-if="!isLogin">
-            <image class="login-image" src="/static/images/icons/favorite.png" mode="aspectFit"></image>
-            <view class="login-tip">登录后才能查看收藏的商品</view>
-            <button class="login-btn" @tap="goToLogin">去登录</button>
+            <empty-state icon="favorite" text="登录后查看收藏的商品">
+                <button class="login-btn" @tap="goToLogin">去登录</button>
+            </empty-state>
         </view>
 
         <!-- 已登录状态 -->
         <block v-else>
             <!-- 加载中 -->
-            <view class="loading" v-if="isLoading">
-                <image class="loading-icon" src="/static/images/icons/loading.png" mode="aspectFit"></image>
-                <text>加载中...</text>
-            </view>
+            <loading-state v-if="isLoading" />
 
             <!-- 空收藏 -->
             <view class="empty-collection" v-else-if="isEmpty">
-                <image class="empty-icon" src="/static/images/icons/empty.png" mode="aspectFit"></image>
-                <view class="empty-tip">您还没有收藏任何商品</view>
-                <navigator url="/pages/index/index" open-type="switchTab" class="go-shopping">去逛逛</navigator>
+                <empty-state icon="favorite" text="您还没有收藏任何商品" sub-text="收藏心仪好物，随时查看">
+                    <navigator url="/pages/index/index" open-type="switchTab" class="go-shopping">去逛逛</navigator>
+                </empty-state>
             </view>
 
             <!-- 收藏列表 -->
@@ -85,7 +82,7 @@ export default {
     },
     methods: {
         checkLoginStatus: function () {
-            const isLogin = uni.getStorageSync('isLoggedIn') || false;
+            const isLogin = !!uni.getStorageSync('token');
             this.setData({
                 isLogin
             });
@@ -93,22 +90,32 @@ export default {
 
         // 获取收藏列表
         getFavorites: function () {
+            this.setData({
+                isLoading: true
+            });
             favoriteApi
                 .getFavoriteList()
                 .then((data) => {
+                    const list = data || [];
                     this.setData({
-                        favorites: data,
-                        isEmpty: data.length === 0
+                        favorites: list,
+                        isEmpty: list.length === 0,
+                        isLoading: false
                     });
                 })
                 .catch((err) => {
                     console.error('获取收藏列表失败', err);
+                    this.setData({
+                        isLoading: false,
+                        isEmpty: this.favorites.length === 0
+                    });
                 });
         },
 
         // 跳转到商品详情
-        goToDetail: function (e) {
+        viewProductDetail: function (e) {
             const { id } = e.currentTarget.dataset;
+            if (!id) return;
             uni.navigateTo({
                 url: `/pages/product/detail?id=${id}`
             });
@@ -186,10 +193,6 @@ export default {
             uni.navigateTo({
                 url: '/pages/login/login'
             });
-        },
-
-        viewProductDetail() {
-            console.log('占位：函数 viewProductDetail 未声明');
         }
     }
 };
@@ -229,7 +232,7 @@ export default {
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #C5A36A);
     color: #fff;
     font-size: 30rpx;
     border-radius: 40rpx;
@@ -281,7 +284,7 @@ export default {
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #C5A36A);
     color: #fff;
     font-size: 30rpx;
     border-radius: 40rpx;
@@ -338,7 +341,7 @@ export default {
 .current-price {
     font-size: 32rpx;
     font-weight: bold;
-    color: var(--price-color, #ff6b81);
+    color: var(--price-color, #C5A36A);
 }
 
 .original-price {
@@ -374,6 +377,6 @@ export default {
 
 .action-btn.add-cart {
     color: #fff;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #C5A36A);
 }
 </style>

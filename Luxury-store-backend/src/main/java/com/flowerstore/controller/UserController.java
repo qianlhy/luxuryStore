@@ -36,6 +36,8 @@ public class UserController {
             // 隐藏敏感信息
             user.setPassword(null);
             return Result.success(user);
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -71,6 +73,8 @@ public class UserController {
 
             userMapper.updateById(user);
             return Result.success("更新成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

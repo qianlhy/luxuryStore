@@ -2,7 +2,8 @@
  * 图片地址工具
  * 微信小程序无法加载 unsplash 等外网图，统一走后端本地静态资源
  */
-const API_BASE = 'http://localhost:8080/api';
+const { BASE_URL } = require('./config');
+const API_BASE = BASE_URL;
 const SEED_BASE = API_BASE + '/uploads/seed';
 
 function seedImage(name) {

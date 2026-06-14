@@ -2,7 +2,41 @@
  * 网络请求工具
  */
 
-const BASE_URL = 'http://localhost:8080/api'; // 后端接口地址，请根据实际情况修改
+const { BASE_URL } = require('./config');
+
+// 登录页路径，401 时统一跳转
+const LOGIN_PAGE = '/pages/login/login';
+// 标记是否已在处理登录失效，避免重复跳转/提示
+let isHandlingAuthError = false;
+
+/**
+ * 统一处理登录失效
+ */
+function handleAuthError() {
+    uni.removeStorageSync('token');
+    uni.removeStorageSync('userInfo');
+    uni.setStorageSync('isLoggedIn', false);
+
+    if (isHandlingAuthError) {
+        return;
+    }
+    isHandlingAuthError = true;
+
+    uni.showToast({
+        title: '登录已过期，请重新登录',
+        icon: 'none'
+    });
+
+    setTimeout(() => {
+        // 当前页若已是登录页则不跳转
+        const pages = getCurrentPages();
+        const current = pages.length ? pages[pages.length - 1].route : '';
+        if (current && current.indexOf('pages/login/login') === -1) {
+            uni.navigateTo({ url: LOGIN_PAGE });
+        }
+        isHandlingAuthError = false;
+    }, 1200);
+}
 
 /**
  * 发送HTTP请求
@@ -22,34 +56,39 @@ function request(options) {
                 if (res.statusCode === 200) {
                     if (res.data.code === 200) {
                         resolve(res.data.data);
+                    } else if (res.data.code === 401) {
+                        // 业务层返回登录失效
+                        handleAuthError();
+                        reject(new Error('登录已过期'));
                     } else {
-                        uni.showToast({
-                            title: res.data.message || '请求失败',
-                            icon: 'none'
-                        });
-                        reject(new Error(res.data.message));
+                        if (!options.silent) {
+                            uni.showToast({
+                                title: res.data.message || '请求失败',
+                                icon: 'none'
+                            });
+                        }
+                        reject(new Error(res.data.message || '请求失败'));
                     }
                 } else if (res.statusCode === 401) {
-                    uni.showToast({
-                        title: '登录已过期，请重新登录',
-                        icon: 'none'
-                    });
-                    uni.removeStorageSync('token');
-                    uni.removeStorageSync('userInfo');
+                    handleAuthError();
                     reject(new Error('登录已过期'));
                 } else {
-                    uni.showToast({
-                        title: '网络错误',
-                        icon: 'none'
-                    });
+                    if (!options.silent) {
+                        uni.showToast({
+                            title: '网络错误',
+                            icon: 'none'
+                        });
+                    }
                     reject(new Error('网络错误'));
                 }
             },
             fail: (err) => {
-                uni.showToast({
-                    title: '网络连接失败',
-                    icon: 'none'
-                });
+                if (!options.silent) {
+                    uni.showToast({
+                        title: '网络连接失败',
+                        icon: 'none'
+                    });
+                }
                 reject(err);
             }
         });

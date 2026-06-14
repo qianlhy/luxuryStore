@@ -1,5 +1,17 @@
 <template>
-  <div class="order-detail">
+  <div class="order-detail" v-loading="loading">
+    <el-result
+      v-if="!loading && !order"
+      icon="warning"
+      title="订单不存在"
+      sub-title="未找到该订单，可能已被删除"
+    >
+      <template #extra>
+        <el-button type="primary" @click="$router.back()">返回</el-button>
+      </template>
+    </el-result>
+
+    <template v-else>
     <el-card v-if="order">
       <template #header>
         <span>订单详情</span>
@@ -64,6 +76,7 @@
     <div style="margin-top: 20px; text-align: center">
       <el-button @click="$router.back()">返回</el-button>
     </div>
+    </template>
   </div>
 </template>
 
@@ -75,14 +88,19 @@ import { getOrderById } from '@/api/order'
 const route = useRoute()
 const order = ref(null)
 const items = ref([])
+const loading = ref(false)
 
 const fetchData = async () => {
+  loading.value = true
   try {
     const res = await getOrderById(route.params.id)
-    order.value = res.data.order
-    items.value = res.data.items
+    order.value = res.data ? res.data.order : null
+    items.value = res.data ? res.data.items || [] : []
   } catch (error) {
-    console.error(error)
+    order.value = null
+    items.value = []
+  } finally {
+    loading.value = false
   }
 }
 

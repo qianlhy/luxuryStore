@@ -3,9 +3,19 @@
     <el-card>
       <div class="toolbar">
         <el-button type="primary" @click="showAdjust">手动调整积分</el-button>
-        <el-input v-model="queryParams.userId" placeholder="用户ID" style="width: 200px" clearable @change="fetchData" />
+        <div class="toolbar-right">
+          <el-input
+            v-model="queryParams.userId"
+            placeholder="按用户ID筛选"
+            style="width: 200px"
+            clearable
+            @keyup.enter="handleSearch"
+            @clear="handleSearch"
+          />
+          <el-button type="primary" @click="handleSearch"><el-icon><Search /></el-icon> 搜索</el-button>
+        </div>
       </div>
-      <el-table :data="tableData" border style="margin-top: 20px">
+      <el-table v-loading="loading" :data="tableData" border style="margin-top: 20px">
         <el-table-column prop="id" label="ID" width="80" />
         <el-table-column prop="userName" label="用户" width="120" />
         <el-table-column prop="userPhone" label="手机号" width="140" />
@@ -18,40 +28,62 @@
         <el-table-column prop="typeName" label="类型" width="120" />
         <el-table-column prop="remark" label="备注" />
         <el-table-column prop="createTime" label="时间" width="180" />
+        <template #empty>
+          <el-empty description="暂无积分记录" />
+        </template>
       </el-table>
-      <el-pagination v-model:current-page="queryParams.current" :total="total" layout="total, prev, pager, next" @current-change="fetchData" style="margin-top: 20px" />
+      <el-pagination
+        v-model:current-page="queryParams.current"
+        v-model:page-size="queryParams.size"
+        :total="total"
+        :page-sizes="[10, 20, 50]"
+        layout="total, sizes, prev, pager, next, jumper"
+        @current-change="fetchData"
+        @size-change="handleSearch"
+        style="margin-top: 20px"
+      />
     </el-card>
     <el-dialog v-model="adjustVisible" title="手动调整积分" width="400px">
-      <el-form :model="adjustForm" label-width="80px">
-        <el-form-item label="用户ID"><el-input v-model="adjustForm.userId" /></el-form-item>
-        <el-form-item label="积分变动"><el-input-number v-model="adjustForm.points" /></el-form-item>
+      <el-form ref="adjustRef" :model="adjustForm" :rules="rules" label-width="80px">
+        <el-form-item label="用户ID" prop="userId"><el-input v-model="adjustForm.userId" /></el-form-item>
+        <el-form-item label="积分变动" prop="points"><el-input-number v-model="adjustForm.points" /></el-form-item>
         <el-form-item label="备注"><el-input v-model="adjustForm.remark" /></el-form-item>
       </el-form>
       <template #footer>
         <el-button @click="adjustVisible = false">取消</el-button>
-        <el-button type="primary" @click="doAdjust">确定</el-button>
+        <el-button type="primary" :loading="submitLoading" @click="doAdjust">确定</el-button>
       </template>
     </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ref } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { getPointsPage, adjustPoints } from '@/api/points'
+import { useTablePage } from '@/composables/useTablePage'
 
-const tableData = ref([])
-const total = ref(0)
+const { tableData, total, loading, queryParams, fetchData, handleSearch } = useTablePage(getPointsPage, {
+  defaultParams: { userId: '' }
+})
+
 const adjustVisible = ref(false)
-const queryParams = reactive({ current: 1, size: 10, userId: '' })
+const submitLoading = ref(false)
+const adjustRef = ref()
 const adjustForm = ref({ userId: '', points: 0, remark: '管理员调整' })
 
-const fetchData = async () => {
-  const params = { ...queryParams }
-  if (!params.userId) delete params.userId
-  const res = await getPointsPage(params)
-  tableData.value = res.data.records
-  total.value = res.data.total
+const rules = {
+  userId: [{ required: true, message: '请输入用户ID', trigger: 'blur' }],
+  points: [
+    { required: true, message: '请输入积分变动值', trigger: 'blur' },
+    {
+      validator: (rule, value, callback) => {
+        if (!value || value === 0) callback(new Error('积分变动值不能为 0'))
+        else callback()
+      },
+      trigger: 'blur'
+    }
+  ]
 }
 
 const showAdjust = () => {
@@ -59,12 +91,39 @@ const showAdjust = () => {
   adjustVisible.value = true
 }
 
-const doAdjust = async () => {
-  await adjustPoints(adjustForm.value)
-  ElMessage.success('调整成功')
-  adjustVisible.value = false
-  fetchData()
+const doAdjust = () => {
+  adjustRef.value.validate((valid) => {
+    if (!valid) return
+    const { userId, points } = adjustForm.value
+    ElMessageBox.confirm(`确认为用户 ${userId} 调整 ${points > 0 ? '+' : ''}${points} 积分吗？`, '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+      .then(async () => {
+        submitLoading.value = true
+        try {
+          await adjustPoints(adjustForm.value)
+          ElMessage.success('调整成功')
+          adjustVisible.value = false
+          fetchData()
+        } finally {
+          submitLoading.value = false
+        }
+      })
+      .catch(() => {})
+  })
 }
-
-onMounted(fetchData)
 </script>
+
+<style scoped>
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.toolbar-right {
+  display: flex;
+  gap: 10px;
+}
+</style>

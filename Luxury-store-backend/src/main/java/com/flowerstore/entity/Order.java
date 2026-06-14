@@ -1,6 +1,7 @@
 package com.flowerstore.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -79,5 +80,23 @@ public class Order implements Serializable {
     /** 逻辑删除 */
     @TableLogic
     private Integer deleted;
+
+    /**
+     * 订单状态文案（由 status 映射，前端无需重复维护映射表）
+     */
+    @JsonProperty("statusText")
+    public String getStatusText() {
+        if (status == null) {
+            return "未知状态";
+        }
+        switch (status) {
+            case 1: return "待付款";
+            case 2: return "待发货";
+            case 3: return "已发货";
+            case 4: return "已完成";
+            case 5: return "已取消";
+            default: return "未知状态";
+        }
+    }
 }
 

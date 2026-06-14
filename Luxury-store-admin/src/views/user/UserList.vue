@@ -1,7 +1,21 @@
 <template>
   <div class="user-list">
     <el-card>
-      <el-table :data="tableData" border>
+      <div class="toolbar">
+        <div></div>
+        <div class="toolbar-right">
+          <el-input
+            v-model="queryParams.keyword"
+            placeholder="搜索昵称/手机号"
+            style="width: 240px"
+            clearable
+            @keyup.enter="handleSearch"
+            @clear="handleSearch"
+          />
+          <el-button type="primary" @click="handleSearch"><el-icon><Search /></el-icon> 搜索</el-button>
+        </div>
+      </div>
+      <el-table v-loading="loading" :data="tableData" border style="margin-top: 20px">
         <el-table-column prop="id" label="ID" width="80" />
         <el-table-column prop="nickname" label="昵称" />
         <el-table-column prop="avatar" label="头像" width="100">
@@ -24,6 +38,18 @@
           </template>
         </el-table-column>
         <el-table-column prop="createTime" label="注册时间" width="180" />
+        <el-table-column label="操作" width="120">
+          <template #default="{ row }">
+            <el-button
+              :type="row.status === 1 ? 'danger' : 'success'"
+              text
+              @click="toggleStatus(row)"
+            >{{ row.status === 1 ? '禁用' : '启用' }}</el-button>
+          </template>
+        </el-table-column>
+        <template #empty>
+          <el-empty description="暂无用户数据" />
+        </template>
       </el-table>
 
       <el-pagination
@@ -32,7 +58,7 @@
         :total="total"
         :page-sizes="[10, 20, 50, 100]"
         layout="total, sizes, prev, pager, next, jumper"
-        @size-change="fetchData"
+        @size-change="handleSearch"
         @current-change="fetchData"
         style="margin-top: 20px"
       />
@@ -41,43 +67,44 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
 import { getUserPage, updateUserStatus } from '@/api/user'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { useTablePage } from '@/composables/useTablePage'
 
-const queryParams = ref({
-  current: 1,
-  size: 10
+const { tableData, total, loading, queryParams, fetchData, handleSearch } = useTablePage(getUserPage, {
+  defaultParams: { keyword: '' }
 })
 
-const tableData = ref([])
-const total = ref(0)
-
-const fetchData = async () => {
-  try {
-    const res = await getUserPage(queryParams.value)
-    tableData.value = res.data.records
-    total.value = res.data.total
-  } catch (error) {
-    console.error(error)
-    ElMessage.error('获取用户列表失败')
-  }
-}
-
 const getGenderText = (gender) => {
-  const map = {
-    0: '未知',
-    1: '男',
-    2: '女'
-  }
+  const map = { 0: '未知', 1: '男', 2: '女' }
   return map[gender] || '未知'
 }
 
-onMounted(() => {
-  fetchData()
-})
+const toggleStatus = (row) => {
+  const nextStatus = row.status === 1 ? 0 : 1
+  const action = nextStatus === 1 ? '启用' : '禁用'
+  ElMessageBox.confirm(`确定${action}用户「${row.nickname || row.phone}」吗？`, '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(async () => {
+      await updateUserStatus(row.id, nextStatus)
+      ElMessage.success(`${action}成功`)
+      fetchData()
+    })
+    .catch(() => {})
+}
 </script>
 
 <style scoped>
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.toolbar-right {
+  display: flex;
+  gap: 10px;
+}
 </style>
-

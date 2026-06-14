@@ -24,6 +24,8 @@ public class FootprintController {
         try {
             Long userId = jwtUtils.getUserIdFromToken(token);
             return Result.success(footprintService.getList(userId));
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -38,6 +40,8 @@ public class FootprintController {
             Long productId = Long.valueOf(params.get("productId").toString());
             footprintService.add(userId, productId);
             return Result.success("记录成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -51,6 +55,8 @@ public class FootprintController {
             Long userId = jwtUtils.getUserIdFromToken(token);
             footprintService.remove(userId, productId);
             return Result.success("删除成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

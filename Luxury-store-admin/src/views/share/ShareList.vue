@@ -1,7 +1,7 @@
 <template>
   <div class="share-list">
     <el-card>
-      <el-table :data="tableData" border>
+      <el-table v-loading="loading" :data="tableData" border>
         <el-table-column prop="id" label="ID" width="80" />
         <el-table-column prop="userName" label="分享用户" width="120" />
         <el-table-column prop="shareTypeName" label="分享类型" width="120" />
@@ -12,25 +12,27 @@
         <el-table-column prop="viewCount" label="查看次数" width="100" />
         <el-table-column prop="shareCode" label="分享码" width="160" />
         <el-table-column prop="createTime" label="分享时间" width="180" />
+        <template #empty>
+          <el-empty description="暂无分享记录" />
+        </template>
       </el-table>
-      <el-pagination v-model:current-page="queryParams.current" :total="total" layout="total, prev, pager, next" @current-change="fetchData" style="margin-top: 20px" />
+      <el-pagination
+        v-model:current-page="queryParams.current"
+        v-model:page-size="queryParams.size"
+        :total="total"
+        :page-sizes="[10, 20, 50]"
+        layout="total, sizes, prev, pager, next, jumper"
+        @current-change="fetchData"
+        @size-change="handleSearch"
+        style="margin-top: 20px"
+      />
     </el-card>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
 import { getSharePage } from '@/api/share'
+import { useTablePage } from '@/composables/useTablePage'
 
-const tableData = ref([])
-const total = ref(0)
-const queryParams = reactive({ current: 1, size: 10 })
-
-const fetchData = async () => {
-  const res = await getSharePage(queryParams)
-  tableData.value = res.data.records
-  total.value = res.data.total
-}
-
-onMounted(fetchData)
+const { tableData, total, loading, queryParams, fetchData, handleSearch } = useTablePage(getSharePage)
 </script>

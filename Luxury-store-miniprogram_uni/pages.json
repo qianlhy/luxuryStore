@@ -134,6 +134,20 @@
 				"navigationBarTitleText": "我的足迹",
 				"usingComponents": {}
 			}
+		},
+		{
+			"path": "pages/agreement/user",
+			"style": {
+				"navigationBarTitleText": "用户协议",
+				"usingComponents": {}
+			}
+		},
+		{
+			"path": "pages/agreement/privacy",
+			"style": {
+				"navigationBarTitleText": "隐私政策",
+				"usingComponents": {}
+			}
 		}
 	],
 	"tabBar": {
@@ -144,33 +158,23 @@
 		"list": [
 			{
 				"pagePath": "pages/index/index",
-				"text": "首页",
-				"iconPath": "static/images/home.png",
-				"selectedIconPath": "static/images/home-active.png"
+				"text": "首页"
 			},
 			{
 				"pagePath": "pages/category/category",
-				"text": "分类",
-				"iconPath": "static/images/category.png",
-				"selectedIconPath": "static/images/category-active.png"
+				"text": "分类"
 			},
 			{
 				"pagePath": "pages/recycle/recycle",
-				"text": "回收",
-				"iconPath": "static/images/recycle.png",
-				"selectedIconPath": "static/images/recycle-active.png"
+				"text": "回收"
 			},
 			{
 				"pagePath": "pages/cart/cart",
-				"text": "购物车",
-				"iconPath": "static/images/cart.png",
-				"selectedIconPath": "static/images/cart-active.png"
+				"text": "购物车"
 			},
 			{
 				"pagePath": "pages/user/user",
-				"text": "我的",
-				"iconPath": "static/images/user.png",
-				"selectedIconPath": "static/images/user-active.png"
+				"text": "我的"
 			}
 		]
 	},

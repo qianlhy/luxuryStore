@@ -27,6 +27,8 @@ public class PointsController {
         try {
             Long userId = jwtUtils.getUserIdFromToken(token);
             return Result.success(pointsService.getBalance(userId));
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -37,6 +39,8 @@ public class PointsController {
         try {
             Long userId = jwtUtils.getUserIdFromToken(token);
             return Result.success(pointsService.getUserLogs(userId));
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }
@@ -60,6 +64,8 @@ public class PointsController {
             Long operatorId = params.get("operatorId") != null ? Long.valueOf(params.get("operatorId").toString()) : null;
             pointsService.adjustPoints(userId, points, remark, operatorId);
             return Result.success("调整成功");
+        } catch (com.flowerstore.common.UnauthorizedException ue) {
+            throw ue;
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

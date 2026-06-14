@@ -25,7 +25,7 @@
 
         <!-- 未登录提示 -->
         <view class="login-prompt" v-if="!isLogin">
-            <image class="login-icon" src="/static/images/icons/default-avatar.png" mode="aspectFit"></image>
+            <view class="login-icon"></view>
             <text class="login-prompt-text">暂未登录</text>
             <view class="login-outline-btn" @tap="goToLogin">去登录</view>
         </view>
@@ -169,7 +169,8 @@ export default {
                     if (res.confirm) {
                         uni.removeStorageSync('token');
                         uni.removeStorageSync('userInfo');
-                        this.setData({ userInfo: null, isLogin: false, points: 0 });
+                        uni.removeStorageSync('isLoggedIn');
+                        this.setData({ userInfo: null, isLogin: false, points: 0, orderStats: { unpaid: 0, unshipped: 0, shipped: 0, completed: 0 } });
                         uni.showToast({ title: '已退出登录', icon: 'success' });
                     }
                 }
@@ -222,7 +223,36 @@ export default {
     flex-direction: column;
     align-items: center;
 }
-.login-icon { width: 120rpx; height: 120rpx; margin-bottom: 20rpx; opacity: 0.5; }
+.login-icon {
+    width: 120rpx;
+    height: 120rpx;
+    margin-bottom: 20rpx;
+    border-radius: 50%;
+    background: #f0f0f0;
+    position: relative;
+}
+.login-icon::before {
+    content: '';
+    position: absolute;
+    top: 28rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    background: #d6d6d6;
+}
+.login-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 18rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72rpx;
+    height: 38rpx;
+    border-radius: 36rpx 36rpx 0 0;
+    background: #d6d6d6;
+}
 .login-prompt-text { font-size: 28rpx; color: #999; margin-bottom: 30rpx; }
 .login-outline-btn {
     border: 2rpx solid #C5A36A;
