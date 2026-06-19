@@ -4,7 +4,8 @@
             <!-- 顶部搜索 -->
             <view class="top-header">
                 <view class="logo-area">
-                    <text class="logo-text">名品汇</text>
+                    <view class="brand-badge">BY</view>
+                    <text class="logo-text">白白叶叶</text>
                 </view>
                 <view class="search-input-box" @tap="onTapSearch">
                     <view class="search-icon"></view>
@@ -19,7 +20,7 @@
             </scroll-view>
 
             <!-- 轮播图 -->
-            <swiper class="banner" :indicator-dots="true" :autoplay="true" interval="4000" duration="500" :circular="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#C5A36A">
+            <swiper class="banner" :indicator-dots="true" :autoplay="true" interval="4000" duration="500" :circular="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#E14C82">
                 <swiper-item v-for="(item, index) in banners" :key="index">
                     <image :src="item.image" mode="aspectFill" class="banner-image"></image>
                     <view class="banner-overlay">
@@ -242,14 +243,26 @@ export default {
 </script>
 
 <style>
-.index-container { padding-bottom: 30rpx; background: #F8F8F8; }
+.index-container { padding-bottom: 30rpx; background: #FBF7F9; }
 .top-header {
     display: flex;
     align-items: center;
     padding: 20rpx 30rpx;
     background: #fff;
 }
-.logo-text { font-size: 36rpx; font-weight: bold; color: #1A1A1A; margin-right: 20rpx; }
+.logo-area { display: flex; align-items: center; margin-right: 20rpx; }
+.brand-badge {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 30rpx;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
+    border-radius: 12rpx;
+    padding: 4rpx 14rpx;
+    margin-right: 12rpx;
+    letter-spacing: 2rpx;
+}
+.logo-text { font-size: 34rpx; font-weight: bold; color: #2B2024; }
 .search-input-box {
     flex: 1;
     background: #F5F5F5;
@@ -288,7 +301,7 @@ export default {
     color: #666;
     margin-right: 10rpx;
 }
-.nav-tab.active { color: #1A1A1A; font-weight: bold; border-bottom: 4rpx solid #C5A36A; }
+.nav-tab.active { color: #1A1A1A; font-weight: bold; border-bottom: 4rpx solid #E14C82; }
 .banner { width: 100%; height: 380rpx; position: relative; }
 .banner-image { width: 100%; height: 100%; }
 .banner-overlay {
@@ -325,13 +338,13 @@ export default {
 .section-header { margin-bottom: 20rpx; }
 .section-title { font-size: 32rpx; font-weight: bold; color: #1A1A1A; }
 .section-sub { font-size: 22rpx; color: #999; margin-left: 16rpx; }
-.section-more { float: right; font-size: 24rpx; color: #C5A36A; }
+.section-more { float: right; font-size: 24rpx; color: #E14C82; }
 .hot-grid { display: flex; flex-wrap: wrap; gap: 16rpx; }
 .hot-card { width: calc(50% - 8rpx); border-radius: 12rpx; overflow: hidden; background: #FAFAFA; }
 .hot-img { width: 100%; height: 240rpx; }
 .hot-info { padding: 16rpx; }
 .hot-name { font-size: 24rpx; display: block; margin-bottom: 8rpx; }
-.hot-price { font-size: 28rpx; color: #C5A36A; font-weight: bold; }
+.hot-price { font-size: 28rpx; color: #E14C82; font-weight: bold; }
 .product-list { margin-top: 10rpx; }
 .product-item {
     display: flex;
@@ -341,7 +354,7 @@ export default {
 .product-image { width: 160rpx; height: 160rpx; border-radius: 12rpx; margin-right: 20rpx; }
 .product-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 .product-name { font-size: 28rpx; font-weight: bold; margin-bottom: 10rpx; }
-.price { color: #C5A36A; font-weight: bold; font-size: 32rpx; }
+.price { color: #E14C82; font-weight: bold; font-size: 32rpx; }
 .float-service {
     position: fixed;
     right: 20rpx;
@@ -375,7 +388,7 @@ export default {
 }
 .toast-content text { margin-left: 10rpx; }
 .retry-btn {
-    background-color: #C5A36A;
+    background-color: #E14C82;
     color: #fff;
     font-size: 28rpx;
     padding: 0 48rpx;

@@ -2,5 +2,8 @@
   "navigationBarTitleText": "我的收藏",
   "enablePullDownRefresh": true,
   "backgroundColor": "#f8f8f8",
-  "usingComponents": {}
+  "usingComponents": {
+    "empty-state": "/components/empty-state/empty-state",
+    "loading-state": "/components/loading-state/loading-state"
+  }
 }

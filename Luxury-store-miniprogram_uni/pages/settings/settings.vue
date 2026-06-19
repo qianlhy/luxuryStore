@@ -633,7 +633,7 @@ export default {
 }
 
 .save {
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
     color: #fff;
 }
 
@@ -649,7 +649,7 @@ export default {
     height: 80rpx;
     font-size: 30rpx;
     color: #fff;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
     border-radius: 40rpx;
     line-height: 80rpx;
 }

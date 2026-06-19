@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "名品汇",
+				"navigationBarTitleText": "白白叶叶奢侈品",
 				"usingComponents": {}
 			}
 		},
@@ -152,7 +152,7 @@
 	],
 	"tabBar": {
 		"color": "#999999",
-		"selectedColor": "#C5A36A",
+		"selectedColor": "#E14C82",
 		"backgroundColor": "#ffffff",
 		"borderStyle": "black",
 		"list": [
@@ -182,9 +182,9 @@
 	"sitemapLocation": "sitemap.json",
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarBackgroundColor": "#1A1A1A",
-		"navigationBarTitleText": "名品汇商城",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#E14C82",
+		"navigationBarTitleText": "白白叶叶奢侈品",
+		"backgroundColor": "#FBF7F9"
 	},
 	"subPackages": []
 }

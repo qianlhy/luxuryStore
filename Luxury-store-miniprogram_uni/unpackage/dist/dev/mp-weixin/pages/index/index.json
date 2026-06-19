@@ -1,4 +1,7 @@
 {
-  "navigationBarTitleText": "名品汇",
-  "usingComponents": {}
+  "navigationBarTitleText": "白白叶叶奢侈品",
+  "usingComponents": {
+    "loading-state": "/components/loading-state/loading-state",
+    "empty-state": "/components/empty-state/empty-state"
+  }
 }

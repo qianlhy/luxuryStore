@@ -5,7 +5,7 @@
             <!-- 商品轮播图 -->
             <swiper class="product-swiper" :indicator-dots="true" :autoplay="false" interval="3000" duration="500" :circular="true" @change="onSwiperChange">
                 <swiper-item v-for="(item, index) in product.images" :key="index">
-                    <image :src="item" mode="aspectFill" class="product-image"></image>
+                    <image :src="imgUrl(item)" mode="aspectFill" class="product-image"></image>
                 </swiper-item>
             </swiper>
 

@@ -32,7 +32,7 @@
                     <view :class="'select-icon ' + (item.selected && !item.invalid ? 'selected' : '')"></view>
                 </view>
 
-                <image class="product-image" :src="item.image" mode="aspectFill"></image>
+                <image class="product-image" :src="imgUrl(item.image)" mode="aspectFill"></image>
 
                 <view class="product-info">
                     <text class="product-name text-ellipsis">{{ item.name }}</text>
@@ -379,13 +379,13 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 20rpx 30rpx;
-    background-color: #fff9f0;
-    color: #ff9500;
+    background-color: #FBE3EC;
+    color: #C9275F;
     font-size: 26rpx;
 }
 
 .login-btn {
-    background-color: #ff9500;
+    background-color: #E14C82;
     color: #fff;
     font-size: 24rpx;
     padding: 6rpx 20rpx;
@@ -595,7 +595,7 @@ export default {
 
 .invalid-tip {
     background: #FFF8E6;
-    color: #C5A36A;
+    color: #E14C82;
     padding: 16rpx 30rpx;
     font-size: 24rpx;
 }
@@ -604,8 +604,8 @@ export default {
 .share-btns { display: flex; gap: 10rpx; margin-right: 10rpx; }
 .share-btn {
     font-size: 22rpx;
-    color: #C5A36A;
-    border: 1rpx solid #C5A36A;
+    color: #E14C82;
+    border: 1rpx solid #E14C82;
     padding: 8rpx 16rpx;
     border-radius: 20rpx;
     white-space: nowrap;

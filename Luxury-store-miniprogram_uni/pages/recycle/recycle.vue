@@ -92,7 +92,7 @@ export default {
 <style>
 .recycle-container {
     min-height: 100vh;
-    background-color: #F9F3E6;
+    background-color: #FBF7F9;
     padding-bottom: 40rpx;
 }
 .banner-section {
@@ -121,14 +121,14 @@ export default {
     display: flex;
     justify-content: space-around;
     padding: 30rpx;
-    background: #F9F3E6;
+    background: #FFF1F6;
 }
 .service-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 24rpx;
-    color: #8B7355;
+    color: #C9275F;
 }
 .service-icon { font-size: 36rpx; margin-bottom: 8rpx; }
 .qrcode-section {
@@ -169,7 +169,7 @@ export default {
     border-radius: 8rpx 8rpx 0 0;
 }
 .brand-label {
-    background: #A68C68;
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
     color: #fff;
     text-align: center;
     font-size: 22rpx;

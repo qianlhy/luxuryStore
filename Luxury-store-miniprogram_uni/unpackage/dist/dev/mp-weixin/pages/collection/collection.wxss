@@ -195,6 +195,9 @@
 
 
 
+
+
+
 /* pages/collection/collection.wxss */
 .collection-container {
     min-height: 100vh;
@@ -225,7 +228,7 @@
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
     color: #fff;
     font-size: 30rpx;
     border-radius: 40rpx;
@@ -270,7 +273,7 @@
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
     color: #fff;
     font-size: 30rpx;
     border-radius: 40rpx;
@@ -319,7 +322,7 @@
 .current-price {
     font-size: 32rpx;
     font-weight: bold;
-    color: var(--price-color, #ff6b81);
+    color: var(--price-color, #E14C82);
 }
 .original-price {
     font-size: 24rpx;
@@ -349,6 +352,6 @@
 }
 .action-btn.add-cart {
     color: #fff;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
 }
 

@@ -72,15 +72,16 @@ export default {
 </script>
 
 <style>
-.points-container { min-height: 100vh; background: #F8F8F8; }
+.points-container { min-height: 100vh; background: #FBF7F9; }
 .points-header {
-    background: #1A1A1A;
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
     padding: 60rpx 40rpx;
     text-align: center;
     border-radius: 0 0 30rpx 30rpx;
+    box-shadow: 0 12rpx 30rpx rgba(225, 76, 130, 0.25);
 }
-.points-label { color: rgba(255,255,255,0.7); font-size: 26rpx; display: block; }
-.points-value { color: #C5A36A; font-size: 80rpx; font-weight: bold; display: block; margin: 20rpx 0; }
+.points-label { color: rgba(255,255,255,0.85); font-size: 26rpx; display: block; }
+.points-value { color: #fff; font-size: 80rpx; font-weight: bold; display: block; margin: 20rpx 0; }
 .points-tip { color: rgba(255,255,255,0.5); font-size: 22rpx; }
 .points-list {
     margin: 30rpx;
@@ -99,7 +100,7 @@ export default {
 .log-remark { font-size: 28rpx; color: #333; display: block; }
 .log-time { font-size: 22rpx; color: #999; margin-top: 8rpx; display: block; }
 .log-points { font-size: 32rpx; font-weight: bold; }
-.log-points.plus { color: #C5A36A; }
+.log-points.plus { color: #E14C82; }
 .log-points.minus { color: #999; }
 .empty { text-align: center; padding: 60rpx; color: #999; }
 </style>

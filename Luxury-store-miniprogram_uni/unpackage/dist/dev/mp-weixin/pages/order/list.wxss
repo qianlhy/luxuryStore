@@ -324,12 +324,6 @@
 
 
 
-
-
-
-
-
-
 /* pages/order/list.wxss */
 .order-list-container {
     display: flex;
@@ -356,7 +350,7 @@
     color: #666;
 }
 .tab-item.active {
-    color: var(--primary-color, #ff6b81);
+    color: var(--primary-color, #E14C82);
     font-weight: bold;
 }
 .tab-line {
@@ -367,7 +361,7 @@
             transform: translateX(-50%);
     width: 40rpx;
     height: 4rpx;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
     border-radius: 2rpx;
 }
 /* 订单列表样式 */
@@ -396,7 +390,7 @@
 }
 .order-status {
     font-size: 26rpx;
-    color: var(--primary-color, #ff6b81);
+    color: var(--primary-color, #E14C82);
     font-weight: bold;
 }
 .order-status.cancelled {
@@ -466,8 +460,8 @@
 }
 .action-btn.primary {
     color: #fff;
-    background-color: var(--primary-color, #ff6b81);
-    border: 1rpx solid var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
+    border: 1rpx solid var(--primary-color, #E14C82);
 }
 /* 加载中样式 */
 .loading-container {

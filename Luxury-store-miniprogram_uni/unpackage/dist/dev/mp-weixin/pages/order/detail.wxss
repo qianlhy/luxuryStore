@@ -272,6 +272,50 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* pages/order/detail.wxss */
 .order-detail-container {
     min-height: 100vh;
@@ -281,6 +325,7 @@
 /* 加载中 */
 .loading-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -289,10 +334,31 @@
     width: 80rpx;
     height: 80rpx;
     border: 6rpx solid #f3f3f3;
-    border-top: 6rpx solid #ff6b81;
+    border-top: 6rpx solid #E14C82;
     border-radius: 50%;
     -webkit-animation: spin 1s linear infinite;
             animation: spin 1s linear infinite;
+}
+.loading-text {
+    margin-top: 20rpx;
+    font-size: 26rpx;
+    color: #999;
+}
+/* 加载失败 */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.error-text {
+    font-size: 28rpx;
+    color: #999;
+    margin-bottom: 40rpx;
+}
+.retry-btn {
+    padding: 0 60rpx;
 }
 @-webkit-keyframes spin {
 0% {
@@ -323,7 +389,7 @@
 }
 /* 订单状态 */
 .status-section {
-    background-color: #ff6b81;
+    background-color: #E14C82;
     color: #fff;
     padding: 40rpx 30rpx;
 }
@@ -405,7 +471,7 @@
 }
 .goods-price {
     font-size: 30rpx;
-    color: #ff6b81;
+    color: #E14C82;
     font-weight: 500;
 }
 .goods-count {
@@ -437,7 +503,7 @@
 }
 .copy-btn {
     margin-left: 20rpx;
-    color: #ff6b81;
+    color: #E14C82;
     font-size: 26rpx;
 }
 /* 金额信息 */
@@ -461,7 +527,7 @@
 .amount-item.total .value {
     font-size: 32rpx;
     font-weight: bold;
-    color: #ff6b81;
+    color: #E14C82;
 }
 /* 底部按钮 */
 .footer {
@@ -486,7 +552,7 @@
     color: #666;
 }
 .btn.primary {
-    background-color: #ff6b81;
+    background-color: #E14C82;
     color: #fff;
 }
 .btn.cancel {

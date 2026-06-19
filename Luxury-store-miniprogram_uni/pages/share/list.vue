@@ -53,11 +53,11 @@ export default {
     margin-bottom: 20rpx;
 }
 .share-header { display: flex; justify-content: space-between; margin-bottom: 16rpx; }
-.share-type { font-size: 28rpx; font-weight: bold; color: #C5A36A; }
+.share-type { font-size: 28rpx; font-weight: bold; color: #E14C82; }
 .share-time { font-size: 22rpx; color: #999; }
 .share-products { font-size: 26rpx; color: #666; line-height: 1.5; margin-bottom: 16rpx; }
 .share-footer { display: flex; justify-content: space-between; }
-.share-price { font-size: 30rpx; font-weight: bold; color: #C5A36A; }
+.share-price { font-size: 30rpx; font-weight: bold; color: #E14C82; }
 .share-views { font-size: 22rpx; color: #999; }
 .empty { text-align: center; padding: 100rpx; color: #999; }
 </style>

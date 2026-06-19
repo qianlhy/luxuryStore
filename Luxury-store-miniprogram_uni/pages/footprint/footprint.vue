@@ -4,7 +4,7 @@
         <empty-state v-else-if="list.length === 0" text="暂无浏览足迹" sub-text="快去挑选心仪好物吧" />
         <block v-else>
         <view class="foot-item" v-for="(item, index) in list" :key="index" @tap="goDetail" :data-id="item.productId">
-            <image class="foot-img" :src="item.image" mode="aspectFill" lazy-load></image>
+            <image class="foot-img" :src="imgUrl(item.image)" mode="aspectFill" lazy-load></image>
             <view class="foot-info">
                 <text class="foot-name">{{ item.name }}</text>
                 <text class="foot-price">¥{{ item.price }}</text>
@@ -68,7 +68,7 @@ export default {
 .foot-img { width: 160rpx; height: 160rpx; border-radius: 12rpx; margin-right: 20rpx; }
 .foot-info { flex: 1; }
 .foot-name { font-size: 28rpx; font-weight: bold; display: block; margin-bottom: 10rpx; }
-.foot-price { font-size: 30rpx; color: #C5A36A; font-weight: bold; display: block; }
+.foot-price { font-size: 30rpx; color: #E14C82; font-weight: bold; display: block; }
 .foot-time { font-size: 22rpx; color: #999; margin-top: 8rpx; display: block; }
 .foot-delete { font-size: 24rpx; color: #999; padding: 10rpx; }
 .empty { text-align: center; padding: 100rpx; color: #999; }

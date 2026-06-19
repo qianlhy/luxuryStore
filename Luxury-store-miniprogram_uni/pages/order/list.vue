@@ -352,7 +352,7 @@ export default {
 }
 
 .tab-item.active {
-    color: var(--primary-color, #ff6b81);
+    color: var(--primary-color, #E14C82);
     font-weight: bold;
 }
 
@@ -363,7 +363,7 @@ export default {
     transform: translateX(-50%);
     width: 40rpx;
     height: 4rpx;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
     border-radius: 2rpx;
 }
 
@@ -397,7 +397,7 @@ export default {
 
 .order-status {
     font-size: 26rpx;
-    color: var(--primary-color, #ff6b81);
+    color: var(--primary-color, #E14C82);
     font-weight: bold;
 }
 
@@ -482,8 +482,8 @@ export default {
 
 .action-btn.primary {
     color: #fff;
-    background-color: var(--primary-color, #ff6b81);
-    border: 1rpx solid var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
+    border: 1rpx solid var(--primary-color, #E14C82);
 }
 
 /* 加载中样式 */

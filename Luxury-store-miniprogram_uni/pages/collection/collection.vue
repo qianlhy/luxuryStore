@@ -24,7 +24,7 @@
             <view class="collection-list" v-else>
                 <view class="collection-item" @tap="viewProductDetail" :data-id="item.id" v-for="(item, index) in favorites" :key="index">
                     <view class="product-card">
-                        <image class="product-image" :src="item.image" mode="aspectFill"></image>
+                        <image class="product-image" :src="imgUrl(item.image)" mode="aspectFill"></image>
                         <view class="product-info">
                             <view class="product-name">{{ item.name }}</view>
                             <view class="product-price">
@@ -232,7 +232,7 @@ export default {
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
-    background-color: var(--primary-color, #C5A36A);
+    background-color: var(--primary-color, #E14C82);
     color: #fff;
     font-size: 30rpx;
     border-radius: 40rpx;
@@ -284,7 +284,7 @@ export default {
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
-    background-color: var(--primary-color, #C5A36A);
+    background-color: var(--primary-color, #E14C82);
     color: #fff;
     font-size: 30rpx;
     border-radius: 40rpx;
@@ -341,7 +341,7 @@ export default {
 .current-price {
     font-size: 32rpx;
     font-weight: bold;
-    color: var(--price-color, #C5A36A);
+    color: var(--price-color, #E14C82);
 }
 
 .original-price {
@@ -377,6 +377,6 @@ export default {
 
 .action-btn.add-cart {
     color: #fff;
-    background-color: var(--primary-color, #C5A36A);
+    background-color: var(--primary-color, #E14C82);
 }
 </style>

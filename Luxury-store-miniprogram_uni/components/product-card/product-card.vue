@@ -1,7 +1,7 @@
 <template>
     <view class="product-card" @tap="onClick">
         <view class="product-image-wrap">
-            <image class="product-image" :src="product.image" mode="aspectFill" lazy-load></image>
+            <image class="product-image" :src="imgUrl(product.image)" mode="aspectFill" lazy-load></image>
             <view class="product-tag" v-if="tag">{{ tag }}</view>
         </view>
         <view class="product-body">
@@ -67,7 +67,7 @@ export default {
     position: absolute;
     top: 12rpx;
     left: 12rpx;
-    background: linear-gradient(135deg, #D4AF37, #C5A36A);
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
     color: #fff;
     font-size: 20rpx;
     padding: 4rpx 12rpx;
@@ -104,13 +104,13 @@ export default {
 
 .price-symbol {
     font-size: 24rpx;
-    color: #C5A36A;
+    color: #E14C82;
     font-weight: bold;
 }
 
 .price-value {
     font-size: 34rpx;
-    color: #C5A36A;
+    color: #E14C82;
     font-weight: bold;
 }
 

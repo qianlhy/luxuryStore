@@ -3,9 +3,10 @@
     <view class="login-container">
         <view class="login-header">
             <view class="logo">
-                <text class="logo-text">名品汇</text>
+                <text class="logo-text">BY</text>
             </view>
-            <text class="title">欢迎来到名品汇商城</text>
+            <text class="title">白白叶叶奢侈品</text>
+            <text class="subtitle">BAIBAI YEYE · LUXURY</text>
         </view>
 
         <view class="login-form">
@@ -417,7 +418,7 @@ export default {
     left: 0;
     right: 0;
     height: 500rpx;
-    background: #667eea;
+    background: linear-gradient(160deg, #F79AC0, #E14C82);
     border-radius: 0 0 50% 50% / 0 0 100rpx 100rpx;
     z-index: 0;
 }
@@ -435,27 +436,36 @@ export default {
 .logo {
     width: 160rpx;
     height: 160rpx;
-    margin-bottom: 30rpx;
-    background: linear-gradient(135deg, #D4AF37, #C5A36A);
+    margin-bottom: 26rpx;
+    background: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10rpx 40rpx rgba(197, 163, 106, 0.4);
+    box-shadow: 0 12rpx 40rpx rgba(201, 39, 95, 0.28);
 }
 
 .logo-text {
-    color: #fff;
-    font-size: 40rpx;
+    color: #B98A5E;
+    font-size: 56rpx;
     font-weight: bold;
-    letter-spacing: 2rpx;
+    letter-spacing: 4rpx;
+    font-family: Georgia, 'Times New Roman', serif;
 }
 
 .title {
-    font-size: 36rpx;
+    font-size: 38rpx;
     font-weight: bold;
     color: #fff;
-    text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.2);
+    letter-spacing: 4rpx;
+    text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.15);
+}
+
+.subtitle {
+    margin-top: 12rpx;
+    font-size: 22rpx;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 4rpx;
 }
 
 /* 表单样式 */

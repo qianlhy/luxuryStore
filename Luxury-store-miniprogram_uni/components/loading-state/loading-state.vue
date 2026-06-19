@@ -52,8 +52,8 @@ export default {
 .loading-spinner {
     width: 64rpx;
     height: 64rpx;
-    border: 6rpx solid #f0e9da;
-    border-top-color: #C5A36A;
+    border: 6rpx solid #F7E0E8;
+    border-top-color: #E14C82;
     border-radius: 50%;
     animation: ls-spin 0.8s linear infinite;
 }

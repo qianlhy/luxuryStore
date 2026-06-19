@@ -10,8 +10,8 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/luxury_store?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: root
+    username: luxury_store
+    password: ELfJzZ6ZYyJhBfbz
     druid:
       initial-size: 5
       min-idle: 5
@@ -55,8 +55,8 @@ mybatis-plus:
 
 # 微信小程序配置
 wechat:
-  appid: wx105c7f4184eb6754
-  secret: 088d0c9a3a536cad7501f197a06d60ef
+  appid: wxfdec96cc63ba0955
+  secret: 5a154954438e74c5168d8668693596e3
 
 # JWT配置
 jwt:
@@ -71,7 +71,7 @@ file:
     path: ./uploads/  # 上传文件保存路径（相对项目根目录）
     static-pattern: /uploads/**  # 静态资源访问路径
     max-size: 10485760  # 最大文件大小，10MB
-    domain: http://localhost:8080/api  # 服务器域名，用于生成完整URL
+    domain: https://www.baibaiyeye.com.cn/api  # 服务器域名（须与SSL证书域名一致，真机校验证书，必须带www）
 
 # 订单通知配置
 order:

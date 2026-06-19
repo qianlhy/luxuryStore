@@ -45,7 +45,7 @@ export default {
     width: 160rpx;
     height: 160rpx;
     border-radius: 50%;
-    background-color: rgba(197, 163, 106, 0.08);
+    background-color: rgba(225, 76, 130, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,7 +56,7 @@ export default {
     position: relative;
     width: 72rpx;
     height: 62rpx;
-    border: 4rpx solid #d9c7a6;
+    border: 4rpx solid #EDA9C0;
     border-radius: 0 0 14rpx 14rpx;
     background-color: #fff;
 }
@@ -69,7 +69,7 @@ export default {
     transform: translateX(-50%);
     width: 38rpx;
     height: 38rpx;
-    border: 4rpx solid #d9c7a6;
+    border: 4rpx solid #EDA9C0;
     border-bottom: none;
     border-radius: 22rpx 22rpx 0 0;
 }

@@ -70,20 +70,25 @@
 
 /**app.wxss**/
 page {
-    --primary-color: #C5A36A;
-    --secondary-color: #1A1A1A;
+    /* 品牌主色：取自实体店「粉+时尚」——明媚玫粉做主调，胭脂深粉做强调，柔粉做底色 */
+    --primary-color: #E14C82;
+    --primary-deep: #C9275F;
+    --primary-soft: #FBE3EC;
+    --secondary-color: #3D2A33;
+    --accent-bronze: #B98A5E;
     --text-color: #333333;
-    --price-color: #C5A36A;
-    --light-gray: #F8F8F8;
-    --border-color: #eeeeee;
+    --price-color: #E14C82;
+    --light-gray: #FBF6F8;
+    --border-color: #F2E6EB;
     --disabled-color: #cccccc;
-    --gold-gradient: linear-gradient(135deg, #D4AF37, #C5A36A);
+    --gold-gradient: linear-gradient(135deg, #F79AC0, #E14C82);
+    --brand-gradient: linear-gradient(135deg, #F79AC0, #E14C82);
 
     font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
     font-size: 14px;
     line-height: 1.5;
     color: var(--text-color);
-    background-color: #F8F8F8;
+    background-color: #FBF7F9;
     box-sizing: border-box;
 }
 /* 常用颜色类 */
@@ -240,11 +245,11 @@ page {
     margin-right: 10rpx;
 }
 .tag-primary {
-    background-color: rgba(255, 107, 107, 0.1);
+    background-color: var(--primary-soft);
     color: var(--primary-color);
 }
 .tag-secondary {
-    background-color: rgba(78, 205, 196, 0.1);
+    background-color: rgba(61, 42, 51, 0.08);
     color: var(--secondary-color);
 }
 /* 网格布局 */

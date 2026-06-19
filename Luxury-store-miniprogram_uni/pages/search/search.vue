@@ -56,7 +56,7 @@
             <!-- 结果列表 -->
             <view class="result-list" v-else>
                 <view class="result-item" @tap="viewProductDetail" :data-id="item.id" v-for="(item, index) in searchResults" :key="index">
-                    <image class="product-image" :src="item.image" mode="aspectFill"></image>
+                    <image class="product-image" :src="imgUrl(item.image)" mode="aspectFill"></image>
 
                     <view class="product-info">
                         <view class="product-name">{{ item.name }}</view>
@@ -381,7 +381,7 @@ export default {
     line-height: 70rpx;
     text-align: center;
     font-size: 28rpx;
-    color: var(--primary-color, #ff6b81);
+    color: var(--primary-color, #E14C82);
 }
 
 /* 搜索历史和热门搜索样式 */
@@ -541,7 +541,7 @@ export default {
 }
 
 .price {
-    color: var(--price-color, #ff6b81);
+    color: var(--price-color, #E14C82);
     font-weight: bold;
     font-size: 32rpx;
 }
@@ -565,7 +565,7 @@ export default {
     width: 60rpx;
     height: 60rpx;
     border-radius: 50%;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
     color: #fff;
     font-size: 40rpx;
     display: flex;

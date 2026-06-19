@@ -451,9 +451,6 @@
 
 
 
-
-
-
 /* pages/product/detail.wxss */
 .container {
     padding-bottom: 120rpx;

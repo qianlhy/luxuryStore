@@ -1,0 +1,1 @@
+<view class="empty-state data-v-6fdeffb0"><view class="empty-graphic data-v-6fdeffb0"><view class="empty-bag data-v-6fdeffb0"></view></view><view class="empty-text data-v-6fdeffb0">{{text}}</view><block wx:if="{{subText}}"><view class="empty-subtext data-v-6fdeffb0">{{subText}}</view></block><view class="empty-action data-v-6fdeffb0"><slot></slot></view></view>

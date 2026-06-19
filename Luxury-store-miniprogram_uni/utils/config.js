@@ -4,7 +4,7 @@
  */
 
 // 当前环境：'dev' | 'prod'
-const ENV = 'dev';
+const ENV = 'prod';
 
 const CONFIG = {
     dev: {
@@ -12,8 +12,9 @@ const CONFIG = {
         BASE_URL: 'http://localhost:8080/api'
     },
     prod: {
-        // 上线前请替换为正式域名，并使用 https
-        BASE_URL: 'https://your-domain.com/api'
+        // 正式域名（微信小程序要求 https 且端口为 443）
+        // 注意：SSL 证书签的是 www.baibaiyeye.com.cn，真机会校验证书，必须带 www
+        BASE_URL: 'https://www.baibaiyeye.com.cn/api'
     }
 };
 

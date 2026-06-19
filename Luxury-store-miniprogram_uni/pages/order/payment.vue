@@ -211,14 +211,14 @@ export default {
 
 /* 支付头部 */
 .payment-header {
-    background-color: #1A1A1A;
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
     color: #fff;
     padding: 40rpx 30rpx;
     text-align: center;
 }
 
 .payment-header .amount {
-    color: #C5A36A;
+    color: #fff;
 }
 
 .amount {
@@ -319,7 +319,7 @@ export default {
 }
 
 .method-check {
-    color: #C5A36A;
+    color: #E14C82;
     font-size: 36rpx;
     font-weight: bold;
 }
@@ -346,7 +346,7 @@ export default {
 
 .pay-btn {
     flex: 2;
-    background-color: #C5A36A;
+    background-color: #E14C82;
     color: #fff;
     font-size: 30rpx;
 }

@@ -104,7 +104,7 @@
         </view>
 
         <view class="version-info">
-            <text>名品汇商城 v2.0.0</text>
+            <text>白白叶叶奢侈品 v2.0.0</text>
         </view>
     </view>
 </template>
@@ -203,7 +203,7 @@ export default {
 .user-nickname, .login-text { font-size: 36rpx; font-weight: bold; color: #1A1A1A; }
 .settings-icon { font-size: 36rpx; color: #999; }
 .points-card {
-    background: #1A1A1A;
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
     border-radius: 16rpx 16rpx 0 0;
     padding: 30rpx;
     display: flex;
@@ -255,8 +255,8 @@ export default {
 }
 .login-prompt-text { font-size: 28rpx; color: #999; margin-bottom: 30rpx; }
 .login-outline-btn {
-    border: 2rpx solid #C5A36A;
-    color: #C5A36A;
+    border: 2rpx solid #E14C82;
+    color: #E14C82;
     padding: 16rpx 60rpx;
     border-radius: 40rpx;
     font-size: 28rpx;
@@ -300,7 +300,7 @@ export default {
     position: absolute;
     top: -10rpx;
     right: -10rpx;
-    background: #C5A36A;
+    background: #E14C82;
     color: #fff;
     font-size: 20rpx;
     min-width: 32rpx;

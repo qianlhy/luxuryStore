@@ -14,7 +14,7 @@
 }
 .foot-name { font-size: 28rpx; font-weight: bold; display: block; margin-bottom: 10rpx;
 }
-.foot-price { font-size: 30rpx; color: #C5A36A; font-weight: bold; display: block;
+.foot-price { font-size: 30rpx; color: #E14C82; font-weight: bold; display: block;
 }
 .foot-time { font-size: 22rpx; color: #999; margin-top: 8rpx; display: block;
 }

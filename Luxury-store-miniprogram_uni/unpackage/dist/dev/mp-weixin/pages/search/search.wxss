@@ -332,11 +332,6 @@
 
 
 
-
-
-
-
-
 /* pages/search/search.wxss */
 .search-container {
     min-height: 100vh;
@@ -381,7 +376,7 @@
     line-height: 70rpx;
     text-align: center;
     font-size: 28rpx;
-    color: var(--primary-color, #ff6b81);
+    color: var(--primary-color, #E14C82);
 }
 /* 搜索历史和热门搜索样式 */
 .search-history {
@@ -517,7 +512,7 @@
     margin-bottom: 10rpx;
 }
 .price {
-    color: var(--price-color, #ff6b81);
+    color: var(--price-color, #E14C82);
     font-weight: bold;
     font-size: 32rpx;
 }
@@ -538,7 +533,7 @@
     width: 60rpx;
     height: 60rpx;
     border-radius: 50%;
-    background-color: var(--primary-color, #ff6b81);
+    background-color: var(--primary-color, #E14C82);
     color: #fff;
     font-size: 40rpx;
     display: flex;

@@ -42,7 +42,7 @@
                     </view>
                     <block v-else>
                     <view class="product-item" @tap="onTapProduct" :data-id="item.id" v-for="(item, index) in products" :key="index">
-                        <image class="product-image" :src="item.image" mode="aspectFill" lazy-load></image>
+                        <image class="product-image" :src="imgUrl(item.image)" mode="aspectFill" lazy-load></image>
                         <view class="product-info">
                             <text class="product-name">{{ item.name }}</text>
                             <text class="product-price">¥{{ item.price }}</text>
@@ -231,7 +231,7 @@ export default {
 }
 .category-item.active {
     background: #fff;
-    color: #C5A36A;
+    color: #E14C82;
     font-weight: bold;
 }
 .category-item.active::before {
@@ -241,7 +241,7 @@ export default {
     top: 30rpx;
     bottom: 30rpx;
     width: 6rpx;
-    background: #C5A36A;
+    background: #E14C82;
 }
 .category-content { flex: 1; display: flex; flex-direction: column; background: #fff; }
 .sub-tabs { white-space: nowrap; padding: 16rpx 20rpx; border-bottom: 1rpx solid #f5f5f5; }
@@ -254,7 +254,7 @@ export default {
     border-radius: 30rpx;
     border: 1rpx solid #eee;
 }
-.sub-tab.active { color: #C5A36A; border-color: #C5A36A; }
+.sub-tab.active { color: #E14C82; border-color: #E14C82; }
 .product-scroll { flex: 1; height: 0; }
 .product-item {
     display: flex;
@@ -264,7 +264,7 @@ export default {
 .product-image { width: 180rpx; height: 180rpx; border-radius: 12rpx; margin-right: 20rpx; }
 .product-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
 .product-name { font-size: 26rpx; line-height: 1.5; color: #333; }
-.product-price { font-size: 32rpx; color: #C5A36A; font-weight: bold; text-align: right; }
+.product-price { font-size: 32rpx; color: #E14C82; font-weight: bold; text-align: right; }
 .no-data { text-align: center; padding: 100rpx; color: #999; }
 .float-bar {
     position: fixed;
@@ -283,7 +283,7 @@ export default {
 .float-cart {
     width: 60rpx;
     height: 60rpx;
-    background: #C5A36A;
+    background: #E14C82;
     border-radius: 50%;
     display: flex;
     align-items: center;

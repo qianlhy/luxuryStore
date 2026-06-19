@@ -4,7 +4,7 @@
         <view class="agreement-update">更新日期：2026年01月01日</view>
 
         <view class="agreement-section">
-            <view class="section-text">名品汇商城（以下简称“我们”）非常重视您的个人信息和隐私保护。本隐私政策旨在向您说明我们如何收集、使用、存储和保护您的个人信息。请您在使用本平台服务前仔细阅读并充分理解本政策。</view>
+            <view class="section-text">白白叶叶奢侈品（以下简称“我们”）非常重视您的个人信息和隐私保护。本隐私政策旨在向您说明我们如何收集、使用、存储和保护您的个人信息。请您在使用本平台服务前仔细阅读并充分理解本政策。</view>
         </view>
 
         <view class="agreement-section">

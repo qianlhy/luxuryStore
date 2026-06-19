@@ -1,6 +1,6 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],[
-/* 0 */,
-/* 1 */
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
+
+/***/ 1:
 /*!*********************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js ***!
   \*********************************************************/
@@ -52,7 +52,483 @@ var _default = target[key];
 exports.default = _default;
 
 /***/ }),
-/* 2 */
+
+/***/ 10:
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 105:
+/*!**********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/favorite.js ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get,
+  post = _require.post,
+  del = _require.del;
+
+/**
+ * 获取收藏列表
+ */
+function getFavoriteList() {
+  return get('/favorite/list');
+}
+
+/**
+ * 检查是否已收藏
+ */
+function checkFavorite(productId) {
+  return get('/favorite/check', {
+    productId: productId
+  });
+}
+
+/**
+ * 添加收藏
+ */
+function addFavorite(productId) {
+  return post('/favorite', {
+    productId: productId
+  });
+}
+
+/**
+ * 取消收藏
+ */
+function removeFavorite(productId) {
+  return del('/favorite', {
+    productId: productId
+  });
+}
+module.exports = {
+  getFavoriteList: getFavoriteList,
+  checkFavorite: checkFavorite,
+  addFavorite: addFavorite,
+  removeFavorite: removeFavorite
+};
+
+/***/ }),
+
+/***/ 106:
+/*!************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/statistics.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  post = _require.post;
+module.exports = {
+  recordBrowse: function recordBrowse(productId, userId, visitorId) {
+    var url = '/statistics/browse/' + productId;
+    var params = [];
+    if (userId) params.push('userId=' + userId);
+    if (visitorId) params.push('visitorId=' + visitorId);
+    if (params.length) url += '?' + params.join('&');
+    return post(url);
+  }
+};
+
+/***/ }),
+
+/***/ 107:
+/*!***********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/footprint.js ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get,
+  post = _require.post,
+  del = _require.del;
+module.exports = {
+  getList: function getList() {
+    return get('/footprint/list');
+  },
+  add: function add(productId) {
+    return post('/footprint', {
+      productId: productId
+    });
+  },
+  remove: function remove(productId) {
+    return del('/footprint', {
+      productId: productId
+    });
+  }
+};
+
+/***/ }),
+
+/***/ 11:
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ 12);
+function _defineProperty(obj, key, value) {
+  key = toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 116:
+/*!*********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/address.js ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get,
+  post = _require.post,
+  put = _require.put,
+  del = _require.del;
+
+/**
+ * 获取地址列表
+ */
+function getAddressList() {
+  return get('/address/list');
+}
+
+/**
+ * 根据ID获取地址
+ */
+function getAddressById(id) {
+  return get('/address/' + id);
+}
+
+/**
+ * 获取默认地址
+ */
+function getDefaultAddress() {
+  return get('/address/default');
+}
+
+/**
+ * 添加地址
+ */
+function addAddress(data) {
+  return post('/address', data);
+}
+
+/**
+ * 更新地址
+ */
+function updateAddress(data) {
+  return put('/address', data);
+}
+
+/**
+ * 删除地址
+ */
+function deleteAddress(id) {
+  return del('/address/' + id);
+}
+module.exports = {
+  getAddressList: getAddressList,
+  getAddressById: getAddressById,
+  getDefaultAddress: getDefaultAddress,
+  addAddress: addAddress,
+  updateAddress: updateAddress,
+  deleteAddress: deleteAddress
+};
+
+/***/ }),
+
+/***/ 12:
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
+var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ 14);
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof(i) ? i : i + "";
+}
+module.exports = toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 13:
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(o);
+}
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 14:
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
+function toPrimitive(t, r) {
+  if ("object" != _typeof(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != _typeof(i)) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+module.exports = toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 15:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/construct.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
+var isNativeReflectConstruct = __webpack_require__(/*! ./isNativeReflectConstruct.js */ 17);
+function _construct(t, e, r) {
+  if (isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments);
+  var o = [null];
+  o.push.apply(o, e);
+  var p = new (t.bind.apply(t, o))();
+  return r && setPrototypeOf(p, r.prototype), p;
+}
+module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 16:
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  return _setPrototypeOf(o, p);
+}
+module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 165:
+/*!******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/auth.js ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  post = _require.post;
+
+/**
+ * 微信小程序登录
+ * @param {string} code - 微信登录code
+ * @param {string} phone - 手机号（可选）
+ * @param {string} password - 密码（可选，用于密码登录）
+ */
+function wxLogin(code, phone, password) {
+  var data = {
+    code: code
+  };
+  if (phone) {
+    data.phone = phone;
+  }
+  if (password) {
+    data.password = password;
+  }
+  return post('/auth/wx/login', data);
+}
+
+/**
+ * 手机号密码登录
+ */
+function phoneLogin(phone, password) {
+  return post('/auth/phone/login', {
+    phone: phone,
+    password: password
+  });
+}
+
+/**
+ * 手机号验证码登录
+ */
+function phoneCodeLogin(phone, code) {
+  return post('/auth/phone/code-login', {
+    phone: phone,
+    code: code
+  });
+}
+
+/**
+ * 用户注册
+ */
+function register(phone, password) {
+  return post('/auth/register', {
+    phone: phone,
+    password: password
+  });
+}
+
+/**
+ * 发送验证码
+ */
+function sendCode(phone) {
+  return post('/auth/send-code', {
+    phone: phone
+  });
+}
+
+/**
+ * 退出登录
+ */
+function logout() {
+  return post('/auth/logout');
+}
+module.exports = {
+  wxLogin: wxLogin,
+  phoneLogin: phoneLogin,
+  phoneCodeLogin: phoneCodeLogin,
+  register: register,
+  sendCode: sendCode,
+  logout: logout
+};
+
+/***/ }),
+
+/***/ 17:
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _isNativeReflectConstruct() {
+  try {
+    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+  } catch (t) {}
+  return (module.exports = _isNativeReflectConstruct = function _isNativeReflectConstruct() {
+    return !!t;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
+}
+module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 174:
+/*!******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/user.js ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get,
+  put = _require.put;
+
+/**
+ * 获取用户信息
+ */
+function getUserInfo() {
+  return get('/user/info');
+}
+
+/**
+ * 更新用户信息
+ */
+function updateUserInfo(data) {
+  return put('/user/update', data);
+}
+module.exports = {
+  getUserInfo: getUserInfo,
+  updateUserInfo: updateUserInfo
+};
+
+/***/ }),
+
+/***/ 18:
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles.js */ 19);
+var iterableToArray = __webpack_require__(/*! ./iterableToArray.js */ 20);
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread.js */ 21);
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 19:
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 2:
 /*!************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js ***!
   \************************************************************/
@@ -2542,336 +3018,8 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 3 */
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 4 */
-/*!**********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
-module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 5 */
-/*!**************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ 6);
-var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ 7);
-var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
-var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ 10);
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 6 */
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 7 */
-/*!*********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _iterableToArrayLimit(r, l) {
-  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (null != t) {
-    var e,
-      n,
-      i,
-      u,
-      a = [],
-      f = !0,
-      o = !1;
-    try {
-      if (i = (t = t.call(r)).next, 0 === l) {
-        if (Object(t) !== t) return;
-        f = !1;
-      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0) {
-        ;
-      }
-    } catch (r) {
-      o = !0, n = r;
-    } finally {
-      try {
-        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
-      } finally {
-        if (o) throw n;
-      }
-    }
-    return a;
-  }
-}
-module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 8 */
-/*!***************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
-}
-module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 9 */
-/*!*****************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-  return arr2;
-}
-module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 10 */
-/*!****************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 11 */
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ 12);
-function _defineProperty(obj, key, value) {
-  key = toPropertyKey(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 12 */
-/*!**************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ 14);
-function toPropertyKey(t) {
-  var i = toPrimitive(t, "string");
-  return "symbol" == _typeof(i) ? i : i + "";
-}
-module.exports = toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 13 */
-/*!*******************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _typeof(o) {
-  "@babel/helpers - typeof";
-
-  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-    return typeof o;
-  } : function (o) {
-    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(o);
-}
-module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 14 */
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-function toPrimitive(t, r) {
-  if ("object" != _typeof(t) || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r || "default");
-    if ("object" != _typeof(i)) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r ? String : Number)(t);
-}
-module.exports = toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 15 */
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/construct.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
-var isNativeReflectConstruct = __webpack_require__(/*! ./isNativeReflectConstruct.js */ 17);
-function _construct(t, e, r) {
-  if (isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments);
-  var o = [null];
-  o.push.apply(o, e);
-  var p = new (t.bind.apply(t, o))();
-  return r && setPrototypeOf(p, r.prototype), p;
-}
-module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 16 */
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _setPrototypeOf(o, p) {
-  module.exports = _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _setPrototypeOf(o, p);
-}
-module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 17 */
-/*!*************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _isNativeReflectConstruct() {
-  try {
-    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-  } catch (t) {}
-  return (module.exports = _isNativeReflectConstruct = function _isNativeReflectConstruct() {
-    return !!t;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
-}
-module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 18 */
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles.js */ 19);
-var iterableToArray = __webpack_require__(/*! ./iterableToArray.js */ 20);
-var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
-var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread.js */ 21);
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
-}
-module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 19 */
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return arrayLikeToArray(arr);
-}
-module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-/* 20 */
+/***/ 20:
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
   \****************************************************************/
@@ -2884,7 +3032,8 @@ function _iterableToArray(iter) {
 module.exports = _iterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 21 */
+
+/***/ 21:
 /*!******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
   \******************************************************************/
@@ -2897,7 +3046,8 @@ function _nonIterableSpread() {
 module.exports = _nonIterableSpread, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 22 */
+
+/***/ 22:
 /*!*************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-i18n/dist/uni-i18n.es.js ***!
   \*************************************************************/
@@ -3433,7 +3583,8 @@ function resolveLocaleChain(locale) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 23 */
+
+/***/ 23:
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
   \***************************************************************/
@@ -3448,7 +3599,8 @@ function _classCallCheck(instance, Constructor) {
 module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 24 */
+
+/***/ 24:
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
   \************************************************************/
@@ -3476,7 +3628,8 @@ function _createClass(Constructor, protoProps, staticProps) {
 module.exports = _createClass, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 25 */
+
+/***/ 25:
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
   \******************************************************************************************/
@@ -9557,1837 +9710,8 @@ internalMixin(Vue);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 26 */
-/*!*****************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/pages.json ***!
-  \*****************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
 
-
-
-/***/ }),
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \**********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode, /* vue-cli only */
-  components, // fixed by xxxxxx auto components
-  renderjs // fixed by xxxxxx renderjs
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // fixed by xxxxxx auto components
-  if (components) {
-    if (!options.components) {
-      options.components = {}
-    }
-    var hasOwn = Object.prototype.hasOwnProperty
-    for (var name in components) {
-      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
-        options.components[name] = components[name]
-      }
-    }
-  }
-  // fixed by xxxxxx renderjs
-  if (renderjs) {
-    if(typeof renderjs.beforeCreate === 'function'){
-			renderjs.beforeCreate = [renderjs.beforeCreate]
-		}
-    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
-      this[renderjs.__module] = this
-    });
-    (options.mixins || (options.mixins = [])).push(renderjs)
-  }
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 33 */
-/*!*************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/index.js ***!
-  \*************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _pageLifetimes = __webpack_require__(/*! ./lifecycle/pageLifetimes */ 34);
-var _clone = __webpack_require__(/*! ./methods/clone */ 35);
-var _dataset = __webpack_require__(/*! ./methods/dataset */ 36);
-var _escape = __webpack_require__(/*! ./methods/escape */ 37);
-var _event = __webpack_require__(/*! ./methods/event */ 38);
-var _getTabBar = __webpack_require__(/*! ./methods/getTabBar */ 39);
-var _relation = __webpack_require__(/*! ./methods/relation */ 40);
-var _selectComponent = __webpack_require__(/*! ./methods/selectComponent */ 41);
-var _setData = __webpack_require__(/*! ./methods/setData */ 42);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-var _default = {
-  install: function install(Vue, option) {
-    Vue.mixin(_objectSpread(_objectSpread({}, _pageLifetimes.pageLifetimes), {}, {
-      methods: {
-        clone: _clone.clone,
-        handleDataset: _dataset.handleDataset,
-        escape2Html: _escape.escape2Html,
-        html2Escape: _escape.html2Escape,
-        parseEventDynamicCode: _event.parseEventDynamicCode,
-        getTabBar: _getTabBar.getTabBar,
-        getRelationNodes: _relation.getRelationNodes,
-        zpSelectComponent: _selectComponent.selectComponent,
-        zpSelectAllComponents: _selectComponent.selectAllComponents,
-        setData: _setData.setData
-      }
-    }));
-  }
-};
-exports.default = _default;
-
-/***/ }),
-/* 34 */
-/*!*******************************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/lifecycle/pageLifetimes.js ***!
-  \*******************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.pageLifetimes = void 0;
-/**
- * 组件pageLifetimes处理，需在页面生命周期里调用
- * @param {Object} node
- * @param {Object} lifeName
- */
-function handlePageLifetime(node, lifeName) {
-  node.$children.map(function (child) {
-    if (typeof child[lifeName] == 'function') child[lifeName]();
-    handlePageLifetime(child, lifeName);
-  });
-}
-var pageLifetimes = {
-  onLoad: function onLoad() {
-    // uni.onWindowResize(CALLBACK)  监听窗口尺寸变化事件
-    // 平台差异说明
-    // App	H5	微信小程序	支付宝小程序	百度小程序	抖音小程序	飞书小程序	QQ小程序
-    // √	√	√	x	x	x	√	√
-  },
-  onShow: function onShow() {
-    handlePageLifetime(this, "handlePageShow");
-  },
-  onHide: function onHide() {
-    handlePageLifetime(this, "handlePageHide");
-  },
-  onResize: function onResize() {
-    //onResize	监听窗口尺寸变化	App、微信小程序、快手小程序
-
-    handlePageLifetime(this, "handlePageResize");
-  }
-};
-exports.pageLifetimes = pageLifetimes;
-
-/***/ }),
-/* 35 */
-/*!*********************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/clone.js ***!
-  \*********************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.clone = clone;
-/**
- * 用于处理对props进行赋值的情况
- * //简单处理一下就行了
- *
- * @param {*} target
- * @returns
- */
-function clone(target) {
-  return JSON.parse(JSON.stringify(target));
-}
-
-/***/ }),
-/* 36 */
-/*!***********************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/dataset.js ***!
-  \***********************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.handleDataset = handleDataset;
-/**
- * 用于处理dataset
- * 自定义组件的事件里，是获取不到e.currentTarget.dataset的
- * 因此收集data-参数，手动传进去
- *
- * @param {*} event
- * @param {*} dataSet
- */
-function handleDataset(event) {
-  var dataSet = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  if (event && !event.currentTarget) {
-    if (dataSet.tagId) {
-      event.currentTarget = {
-        id: dataSet.tagId
-      };
-    } else {
-      event.currentTarget = {
-        dataset: dataSet
-      };
-    }
-  }
-}
-
-/***/ }),
-/* 37 */
-/*!**********************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/escape.js ***!
-  \**********************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.escape2Html = escape2Html;
-exports.html2Escape = html2Escape;
-/**
- * 转义符换成普通字符
- * @param {*} str
- * @returns
- */
-function escape2Html(str) {
-  if (!str) return str;
-  var arrEntities = {
-    'lt': '<',
-    'gt': '>',
-    'nbsp': ' ',
-    'amp': '&',
-    'quot': '"'
-  };
-  return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
-    return arrEntities[t];
-  });
-}
-
-/**
- * 普通字符转换成转义符
- * @param {*} sHtml
- * @returns
- */
-function html2Escape(sHtml) {
-  if (!sHtml) return sHtml;
-  return sHtml.replace(/[<>&"]/g, function (c) {
-    return {
-      '<': '&lt;',
-      '>': '&gt;',
-      '&': '&amp;',
-      '"': '&quot;'
-    }[c];
-  });
-}
-
-/***/ }),
-/* 38 */
-/*!*********************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/event.js ***!
-  \*********************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.parseEventDynamicCode = parseEventDynamicCode;
-/**
- * 解析事件里的动态函数名，这种没有()的函数名，在uniapp不被执行
- * 比如：<view bindtap="{{openId==undefined?'denglu':'hy_to'}}">立即</view>
- * @param {*} exp
- */
-function parseEventDynamicCode(e, exp) {
-  if (typeof this[exp] === 'function') {
-    this[exp](e);
-  }
-}
-
-/***/ }),
-/* 39 */
-/*!*************************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/getTabBar.js ***!
-  \*************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getTabBar = getTabBar;
-/**
- * 接管getTabBar函数，默认uni-app是没有这个函数的
- * 适用于使用custom-tab-bar自定义导航栏的小程序项目
- * 需注意：
- * 1.custom-tab-bar下面仍是小程序文件
- * 2.pages.json里面需使用条件编译区分好小程序和非小程序的tabBar配置
- */
-function getTabBar() {
-  return {
-    setData: function setData(obj) {
-      var _this$$mp, _this$$mp$page, _this$$mp2, _this$$mp2$page;
-      if (typeof ((_this$$mp = this.$mp) === null || _this$$mp === void 0 ? void 0 : (_this$$mp$page = _this$$mp.page) === null || _this$$mp$page === void 0 ? void 0 : _this$$mp$page.getTabBar) === 'function' && (_this$$mp2 = this.$mp) !== null && _this$$mp2 !== void 0 && (_this$$mp2$page = _this$$mp2.page) !== null && _this$$mp2$page !== void 0 && _this$$mp2$page.getTabBar()) {
-        this.$mp.page.getTabBar().setData(obj);
-      } else {
-        console.log("当前平台不支持getTabBar()，已稍作处理，详细请参见相关文档。");
-      }
-    }
-  };
-}
-
-/***/ }),
-/* 40 */
-/*!************************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/relation.js ***!
-  \************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getRelationNodes = getRelationNodes;
-/**
- * 组件间关系
- * 注意：须与p-f-unicom配合使用！！！
- * @param {*} name
- * @returns
- */
-function getRelationNodes(name) {
-  if (!this.$unicom) throw "this.getRelationNodes()需与p-f-unicom配合使用！";
-  return this.$unicom('@' + name);
-}
-
-/***/ }),
-/* 41 */
-/*!*******************************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/selectComponent.js ***!
-  \*******************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.selectAllComponents = selectAllComponents;
-exports.selectComponent = selectComponent;
-var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var createTraverse = function createTraverse() {
-  var stop = false;
-  return function traverse(root, callback) {
-    if (!stop && typeof callback === 'function') {
-      var children = root.$children;
-      for (var index = 0; !stop && index < children.length; index++) {
-        var element = children[index];
-        stop = callback(element) === true;
-        traverse(element, callback);
-      }
-    }
-  };
-};
-
-/**
- * 安全的JSON.stringify
- * @param {Object} node
- */
-function safeStringify(node) {
-  var cache = [];
-  var str = JSON.stringify(node, function (key, value) {
-    if ((0, _typeof2.default)(value) === 'object' && value !== null) {
-      if (cache.indexOf(value) !== -1) {
-        // 移除
-        return;
-      }
-      // 收集所有的值
-      cache.push(value);
-    }
-    return value;
-  });
-  cache = null; // 清空变量，便于垃圾回收机制回收
-  return str;
-}
-var match = function match(node, selector) {
-  var _vnode$context$$vnode, _vnode, _vnode$context;
-  var vnode = node._vnode;
-
-  //好家伙，在微信小程序里，node里面根本找不到class，因此这种方式没法搞了
-
-  //关键之处！
-  // console.log("attrs", (vnode.context.$vnode.data));
-  vnode = (_vnode$context$$vnode = (_vnode = vnode) === null || _vnode === void 0 ? void 0 : (_vnode$context = _vnode.context) === null || _vnode$context === void 0 ? void 0 : _vnode$context.$vnode) !== null && _vnode$context$$vnode !== void 0 ? _vnode$context$$vnode : "";
-  //console.log(vnode.data) -->  [Object] {"staticClass":"bar","attrs":{"_i":0}}  at selectComponent.js:72
-  if (!vnode || !vnode.data) {
-    return false;
-  }
-  var attrs = vnode.data.attrs || {};
-  var staticClass = vnode.data.staticClass || '';
-  var id = attrs.id || '';
-  if (selector[0] === '#') {
-    return selector.substr(1) === id;
-  } else {
-    staticClass = staticClass.trim().split(' ');
-    selector = selector.substr(1).split('.');
-    return selector.reduce(function (a, c) {
-      return a && staticClass.includes(c);
-    }, true);
-  }
-};
-var selectorBuilder = function selectorBuilder(selector) {
-  selector = selector.replace(/>>>/g, '>');
-  selector = selector.split('>').map(function (s) {
-    return s.trim().split(' ').join("').descendant('");
-  }).join("').child('");
-
-  // 替换掉new Function方式，因为小程序不支持new Function和eval
-  //return new Function('Selector', 'node', 'all', `return new Selector(node, all).descendant('` + selector + `')`);
-  return function (Selector, node, all) {
-    return new Selector(node, all).descendant(selector);
-  };
-};
-var Selector = /*#__PURE__*/function () {
-  function Selector(node) {
-    var all = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    (0, _classCallCheck2.default)(this, Selector);
-    this.nodes = [node];
-    this.all = all;
-  }
-  (0, _createClass2.default)(Selector, [{
-    key: "child",
-    value: function child(selector) {
-      var matches = [];
-      if (this.all) {
-        this.nodes.forEach(function (node) {
-          var _matches;
-          (_matches = matches).push.apply(_matches, (0, _toConsumableArray2.default)(node.$children.filter(function (node) {
-            return match(node, selector);
-          })));
-        });
-      } else {
-        if (this.nodes.length > 0) {
-          var node = this.nodes[0].$children.find(function (node) {
-            return match(node, selector);
-          });
-          matches = node ? [node] : [];
-        }
-      }
-      this.nodes = matches;
-      return this;
-    }
-  }, {
-    key: "descendant",
-    value: function descendant(selector) {
-      var _this = this;
-      var matches = [];
-      this.nodes.forEach(function (root) {
-        createTraverse()(root, function (node) {
-          if (match(node, selector)) {
-            matches.push(node);
-            return !_this.all;
-          }
-        });
-      });
-      this.nodes = matches;
-      return this;
-    }
-  }]);
-  return Selector;
-}(); ////////////////////////////////////////////selectComponent//////////////////////////////////////////////////
-/**
- * 其他平台，如APP
- * @param {Object} selector
- */
-function selectComponentOther(selector) {
-  var selectors = selector.split(',').map(function (s) {
-    return s.trim();
-  });
-  if (!selectors[0]) {
-    return null;
-  }
-  var querySelector = selectorBuilder(selectors[0]);
-  return querySelector(Selector, this, false, selector).nodes[0];
-}
-
-/**
- * 还是用这个微信小程序的实现吧
- * @param {Object} selector
- */
-var selectComponentWeiXin2 = function selectComponentWeiXin2(selector) {
-  var _this$$scope$selectCo;
-  console.log(".$scope", this.$scope.selectComponent(selector));
-  return ((_this$$scope$selectCo = this.$scope.selectComponent(selector)) === null || _this$$scope$selectCo === void 0 ? void 0 : _this$$scope$selectCo.data) || undefined;
-};
-
-/**
- * selectComponent
- * @param {Object} args
- */
-function selectComponent(args) {
-  // console.log(".$scope",this.$scope)
-
-  //H5和小程序能正常使用这个函数
-  //重写selectComponent函数，因为默认会多一层$vm
-  return selectComponentWeiXin2.call(this, args);
-}
-
-////////////////////////////////////////////selectAllComponents//////////////////////////////////////////////////
-/**
- * 其他平台，如APP
- * @param {Object} selector
- */
-function selectAllComponentsOther(selector) {
-  var _this2 = this;
-  var selectors = selector.split(',').map(function (s) {
-    return s.trim();
-  });
-  var selected = [];
-  selectors.forEach(function (selector) {
-    var querySelector = selectorBuilder(selector);
-    selected = selected.concat(querySelector(Selector, _this2, true, selector).nodes);
-  });
-  return selected;
-}
-
-/**
- * 还是用这个微信小程序的实现吧
- * @param {Object} selector
- */
-var selectAllComponentsWeiXin2 = function selectAllComponentsWeiXin2(selector) {
-  var list = this.$scope.selectAllComponents(selector) || [];
-  list = list.map(function (item) {
-    return item.data;
-  });
-  return list;
-};
-
-/**
- * selectAllComponents
- * @param {Object} args
- */
-function selectAllComponents(args) {
-  //H5和小程序能正常使用这个函数
-  //重写selectComponent函数，因为默认会多一层$vm
-  return selectAllComponentsWeiXin2.call(this, args);
-}
-
-/***/ }),
-/* 42 */
-/*!***********************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/setData.js ***!
-  \***********************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.setData = setData;
-var _set2 = _interopRequireDefault(__webpack_require__(/*! ../utils/_set */ 43));
-var _debounce = _interopRequireDefault(__webpack_require__(/*! ../utils/debounce */ 44));
-/**
- * 老setData polyfill
- * 用于转换后的uniapp的项目能直接使用this.setData()函数
- * @param {*} obj
- * @param {*} callback
- */
-function oldSetData(obj, callback) {
-  var that = this;
-  var handleData = function handleData(tepData, tepKey, afterKey) {
-    var tepData2 = tepData;
-    tepKey = tepKey.split('.');
-    tepKey.forEach(function (item) {
-      if (tepData[item] === null || tepData[item] === undefined) {
-        var reg = /^[0-9]+$/;
-        tepData[item] = reg.test(afterKey) ? [] : {};
-        tepData2 = tepData[item];
-      } else {
-        tepData2 = tepData[item];
-      }
-    });
-    return tepData2;
-  };
-  var isFn = function isFn(value) {
-    return typeof value == 'function' || false;
-  };
-  Object.keys(obj).forEach(function (key) {
-    var val = obj[key];
-    key = key.replace(/\]/g, '').replace(/\[/g, '.');
-    var front, after;
-    var index_after = key.lastIndexOf('.');
-    if (index_after != -1) {
-      after = key.slice(index_after + 1);
-      front = handleData(that, key.slice(0, index_after), after);
-    } else {
-      after = key;
-      front = that;
-    }
-    if (front.$data && front.$data[after] === undefined) {
-      Object.defineProperty(front, after, {
-        get: function get() {
-          return front.$data[after];
-        },
-        set: function set(newValue) {
-          front.$data[after] = newValue;
-          that.hasOwnProperty("$forceUpdate") && that.$forceUpdate();
-        },
-        enumerable: true,
-        configurable: true
-      });
-      front[after] = val;
-    } else {
-      that.$set(front, after, val);
-    }
-  });
-  // this.$forceUpdate();
-  isFn(callback) && this.$nextTick(callback);
-}
-
-/**
- * 变量名正则
- */
-var variableNameReg = /^([^\x00-\xff]|[a-zA-Z_$])([^\x00-\xff]|[a-zA-Z0-9_$])*$/;
-
-/**
- * 2022-10-31 重写setData
- * 2023-05-08 增加微信“简易双向绑定”支持
- * 用于转换后的uniapp的项目能直接使用this.setData()函数
- * @param {Object} obj
- * @param {Object} callback
- */
-function setData(obj) {
-  var _this = this;
-  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  Object.keys(obj).forEach(function (key) {
-    (0, _set2.default)(_this, key, obj[key]);
-
-    //处理微信“简易双向绑定”
-    if (variableNameReg.test(key) && key.endsWith("Clone")) {
-      var propName = key.replace(/Clone$/, "");
-      if (_this.$options && _this.$options.propsData[propName]) {
-        _this.$emit("update:".concat(propName), obj[key]);
-      }
-    }
-  });
-  this.$forceUpdate();
-  if (typeof callback == 'function') this.$nextTick(callback);
-}
-
-/***/ }),
-/* 43 */
-/*!******************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/utils/_set.js ***!
-  \******************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-/**
- * lodash set
- * @param {*} obj
- * @param {*} path
- * @param {*} value
- * @returns
- */
-function _set(obj, path, value) {
-  if (Object(obj) !== obj) return obj; // When obj is not an object
-  // If not yet an array, get the keys from the string-path
-  if (!Array.isArray(path)) path = path.toString().match(/[^.[\]]+/g) || [];
-  path.slice(0, -1).reduce(function (a, c, i) {
-    return (
-      // Iterate all of them except the last one
-      Object(a[c]) === a[c] // Does the key exist and is its value an object?
-      // Yes: then follow that path
-      ? a[c]
-      // No: create the key. Is the next key a potential array-index?
-      : a[c] = Math.abs(path[i + 1]) >> 0 === +path[i + 1] ? [] // Yes: assign a new array object
-      : {}
-    );
-  },
-  // No: assign a new plain object
-  obj)[path[path.length - 1]] = value; // Finally assign the value to the last key
-  return obj; // Return the top-level object to allow chaining
-}
-var _default = _set;
-exports.default = _default;
-
-/***/ }),
-/* 44 */
-/*!**********************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/utils/debounce.js ***!
-  \**********************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-/**
- * 防抖
- * @param {Object} scope  //引用的this，发现不显式传this，拿不到。
- * @param {Object} fn
- * @param {Object} delay
- */
-var t = null;
-var debounce = function debounce(scope, fn, delay) {
-  if (t !== null) {
-    clearTimeout(t);
-  }
-  t = setTimeout(function () {
-    scope[fn]();
-  }, delay);
-};
-var _default = debounce;
-exports.default = _default;
-
-/***/ }),
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */
-/*!************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/eventBus.js ***!
-  \************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// 事件总线，用于页面间通信
-var eventBus = {
-  // 存储事件和回调的映射
-  events: {},
-  // 监听事件
-  on: function on(eventName, callback) {
-    if (!this.events[eventName]) {
-      this.events[eventName] = [];
-    }
-    this.events[eventName].push(callback);
-  },
-  // 触发事件
-  emit: function emit(eventName, data) {
-    var callbacks = this.events[eventName];
-    if (callbacks) {
-      callbacks.forEach(function (callback) {
-        callback(data);
-      });
-    }
-  },
-  // 移除事件监听
-  off: function off(eventName, callback) {
-    var callbacks = this.events[eventName];
-    if (callbacks) {
-      if (callback) {
-        // 移除特定回调
-        var index = callbacks.indexOf(callback);
-        if (index !== -1) {
-          callbacks.splice(index, 1);
-        }
-      } else {
-        // 移除该事件的所有回调
-        delete this.events[eventName];
-      }
-    }
-  }
-};
-module.exports = eventBus;
-
-/***/ }),
-/* 52 */
-/*!**********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/category.js ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get;
-
-/**
- * 获取分类列表
- */
-function getCategoryList() {
-  return get('/category/list');
-}
-module.exports = {
-  getCategoryList: getCategoryList
-};
-
-/***/ }),
-/* 53 */
-/*!***********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/request.js ***!
-  \***********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(uni) {/**
- * 网络请求工具
- */
-
-var BASE_URL = 'http://localhost:8080/api'; // 后端接口地址，请根据实际情况修改
-
-/**
- * 发送HTTP请求
- */
-function request(options) {
-  return new Promise(function (resolve, reject) {
-    var token = uni.getStorageSync('token') || '';
-    uni.request({
-      url: BASE_URL + options.url,
-      method: options.method || 'GET',
-      data: options.data || {},
-      header: {
-        'Content-Type': 'application/json',
-        Authorization: token
-      },
-      success: function success(res) {
-        if (res.statusCode === 200) {
-          if (res.data.code === 200) {
-            resolve(res.data.data);
-          } else {
-            uni.showToast({
-              title: res.data.message || '请求失败',
-              icon: 'none'
-            });
-            reject(new Error(res.data.message));
-          }
-        } else if (res.statusCode === 401) {
-          uni.showToast({
-            title: '登录已过期，请重新登录',
-            icon: 'none'
-          });
-          uni.removeStorageSync('token');
-          uni.removeStorageSync('userInfo');
-          reject(new Error('登录已过期'));
-        } else {
-          uni.showToast({
-            title: '网络错误',
-            icon: 'none'
-          });
-          reject(new Error('网络错误'));
-        }
-      },
-      fail: function fail(err) {
-        uni.showToast({
-          title: '网络连接失败',
-          icon: 'none'
-        });
-        reject(err);
-      }
-    });
-  });
-}
-
-/**
- * GET请求
- */
-function get(url, data) {
-  return request({
-    url: url,
-    method: 'GET',
-    data: data
-  });
-}
-
-/**
- * POST请求
- */
-function post(url, data) {
-  return request({
-    url: url,
-    method: 'POST',
-    data: data
-  });
-}
-
-/**
- * PUT请求
- */
-function put(url, data) {
-  return request({
-    url: url,
-    method: 'PUT',
-    data: data
-  });
-}
-
-/**
- * DELETE请求
- */
-function del(url, params) {
-  // 将参数拼接到URL中
-  if (params) {
-    var queryString = Object.keys(params).map(function (key) {
-      return "".concat(key, "=").concat(params[key]);
-    }).join('&');
-    url = url + (url.includes('?') ? '&' : '?') + queryString;
-  }
-  return request({
-    url: url,
-    method: 'DELETE'
-  });
-}
-module.exports = {
-  request: request,
-  get: get,
-  post: post,
-  put: put,
-  del: del
-};
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 54 */
-/*!*********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/product.js ***!
-  \*********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get;
-
-/**
- * 获取商品列表
- */
-function getProductList(categoryId) {
-  if (!categoryId) {
-    return get('/product/list');
-  }
-  return get('/product/list', {
-    categoryId: categoryId
-  });
-}
-
-/**
- * 根据分类ID获取商品列表
- */
-function getProductsByCategory(categoryId) {
-  return get('/product/category/' + categoryId);
-}
-
-/**
- * 根据ID获取商品详情
- */
-function getProductById(id) {
-  return get('/product/' + id);
-}
-
-/**
- * 获取热门商品
- */
-function getHotProducts(limit) {
-  return get('/product/hot', {
-    limit: limit || 6
-  });
-}
-
-/**
- * 获取新品商品
- */
-function getNewProducts(limit) {
-  return get('/product/new', {
-    limit: limit || 6
-  });
-}
-
-/**
- * 搜索商品
- */
-function searchProducts(keyword) {
-  return get('/product/search', {
-    keyword: keyword
-  });
-}
-function getProductsBySubCategory(categoryId, subCategoryId) {
-  return get('/product/sub-category', {
-    categoryId: categoryId,
-    subCategoryId: subCategoryId
-  });
-}
-module.exports = {
-  getProductList: getProductList,
-  getProductsByCategory: getProductsByCategory,
-  getProductById: getProductById,
-  getHotProducts: getHotProducts,
-  getNewProducts: getNewProducts,
-  searchProducts: searchProducts,
-  getProductsBySubCategory: getProductsBySubCategory
-};
-
-/***/ }),
-/* 55 */
-/*!*******************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/brand.js ***!
-  \*******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get;
-module.exports = {
-  getBrandList: function getBrandList() {
-    return get('/brand/list');
-  }
-};
-
-/***/ }),
-/* 56 */
-/*!********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/config.js ***!
-  \********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get;
-module.exports = {
-  getAll: function getAll() {
-    return get('/config');
-  },
-  getValue: function getValue(key) {
-    return get('/config/' + key);
-  }
-};
-
-/***/ }),
-/* 57 */
-/*!*********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/image.js ***!
-  \*********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * 图片地址工具
- * 微信小程序无法加载 unsplash 等外网图，统一走后端本地静态资源
- */
-var API_BASE = 'http://localhost:8080/api';
-var SEED_BASE = API_BASE + '/uploads/seed';
-function seedImage(name) {
-  return SEED_BASE + '/' + name;
-}
-
-/** 将外链或相对路径转为可访问的完整地址 */
-function resolveImage(url) {
-  if (!url) return '';
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    // 替换无法访问的外链为本地种子图
-    if (url.indexOf('unsplash.com') !== -1 || url.indexOf('alicdn.com') !== -1) {
-      return seedImage('product1.jpg');
-    }
-    return url;
-  }
-  if (url.startsWith('/api/')) return API_BASE.replace('/api', '') + url;
-  if (url.startsWith('/uploads/')) return API_BASE + url;
-  return url;
-}
-module.exports = {
-  API_BASE: API_BASE,
-  SEED_BASE: SEED_BASE,
-  seedImage: seedImage,
-  resolveImage: resolveImage
-};
-
-/***/ }),
-/* 58 */
-/*!******************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/cart.js ***!
-  \******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get,
-  post = _require.post,
-  put = _require.put,
-  del = _require.del;
-
-/**
- * 获取购物车列表
- */
-function getCartList() {
-  return get('/cart/list');
-}
-
-/**
- * 添加到购物车
- */
-function addToCart(productId, count) {
-  return post('/cart', {
-    productId: productId,
-    count: count
-  });
-}
-
-/**
- * 更新购物车商品数量
- */
-function updateCartCount(id, count) {
-  return put('/cart/' + id + '?count=' + count, null);
-}
-
-/**
- * 删除购物车商品
- */
-function deleteCartItem(id) {
-  return del('/cart/' + id);
-}
-
-/**
- * 清空购物车
- */
-function clearCart() {
-  return del('/cart/clear');
-}
-module.exports = {
-  getCartList: getCartList,
-  addToCart: addToCart,
-  updateCartCount: updateCartCount,
-  deleteCartItem: deleteCartItem,
-  clearCart: clearCart
-};
-
-/***/ }),
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */
-/*!*************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/subCategory.js ***!
-  \*************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get;
-module.exports = {
-  getSubCategoryList: function getSubCategoryList(categoryId) {
-    return get('/sub-category/list/' + categoryId);
-  }
-};
-
-/***/ }),
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */
-/*!*******************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/share.js ***!
-  \*******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get,
-  post = _require.post;
-module.exports = {
-  createShare: function createShare(data) {
-    return post('/share', data);
-  },
-  getMyShares: function getMyShares() {
-    return get('/share/my');
-  },
-  getByCode: function getByCode(shareCode) {
-    return get('/share/code/' + shareCode);
-  }
-};
-
-/***/ }),
-/* 85 */
-/*!*******************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/sales.js ***!
-  \*******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get;
-module.exports = {
-  getSalesList: function getSalesList() {
-    return get('/sales/list');
-  }
-};
-
-/***/ }),
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */
-/*!*******************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/order.js ***!
-  \*******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get,
-  post = _require.post,
-  put = _require.put;
-
-/**
- * 获取订单列表
- */
-function getOrderList(status) {
-  // 过滤掉null和undefined的status参数
-  var params = {};
-  if (status !== null && status !== undefined && status !== 'null') {
-    params.status = status;
-  }
-  return get('/order/list', params);
-}
-
-/**
- * 根据ID获取订单详情
- */
-function getOrderById(id) {
-  return get('/order/' + id);
-}
-
-/**
- * 创建订单
- */
-function createOrder(data) {
-  return post('/order', data);
-}
-
-/**
- * 更新订单状态
- */
-function updateOrderStatus(id, status) {
-  return put('/order/' + id + '/status?status=' + status);
-}
-
-/**
- * 获取订单统计（按状态）
- */
-function getOrderStatistics() {
-  return get('/order/statistics');
-}
-
-/**
- * 取消订单
- */
-function cancelOrder(id) {
-  return put('/order/' + id + '/cancel');
-}
-module.exports = {
-  getOrderList: getOrderList,
-  getOrderById: getOrderById,
-  getOrderDetail: getOrderById,
-  // 别名
-  createOrder: createOrder,
-  updateOrderStatus: updateOrderStatus,
-  cancelOrder: cancelOrder,
-  getOrderStatistics: getOrderStatistics
-};
-
-/***/ }),
-/* 95 */
-/*!********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/points.js ***!
-  \********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get;
-module.exports = {
-  getBalance: function getBalance() {
-    return get('/points/balance');
-  },
-  getLogs: function getLogs() {
-    return get('/points/logs');
-  }
-};
-
-/***/ }),
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */
-/*!**********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/favorite.js ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get,
-  post = _require.post,
-  del = _require.del;
-
-/**
- * 获取收藏列表
- */
-function getFavoriteList() {
-  return get('/favorite/list');
-}
-
-/**
- * 检查是否已收藏
- */
-function checkFavorite(productId) {
-  return get('/favorite/check', {
-    productId: productId
-  });
-}
-
-/**
- * 添加收藏
- */
-function addFavorite(productId) {
-  return post('/favorite', {
-    productId: productId
-  });
-}
-
-/**
- * 取消收藏
- */
-function removeFavorite(productId) {
-  return del('/favorite', {
-    productId: productId
-  });
-}
-module.exports = {
-  getFavoriteList: getFavoriteList,
-  checkFavorite: checkFavorite,
-  addFavorite: addFavorite,
-  removeFavorite: removeFavorite
-};
-
-/***/ }),
-/* 105 */
-/*!************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/statistics.js ***!
-  \************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  post = _require.post;
-module.exports = {
-  recordBrowse: function recordBrowse(productId, userId, visitorId) {
-    var url = '/statistics/browse/' + productId;
-    var params = [];
-    if (userId) params.push('userId=' + userId);
-    if (visitorId) params.push('visitorId=' + visitorId);
-    if (params.length) url += '?' + params.join('&');
-    return post(url);
-  }
-};
-
-/***/ }),
-/* 106 */
-/*!***********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/footprint.js ***!
-  \***********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get,
-  post = _require.post,
-  del = _require.del;
-module.exports = {
-  getList: function getList() {
-    return get('/footprint/list');
-  },
-  add: function add(productId) {
-    return post('/footprint', {
-      productId: productId
-    });
-  },
-  remove: function remove(productId) {
-    return del('/footprint', {
-      productId: productId
-    });
-  }
-};
-
-/***/ }),
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */,
-/* 114 */,
-/* 115 */
-/*!*********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/address.js ***!
-  \*********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get,
-  post = _require.post,
-  put = _require.put,
-  del = _require.del;
-
-/**
- * 获取地址列表
- */
-function getAddressList() {
-  return get('/address/list');
-}
-
-/**
- * 根据ID获取地址
- */
-function getAddressById(id) {
-  return get('/address/' + id);
-}
-
-/**
- * 获取默认地址
- */
-function getDefaultAddress() {
-  return get('/address/default');
-}
-
-/**
- * 添加地址
- */
-function addAddress(data) {
-  return post('/address', data);
-}
-
-/**
- * 更新地址
- */
-function updateAddress(data) {
-  return put('/address', data);
-}
-
-/**
- * 删除地址
- */
-function deleteAddress(id) {
-  return del('/address/' + id);
-}
-module.exports = {
-  getAddressList: getAddressList,
-  getAddressById: getAddressById,
-  getDefaultAddress: getDefaultAddress,
-  addAddress: addAddress,
-  updateAddress: updateAddress,
-  deleteAddress: deleteAddress
-};
-
-/***/ }),
-/* 116 */,
-/* 117 */,
-/* 118 */,
-/* 119 */,
-/* 120 */,
-/* 121 */,
-/* 122 */,
-/* 123 */,
-/* 124 */,
-/* 125 */,
-/* 126 */,
-/* 127 */,
-/* 128 */,
-/* 129 */,
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */,
-/* 154 */,
-/* 155 */,
-/* 156 */,
-/* 157 */,
-/* 158 */,
-/* 159 */,
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */
-/*!******************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/auth.js ***!
-  \******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  post = _require.post;
-
-/**
- * 微信小程序登录
- * @param {string} code - 微信登录code
- * @param {string} phone - 手机号（可选）
- * @param {string} password - 密码（可选，用于密码登录）
- */
-function wxLogin(code, phone, password) {
-  var data = {
-    code: code
-  };
-  if (phone) {
-    data.phone = phone;
-  }
-  if (password) {
-    data.password = password;
-  }
-  return post('/auth/wx/login', data);
-}
-
-/**
- * 手机号密码登录
- */
-function phoneLogin(phone, password) {
-  return post('/auth/phone/login', {
-    phone: phone,
-    password: password
-  });
-}
-
-/**
- * 手机号验证码登录
- */
-function phoneCodeLogin(phone, code) {
-  return post('/auth/phone/code-login', {
-    phone: phone,
-    code: code
-  });
-}
-
-/**
- * 用户注册
- */
-function register(phone, password) {
-  return post('/auth/register', {
-    phone: phone,
-    password: password
-  });
-}
-
-/**
- * 发送验证码
- */
-function sendCode(phone) {
-  return post('/auth/send-code', {
-    phone: phone
-  });
-}
-
-/**
- * 退出登录
- */
-function logout() {
-  return post('/auth/logout');
-}
-module.exports = {
-  wxLogin: wxLogin,
-  phoneLogin: phoneLogin,
-  phoneCodeLogin: phoneCodeLogin,
-  register: register,
-  sendCode: sendCode,
-  logout: logout
-};
-
-/***/ }),
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */,
-/* 172 */,
-/* 173 */
-/*!******************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/user.js ***!
-  \******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get,
-  put = _require.put;
-
-/**
- * 获取用户信息
- */
-function getUserInfo() {
-  return get('/user/info');
-}
-
-/**
- * 更新用户信息
- */
-function updateUserInfo(data) {
-  return put('/user/update', data);
-}
-module.exports = {
-  getUserInfo: getUserInfo,
-  updateUserInfo: updateUserInfo
-};
-
-/***/ }),
-/* 174 */,
-/* 175 */,
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */
+/***/ 252:
 /*!************************************************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/components/region-picker/region-picker.js ***!
   \************************************************************************************************************************************************************/
@@ -26156,6 +24480,1658 @@ module.exports = {
   zones_tree: zones_tree
 };
 
+/***/ }),
+
+/***/ 26:
+/*!*****************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/pages.json ***!
+  \*****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ 3:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 32:
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    if(typeof renderjs.beforeCreate === 'function'){
+			renderjs.beforeCreate = [renderjs.beforeCreate]
+		}
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ 33:
+/*!*************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/index.js ***!
+  \*************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _pageLifetimes = __webpack_require__(/*! ./lifecycle/pageLifetimes */ 34);
+var _clone = __webpack_require__(/*! ./methods/clone */ 35);
+var _dataset = __webpack_require__(/*! ./methods/dataset */ 36);
+var _escape = __webpack_require__(/*! ./methods/escape */ 37);
+var _event = __webpack_require__(/*! ./methods/event */ 38);
+var _getTabBar = __webpack_require__(/*! ./methods/getTabBar */ 39);
+var _relation = __webpack_require__(/*! ./methods/relation */ 40);
+var _selectComponent = __webpack_require__(/*! ./methods/selectComponent */ 41);
+var _setData = __webpack_require__(/*! ./methods/setData */ 42);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var _default = {
+  install: function install(Vue, option) {
+    Vue.mixin(_objectSpread(_objectSpread({}, _pageLifetimes.pageLifetimes), {}, {
+      methods: {
+        clone: _clone.clone,
+        handleDataset: _dataset.handleDataset,
+        escape2Html: _escape.escape2Html,
+        html2Escape: _escape.html2Escape,
+        parseEventDynamicCode: _event.parseEventDynamicCode,
+        getTabBar: _getTabBar.getTabBar,
+        getRelationNodes: _relation.getRelationNodes,
+        zpSelectComponent: _selectComponent.selectComponent,
+        zpSelectAllComponents: _selectComponent.selectAllComponents,
+        setData: _setData.setData
+      }
+    }));
+  }
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 34:
+/*!*******************************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/lifecycle/pageLifetimes.js ***!
+  \*******************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.pageLifetimes = void 0;
+/**
+ * 组件pageLifetimes处理，需在页面生命周期里调用
+ * @param {Object} node
+ * @param {Object} lifeName
+ */
+function handlePageLifetime(node, lifeName) {
+  node.$children.map(function (child) {
+    if (typeof child[lifeName] == 'function') child[lifeName]();
+    handlePageLifetime(child, lifeName);
+  });
+}
+var pageLifetimes = {
+  onLoad: function onLoad() {
+    // uni.onWindowResize(CALLBACK)  监听窗口尺寸变化事件
+    // 平台差异说明
+    // App	H5	微信小程序	支付宝小程序	百度小程序	抖音小程序	飞书小程序	QQ小程序
+    // √	√	√	x	x	x	√	√
+  },
+  onShow: function onShow() {
+    handlePageLifetime(this, "handlePageShow");
+  },
+  onHide: function onHide() {
+    handlePageLifetime(this, "handlePageHide");
+  },
+  onResize: function onResize() {
+    //onResize	监听窗口尺寸变化	App、微信小程序、快手小程序
+
+    handlePageLifetime(this, "handlePageResize");
+  }
+};
+exports.pageLifetimes = pageLifetimes;
+
+/***/ }),
+
+/***/ 35:
+/*!*********************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/clone.js ***!
+  \*********************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.clone = clone;
+/**
+ * 用于处理对props进行赋值的情况
+ * //简单处理一下就行了
+ *
+ * @param {*} target
+ * @returns
+ */
+function clone(target) {
+  return JSON.parse(JSON.stringify(target));
+}
+
+/***/ }),
+
+/***/ 36:
+/*!***********************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/dataset.js ***!
+  \***********************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.handleDataset = handleDataset;
+/**
+ * 用于处理dataset
+ * 自定义组件的事件里，是获取不到e.currentTarget.dataset的
+ * 因此收集data-参数，手动传进去
+ *
+ * @param {*} event
+ * @param {*} dataSet
+ */
+function handleDataset(event) {
+  var dataSet = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  if (event && !event.currentTarget) {
+    if (dataSet.tagId) {
+      event.currentTarget = {
+        id: dataSet.tagId
+      };
+    } else {
+      event.currentTarget = {
+        dataset: dataSet
+      };
+    }
+  }
+}
+
+/***/ }),
+
+/***/ 37:
+/*!**********************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/escape.js ***!
+  \**********************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.escape2Html = escape2Html;
+exports.html2Escape = html2Escape;
+/**
+ * 转义符换成普通字符
+ * @param {*} str
+ * @returns
+ */
+function escape2Html(str) {
+  if (!str) return str;
+  var arrEntities = {
+    'lt': '<',
+    'gt': '>',
+    'nbsp': ' ',
+    'amp': '&',
+    'quot': '"'
+  };
+  return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+    return arrEntities[t];
+  });
+}
+
+/**
+ * 普通字符转换成转义符
+ * @param {*} sHtml
+ * @returns
+ */
+function html2Escape(sHtml) {
+  if (!sHtml) return sHtml;
+  return sHtml.replace(/[<>&"]/g, function (c) {
+    return {
+      '<': '&lt;',
+      '>': '&gt;',
+      '&': '&amp;',
+      '"': '&quot;'
+    }[c];
+  });
+}
+
+/***/ }),
+
+/***/ 38:
+/*!*********************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/event.js ***!
+  \*********************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.parseEventDynamicCode = parseEventDynamicCode;
+/**
+ * 解析事件里的动态函数名，这种没有()的函数名，在uniapp不被执行
+ * 比如：<view bindtap="{{openId==undefined?'denglu':'hy_to'}}">立即</view>
+ * @param {*} exp
+ */
+function parseEventDynamicCode(e, exp) {
+  if (typeof this[exp] === 'function') {
+    this[exp](e);
+  }
+}
+
+/***/ }),
+
+/***/ 39:
+/*!*************************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/getTabBar.js ***!
+  \*************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getTabBar = getTabBar;
+/**
+ * 接管getTabBar函数，默认uni-app是没有这个函数的
+ * 适用于使用custom-tab-bar自定义导航栏的小程序项目
+ * 需注意：
+ * 1.custom-tab-bar下面仍是小程序文件
+ * 2.pages.json里面需使用条件编译区分好小程序和非小程序的tabBar配置
+ */
+function getTabBar() {
+  return {
+    setData: function setData(obj) {
+      var _this$$mp, _this$$mp$page, _this$$mp2, _this$$mp2$page;
+      if (typeof ((_this$$mp = this.$mp) === null || _this$$mp === void 0 ? void 0 : (_this$$mp$page = _this$$mp.page) === null || _this$$mp$page === void 0 ? void 0 : _this$$mp$page.getTabBar) === 'function' && (_this$$mp2 = this.$mp) !== null && _this$$mp2 !== void 0 && (_this$$mp2$page = _this$$mp2.page) !== null && _this$$mp2$page !== void 0 && _this$$mp2$page.getTabBar()) {
+        this.$mp.page.getTabBar().setData(obj);
+      } else {
+        console.log("当前平台不支持getTabBar()，已稍作处理，详细请参见相关文档。");
+      }
+    }
+  };
+}
+
+/***/ }),
+
+/***/ 4:
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 40:
+/*!************************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/relation.js ***!
+  \************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getRelationNodes = getRelationNodes;
+/**
+ * 组件间关系
+ * 注意：须与p-f-unicom配合使用！！！
+ * @param {*} name
+ * @returns
+ */
+function getRelationNodes(name) {
+  if (!this.$unicom) throw "this.getRelationNodes()需与p-f-unicom配合使用！";
+  return this.$unicom('@' + name);
+}
+
+/***/ }),
+
+/***/ 41:
+/*!*******************************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/selectComponent.js ***!
+  \*******************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.selectAllComponents = selectAllComponents;
+exports.selectComponent = selectComponent;
+var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+var createTraverse = function createTraverse() {
+  var stop = false;
+  return function traverse(root, callback) {
+    if (!stop && typeof callback === 'function') {
+      var children = root.$children;
+      for (var index = 0; !stop && index < children.length; index++) {
+        var element = children[index];
+        stop = callback(element) === true;
+        traverse(element, callback);
+      }
+    }
+  };
+};
+
+/**
+ * 安全的JSON.stringify
+ * @param {Object} node
+ */
+function safeStringify(node) {
+  var cache = [];
+  var str = JSON.stringify(node, function (key, value) {
+    if ((0, _typeof2.default)(value) === 'object' && value !== null) {
+      if (cache.indexOf(value) !== -1) {
+        // 移除
+        return;
+      }
+      // 收集所有的值
+      cache.push(value);
+    }
+    return value;
+  });
+  cache = null; // 清空变量，便于垃圾回收机制回收
+  return str;
+}
+var match = function match(node, selector) {
+  var _vnode$context$$vnode, _vnode, _vnode$context;
+  var vnode = node._vnode;
+
+  //好家伙，在微信小程序里，node里面根本找不到class，因此这种方式没法搞了
+
+  //关键之处！
+  // console.log("attrs", (vnode.context.$vnode.data));
+  vnode = (_vnode$context$$vnode = (_vnode = vnode) === null || _vnode === void 0 ? void 0 : (_vnode$context = _vnode.context) === null || _vnode$context === void 0 ? void 0 : _vnode$context.$vnode) !== null && _vnode$context$$vnode !== void 0 ? _vnode$context$$vnode : "";
+  //console.log(vnode.data) -->  [Object] {"staticClass":"bar","attrs":{"_i":0}}  at selectComponent.js:72
+  if (!vnode || !vnode.data) {
+    return false;
+  }
+  var attrs = vnode.data.attrs || {};
+  var staticClass = vnode.data.staticClass || '';
+  var id = attrs.id || '';
+  if (selector[0] === '#') {
+    return selector.substr(1) === id;
+  } else {
+    staticClass = staticClass.trim().split(' ');
+    selector = selector.substr(1).split('.');
+    return selector.reduce(function (a, c) {
+      return a && staticClass.includes(c);
+    }, true);
+  }
+};
+var selectorBuilder = function selectorBuilder(selector) {
+  selector = selector.replace(/>>>/g, '>');
+  selector = selector.split('>').map(function (s) {
+    return s.trim().split(' ').join("').descendant('");
+  }).join("').child('");
+
+  // 替换掉new Function方式，因为小程序不支持new Function和eval
+  //return new Function('Selector', 'node', 'all', `return new Selector(node, all).descendant('` + selector + `')`);
+  return function (Selector, node, all) {
+    return new Selector(node, all).descendant(selector);
+  };
+};
+var Selector = /*#__PURE__*/function () {
+  function Selector(node) {
+    var all = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    (0, _classCallCheck2.default)(this, Selector);
+    this.nodes = [node];
+    this.all = all;
+  }
+  (0, _createClass2.default)(Selector, [{
+    key: "child",
+    value: function child(selector) {
+      var matches = [];
+      if (this.all) {
+        this.nodes.forEach(function (node) {
+          var _matches;
+          (_matches = matches).push.apply(_matches, (0, _toConsumableArray2.default)(node.$children.filter(function (node) {
+            return match(node, selector);
+          })));
+        });
+      } else {
+        if (this.nodes.length > 0) {
+          var node = this.nodes[0].$children.find(function (node) {
+            return match(node, selector);
+          });
+          matches = node ? [node] : [];
+        }
+      }
+      this.nodes = matches;
+      return this;
+    }
+  }, {
+    key: "descendant",
+    value: function descendant(selector) {
+      var _this = this;
+      var matches = [];
+      this.nodes.forEach(function (root) {
+        createTraverse()(root, function (node) {
+          if (match(node, selector)) {
+            matches.push(node);
+            return !_this.all;
+          }
+        });
+      });
+      this.nodes = matches;
+      return this;
+    }
+  }]);
+  return Selector;
+}(); ////////////////////////////////////////////selectComponent//////////////////////////////////////////////////
+/**
+ * 其他平台，如APP
+ * @param {Object} selector
+ */
+function selectComponentOther(selector) {
+  var selectors = selector.split(',').map(function (s) {
+    return s.trim();
+  });
+  if (!selectors[0]) {
+    return null;
+  }
+  var querySelector = selectorBuilder(selectors[0]);
+  return querySelector(Selector, this, false, selector).nodes[0];
+}
+
+/**
+ * 还是用这个微信小程序的实现吧
+ * @param {Object} selector
+ */
+var selectComponentWeiXin2 = function selectComponentWeiXin2(selector) {
+  var _this$$scope$selectCo;
+  console.log(".$scope", this.$scope.selectComponent(selector));
+  return ((_this$$scope$selectCo = this.$scope.selectComponent(selector)) === null || _this$$scope$selectCo === void 0 ? void 0 : _this$$scope$selectCo.data) || undefined;
+};
+
+/**
+ * selectComponent
+ * @param {Object} args
+ */
+function selectComponent(args) {
+  // console.log(".$scope",this.$scope)
+
+  //H5和小程序能正常使用这个函数
+  //重写selectComponent函数，因为默认会多一层$vm
+  return selectComponentWeiXin2.call(this, args);
+}
+
+////////////////////////////////////////////selectAllComponents//////////////////////////////////////////////////
+/**
+ * 其他平台，如APP
+ * @param {Object} selector
+ */
+function selectAllComponentsOther(selector) {
+  var _this2 = this;
+  var selectors = selector.split(',').map(function (s) {
+    return s.trim();
+  });
+  var selected = [];
+  selectors.forEach(function (selector) {
+    var querySelector = selectorBuilder(selector);
+    selected = selected.concat(querySelector(Selector, _this2, true, selector).nodes);
+  });
+  return selected;
+}
+
+/**
+ * 还是用这个微信小程序的实现吧
+ * @param {Object} selector
+ */
+var selectAllComponentsWeiXin2 = function selectAllComponentsWeiXin2(selector) {
+  var list = this.$scope.selectAllComponents(selector) || [];
+  list = list.map(function (item) {
+    return item.data;
+  });
+  return list;
+};
+
+/**
+ * selectAllComponents
+ * @param {Object} args
+ */
+function selectAllComponents(args) {
+  //H5和小程序能正常使用这个函数
+  //重写selectComponent函数，因为默认会多一层$vm
+  return selectAllComponentsWeiXin2.call(this, args);
+}
+
+/***/ }),
+
+/***/ 42:
+/*!***********************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/methods/setData.js ***!
+  \***********************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setData = setData;
+var _set2 = _interopRequireDefault(__webpack_require__(/*! ../utils/_set */ 43));
+var _debounce = _interopRequireDefault(__webpack_require__(/*! ../utils/debounce */ 44));
+/**
+ * 老setData polyfill
+ * 用于转换后的uniapp的项目能直接使用this.setData()函数
+ * @param {*} obj
+ * @param {*} callback
+ */
+function oldSetData(obj, callback) {
+  var that = this;
+  var handleData = function handleData(tepData, tepKey, afterKey) {
+    var tepData2 = tepData;
+    tepKey = tepKey.split('.');
+    tepKey.forEach(function (item) {
+      if (tepData[item] === null || tepData[item] === undefined) {
+        var reg = /^[0-9]+$/;
+        tepData[item] = reg.test(afterKey) ? [] : {};
+        tepData2 = tepData[item];
+      } else {
+        tepData2 = tepData[item];
+      }
+    });
+    return tepData2;
+  };
+  var isFn = function isFn(value) {
+    return typeof value == 'function' || false;
+  };
+  Object.keys(obj).forEach(function (key) {
+    var val = obj[key];
+    key = key.replace(/\]/g, '').replace(/\[/g, '.');
+    var front, after;
+    var index_after = key.lastIndexOf('.');
+    if (index_after != -1) {
+      after = key.slice(index_after + 1);
+      front = handleData(that, key.slice(0, index_after), after);
+    } else {
+      after = key;
+      front = that;
+    }
+    if (front.$data && front.$data[after] === undefined) {
+      Object.defineProperty(front, after, {
+        get: function get() {
+          return front.$data[after];
+        },
+        set: function set(newValue) {
+          front.$data[after] = newValue;
+          that.hasOwnProperty("$forceUpdate") && that.$forceUpdate();
+        },
+        enumerable: true,
+        configurable: true
+      });
+      front[after] = val;
+    } else {
+      that.$set(front, after, val);
+    }
+  });
+  // this.$forceUpdate();
+  isFn(callback) && this.$nextTick(callback);
+}
+
+/**
+ * 变量名正则
+ */
+var variableNameReg = /^([^\x00-\xff]|[a-zA-Z_$])([^\x00-\xff]|[a-zA-Z0-9_$])*$/;
+
+/**
+ * 2022-10-31 重写setData
+ * 2023-05-08 增加微信“简易双向绑定”支持
+ * 用于转换后的uniapp的项目能直接使用this.setData()函数
+ * @param {Object} obj
+ * @param {Object} callback
+ */
+function setData(obj) {
+  var _this = this;
+  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  Object.keys(obj).forEach(function (key) {
+    (0, _set2.default)(_this, key, obj[key]);
+
+    //处理微信“简易双向绑定”
+    if (variableNameReg.test(key) && key.endsWith("Clone")) {
+      var propName = key.replace(/Clone$/, "");
+      if (_this.$options && _this.$options.propsData[propName]) {
+        _this.$emit("update:".concat(propName), obj[key]);
+      }
+    }
+  });
+  this.$forceUpdate();
+  if (typeof callback == 'function') this.$nextTick(callback);
+}
+
+/***/ }),
+
+/***/ 43:
+/*!******************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/utils/_set.js ***!
+  \******************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * lodash set
+ * @param {*} obj
+ * @param {*} path
+ * @param {*} value
+ * @returns
+ */
+function _set(obj, path, value) {
+  if (Object(obj) !== obj) return obj; // When obj is not an object
+  // If not yet an array, get the keys from the string-path
+  if (!Array.isArray(path)) path = path.toString().match(/[^.[\]]+/g) || [];
+  path.slice(0, -1).reduce(function (a, c, i) {
+    return (
+      // Iterate all of them except the last one
+      Object(a[c]) === a[c] // Does the key exist and is its value an object?
+      // Yes: then follow that path
+      ? a[c]
+      // No: create the key. Is the next key a potential array-index?
+      : a[c] = Math.abs(path[i + 1]) >> 0 === +path[i + 1] ? [] // Yes: assign a new array object
+      : {}
+    );
+  },
+  // No: assign a new plain object
+  obj)[path[path.length - 1]] = value; // Finally assign the value to the last key
+  return obj; // Return the top-level object to allow chaining
+}
+var _default = _set;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 44:
+/*!**********************************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/uni_modules/zp-mixins/utils/debounce.js ***!
+  \**********************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * 防抖
+ * @param {Object} scope  //引用的this，发现不显式传this，拿不到。
+ * @param {Object} fn
+ * @param {Object} delay
+ */
+var t = null;
+var debounce = function debounce(scope, fn, delay) {
+  if (t !== null) {
+    clearTimeout(t);
+  }
+  t = setTimeout(function () {
+    scope[fn]();
+  }, delay);
+};
+var _default = debounce;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 5:
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ 6);
+var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ 7);
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ 10);
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 51:
+/*!************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/eventBus.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// 事件总线，用于页面间通信
+var eventBus = {
+  // 存储事件和回调的映射
+  events: {},
+  // 监听事件
+  on: function on(eventName, callback) {
+    if (!this.events[eventName]) {
+      this.events[eventName] = [];
+    }
+    this.events[eventName].push(callback);
+  },
+  // 触发事件
+  emit: function emit(eventName, data) {
+    var callbacks = this.events[eventName];
+    if (callbacks) {
+      callbacks.forEach(function (callback) {
+        callback(data);
+      });
+    }
+  },
+  // 移除事件监听
+  off: function off(eventName, callback) {
+    var callbacks = this.events[eventName];
+    if (callbacks) {
+      if (callback) {
+        // 移除特定回调
+        var index = callbacks.indexOf(callback);
+        if (index !== -1) {
+          callbacks.splice(index, 1);
+        }
+      } else {
+        // 移除该事件的所有回调
+        delete this.events[eventName];
+      }
+    }
+  }
+};
+module.exports = eventBus;
+
+/***/ }),
+
+/***/ 52:
+/*!**********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/category.js ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get;
+
+/**
+ * 获取分类列表
+ */
+function getCategoryList() {
+  return get('/category/list');
+}
+module.exports = {
+  getCategoryList: getCategoryList
+};
+
+/***/ }),
+
+/***/ 53:
+/*!***********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/request.js ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uni) {/**
+ * 网络请求工具
+ */
+
+var _require = __webpack_require__(/*! ./config */ 54),
+  BASE_URL = _require.BASE_URL;
+
+// 登录页路径，401 时统一跳转
+var LOGIN_PAGE = '/pages/login/login';
+// 标记是否已在处理登录失效，避免重复跳转/提示
+var isHandlingAuthError = false;
+
+/**
+ * 统一处理登录失效
+ */
+function handleAuthError() {
+  uni.removeStorageSync('token');
+  uni.removeStorageSync('userInfo');
+  uni.setStorageSync('isLoggedIn', false);
+  if (isHandlingAuthError) {
+    return;
+  }
+  isHandlingAuthError = true;
+  uni.showToast({
+    title: '登录已过期，请重新登录',
+    icon: 'none'
+  });
+  setTimeout(function () {
+    // 当前页若已是登录页则不跳转
+    var pages = getCurrentPages();
+    var current = pages.length ? pages[pages.length - 1].route : '';
+    if (current && current.indexOf('pages/login/login') === -1) {
+      uni.navigateTo({
+        url: LOGIN_PAGE
+      });
+    }
+    isHandlingAuthError = false;
+  }, 1200);
+}
+
+/**
+ * 发送HTTP请求
+ */
+function request(options) {
+  return new Promise(function (resolve, reject) {
+    var token = uni.getStorageSync('token') || '';
+    uni.request({
+      url: BASE_URL + options.url,
+      method: options.method || 'GET',
+      data: options.data || {},
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      success: function success(res) {
+        if (res.statusCode === 200) {
+          if (res.data.code === 200) {
+            resolve(res.data.data);
+          } else if (res.data.code === 401) {
+            // 业务层返回登录失效
+            handleAuthError();
+            reject(new Error('登录已过期'));
+          } else {
+            if (!options.silent) {
+              uni.showToast({
+                title: res.data.message || '请求失败',
+                icon: 'none'
+              });
+            }
+            reject(new Error(res.data.message || '请求失败'));
+          }
+        } else if (res.statusCode === 401) {
+          handleAuthError();
+          reject(new Error('登录已过期'));
+        } else {
+          if (!options.silent) {
+            uni.showToast({
+              title: '网络错误',
+              icon: 'none'
+            });
+          }
+          reject(new Error('网络错误'));
+        }
+      },
+      fail: function fail(err) {
+        if (!options.silent) {
+          uni.showToast({
+            title: '网络连接失败',
+            icon: 'none'
+          });
+        }
+        reject(err);
+      }
+    });
+  });
+}
+
+/**
+ * GET请求
+ */
+function get(url, data) {
+  return request({
+    url: url,
+    method: 'GET',
+    data: data
+  });
+}
+
+/**
+ * POST请求
+ */
+function post(url, data) {
+  return request({
+    url: url,
+    method: 'POST',
+    data: data
+  });
+}
+
+/**
+ * PUT请求
+ */
+function put(url, data) {
+  return request({
+    url: url,
+    method: 'PUT',
+    data: data
+  });
+}
+
+/**
+ * DELETE请求
+ */
+function del(url, params) {
+  // 将参数拼接到URL中
+  if (params) {
+    var queryString = Object.keys(params).map(function (key) {
+      return "".concat(key, "=").concat(params[key]);
+    }).join('&');
+    url = url + (url.includes('?') ? '&' : '?') + queryString;
+  }
+  return request({
+    url: url,
+    method: 'DELETE'
+  });
+}
+module.exports = {
+  request: request,
+  get: get,
+  post: post,
+  put: put,
+  del: del
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+
+/***/ 54:
+/*!**********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/config.js ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * 全局环境配置
+ * 通过修改 ENV 切换开发/生产环境，避免在多处硬编码后端地址
+ */
+
+// 当前环境：'dev' | 'prod'
+var ENV = 'prod';
+var CONFIG = {
+  dev: {
+    // 后端接口地址（含 /api 前缀）
+    BASE_URL: 'http://localhost:8080/api'
+  },
+  prod: {
+    // 正式域名（微信小程序要求 https 且端口为 443）
+    BASE_URL: 'https://www.baibaiyeye.com.cn/api'
+  }
+};
+var current = CONFIG[ENV] || CONFIG.dev;
+
+// 接口基础地址
+var BASE_URL = current.BASE_URL;
+// 静态资源/上传文件基础地址（去掉 /api 后缀）
+var STATIC_BASE = BASE_URL.replace(/\/api$/, '');
+module.exports = {
+  ENV: ENV,
+  BASE_URL: BASE_URL,
+  STATIC_BASE: STATIC_BASE
+};
+
+/***/ }),
+
+/***/ 55:
+/*!*********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/product.js ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get;
+
+/**
+ * 获取商品列表
+ */
+function getProductList(categoryId) {
+  if (!categoryId) {
+    return get('/product/list');
+  }
+  return get('/product/list', {
+    categoryId: categoryId
+  });
+}
+
+/**
+ * 根据分类ID获取商品列表
+ */
+function getProductsByCategory(categoryId) {
+  return get('/product/category/' + categoryId);
+}
+
+/**
+ * 根据ID获取商品详情
+ */
+function getProductById(id) {
+  return get('/product/' + id);
+}
+
+/**
+ * 获取热门商品
+ */
+function getHotProducts(limit) {
+  return get('/product/hot', {
+    limit: limit || 6
+  });
+}
+
+/**
+ * 获取新品商品
+ */
+function getNewProducts(limit) {
+  return get('/product/new', {
+    limit: limit || 6
+  });
+}
+
+/**
+ * 搜索商品
+ */
+function searchProducts(keyword) {
+  return get('/product/search', {
+    keyword: keyword
+  });
+}
+function getProductsBySubCategory(categoryId, subCategoryId) {
+  return get('/product/sub-category', {
+    categoryId: categoryId,
+    subCategoryId: subCategoryId
+  });
+}
+module.exports = {
+  getProductList: getProductList,
+  getProductsByCategory: getProductsByCategory,
+  getProductById: getProductById,
+  getHotProducts: getHotProducts,
+  getNewProducts: getNewProducts,
+  searchProducts: searchProducts,
+  getProductsBySubCategory: getProductsBySubCategory
+};
+
+/***/ }),
+
+/***/ 56:
+/*!*******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/brand.js ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get;
+module.exports = {
+  getBrandList: function getBrandList() {
+    return get('/brand/list');
+  }
+};
+
+/***/ }),
+
+/***/ 57:
+/*!********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/config.js ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get;
+module.exports = {
+  getAll: function getAll() {
+    return get('/config');
+  },
+  getValue: function getValue(key) {
+    return get('/config/' + key);
+  }
+};
+
+/***/ }),
+
+/***/ 58:
+/*!*********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/image.js ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * 图片地址工具
+ * 微信小程序无法加载 unsplash 等外网图，统一走后端本地静态资源
+ */
+var _require = __webpack_require__(/*! ./config */ 54),
+  BASE_URL = _require.BASE_URL;
+var API_BASE = BASE_URL;
+var SEED_BASE = API_BASE + '/uploads/seed';
+function seedImage(name) {
+  return SEED_BASE + '/' + name;
+}
+
+/** 将外链或相对路径转为可访问的完整地址 */
+function resolveImage(url) {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    // 替换无法访问的外链为本地种子图
+    if (url.indexOf('unsplash.com') !== -1 || url.indexOf('alicdn.com') !== -1) {
+      return seedImage('product1.jpg');
+    }
+    return url;
+  }
+  if (url.startsWith('/api/')) return API_BASE.replace('/api', '') + url;
+  if (url.startsWith('/uploads/')) return API_BASE + url;
+  return url;
+}
+module.exports = {
+  API_BASE: API_BASE,
+  SEED_BASE: SEED_BASE,
+  seedImage: seedImage,
+  resolveImage: resolveImage
+};
+
+/***/ }),
+
+/***/ 59:
+/*!******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/cart.js ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get,
+  post = _require.post,
+  put = _require.put,
+  del = _require.del;
+
+/**
+ * 获取购物车列表
+ */
+function getCartList() {
+  return get('/cart/list');
+}
+
+/**
+ * 添加到购物车
+ */
+function addToCart(productId, count) {
+  return post('/cart', {
+    productId: productId,
+    count: count
+  });
+}
+
+/**
+ * 更新购物车商品数量
+ */
+function updateCartCount(id, count) {
+  return put('/cart/' + id + '?count=' + count, null);
+}
+
+/**
+ * 删除购物车商品
+ */
+function deleteCartItem(id) {
+  return del('/cart/' + id);
+}
+
+/**
+ * 清空购物车
+ */
+function clearCart() {
+  return del('/cart/clear');
+}
+module.exports = {
+  getCartList: getCartList,
+  addToCart: addToCart,
+  updateCartCount: updateCartCount,
+  deleteCartItem: deleteCartItem,
+  clearCart: clearCart
+};
+
+/***/ }),
+
+/***/ 6:
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 68:
+/*!*************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/subCategory.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get;
+module.exports = {
+  getSubCategoryList: function getSubCategoryList(categoryId) {
+    return get('/sub-category/list/' + categoryId);
+  }
+};
+
+/***/ }),
+
+/***/ 7:
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0) {
+        ;
+      }
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 8:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 85:
+/*!*******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/share.js ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get,
+  post = _require.post;
+module.exports = {
+  createShare: function createShare(data) {
+    return post('/share', data);
+  },
+  getMyShares: function getMyShares() {
+    return get('/share/my');
+  },
+  getByCode: function getByCode(shareCode) {
+    return get('/share/code/' + shareCode);
+  }
+};
+
+/***/ }),
+
+/***/ 86:
+/*!*******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/sales.js ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get;
+module.exports = {
+  getSalesList: function getSalesList() {
+    return get('/sales/list');
+  }
+};
+
+/***/ }),
+
+/***/ 9:
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
+}
+module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 95:
+/*!*******************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/order.js ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get,
+  post = _require.post,
+  put = _require.put;
+
+/**
+ * 获取订单列表
+ */
+function getOrderList(status) {
+  // 过滤掉null和undefined的status参数
+  var params = {};
+  if (status !== null && status !== undefined && status !== 'null') {
+    params.status = status;
+  }
+  return get('/order/list', params);
+}
+
+/**
+ * 根据ID获取订单详情
+ */
+function getOrderById(id) {
+  return get('/order/' + id);
+}
+
+/**
+ * 创建订单
+ */
+function createOrder(data) {
+  return post('/order', data);
+}
+
+/**
+ * 更新订单状态
+ */
+function updateOrderStatus(id, status) {
+  return put('/order/' + id + '/status?status=' + status);
+}
+
+/**
+ * 获取订单统计（按状态）
+ */
+function getOrderStatistics() {
+  return get('/order/statistics');
+}
+
+/**
+ * 取消订单
+ */
+function cancelOrder(id) {
+  return put('/order/' + id + '/cancel');
+}
+module.exports = {
+  getOrderList: getOrderList,
+  getOrderById: getOrderById,
+  getOrderDetail: getOrderById,
+  // 别名
+  createOrder: createOrder,
+  updateOrderStatus: updateOrderStatus,
+  cancelOrder: cancelOrder,
+  getOrderStatistics: getOrderStatistics
+};
+
+/***/ }),
+
+/***/ 96:
+/*!********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/points.js ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 53),
+  get = _require.get;
+module.exports = {
+  getBalance: function getBalance() {
+    return get('/points/balance');
+  },
+  getLogs: function getLogs() {
+    return get('/points/logs');
+  }
+};
+
 /***/ })
-]]);
+
+}]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map

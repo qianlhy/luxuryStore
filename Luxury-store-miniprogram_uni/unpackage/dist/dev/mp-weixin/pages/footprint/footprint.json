@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "我的足迹",
-  "usingComponents": {}
+  "usingComponents": {
+    "loading-state": "/components/loading-state/loading-state",
+    "empty-state": "/components/empty-state/empty-state"
+  }
 }

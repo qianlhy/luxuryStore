@@ -9,7 +9,7 @@
 }
 .share-header { display: flex; justify-content: space-between; margin-bottom: 16rpx;
 }
-.share-type { font-size: 28rpx; font-weight: bold; color: #C5A36A;
+.share-type { font-size: 28rpx; font-weight: bold; color: #E14C82;
 }
 .share-time { font-size: 22rpx; color: #999;
 }
@@ -17,7 +17,7 @@
 }
 .share-footer { display: flex; justify-content: space-between;
 }
-.share-price { font-size: 30rpx; font-weight: bold; color: #C5A36A;
+.share-price { font-size: 30rpx; font-weight: bold; color: #E14C82;
 }
 .share-views { font-size: 22rpx; color: #999;
 }

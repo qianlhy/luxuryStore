@@ -336,7 +336,7 @@ export default {
     width: 80rpx;
     height: 80rpx;
     border: 6rpx solid #f3f3f3;
-    border-top: 6rpx solid #C5A36A;
+    border-top: 6rpx solid #E14C82;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -385,7 +385,7 @@ export default {
 
 /* 订单状态 */
 .status-section {
-    background-color: #C5A36A;
+    background-color: #E14C82;
     color: #fff;
     padding: 40rpx 30rpx;
 }
@@ -484,7 +484,7 @@ export default {
 
 .goods-price {
     font-size: 30rpx;
-    color: #C5A36A;
+    color: #E14C82;
     font-weight: 500;
 }
 
@@ -523,7 +523,7 @@ export default {
 
 .copy-btn {
     margin-left: 20rpx;
-    color: #C5A36A;
+    color: #E14C82;
     font-size: 26rpx;
 }
 
@@ -551,7 +551,7 @@ export default {
 .amount-item.total .value {
     font-size: 32rpx;
     font-weight: bold;
-    color: #C5A36A;
+    color: #E14C82;
 }
 
 /* 底部按钮 */
@@ -579,7 +579,7 @@ export default {
 }
 
 .btn.primary {
-    background-color: #C5A36A;
+    background-color: #E14C82;
     color: #fff;
 }
 

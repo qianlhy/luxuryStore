@@ -399,6 +399,8 @@
 
 
 
+
+
 /* pages/login/login.wxss */
 .login-container {
     min-height: 100vh;
@@ -415,7 +417,7 @@
     left: 0;
     right: 0;
     height: 500rpx;
-    background: #667eea;
+    background: linear-gradient(160deg, #F79AC0, #E14C82);
     border-radius: 0 0 50% 50% / 0 0 100rpx 100rpx;
     z-index: 0;
 }
@@ -431,17 +433,33 @@
 .logo {
     width: 160rpx;
     height: 160rpx;
-    margin-bottom: 30rpx;
-    background-color: #fff;
+    margin-bottom: 26rpx;
+    background: #ffffff;
     border-radius: 50%;
-    padding: 20rpx;
-    box-shadow: 0 10rpx 40rpx rgba(102, 126, 234, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12rpx 40rpx rgba(201, 39, 95, 0.28);
+}
+.logo-text {
+    color: #B98A5E;
+    font-size: 56rpx;
+    font-weight: bold;
+    letter-spacing: 4rpx;
+    font-family: Georgia, 'Times New Roman', serif;
 }
 .title {
-    font-size: 36rpx;
+    font-size: 38rpx;
     font-weight: bold;
     color: #fff;
-    text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.2);
+    letter-spacing: 4rpx;
+    text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.15);
+}
+.subtitle {
+    margin-top: 12rpx;
+    font-size: 22rpx;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 4rpx;
 }
 /* 表单样式 */
 .login-form {

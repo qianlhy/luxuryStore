@@ -5,7 +5,7 @@
 
         <view class="agreement-section">
             <view class="section-title">一、总则</view>
-            <view class="section-text">欢迎使用名品汇商城（以下简称“本平台”）。本协议是您与本平台之间就使用本平台服务所订立的协议。在使用本平台服务前，请您仔细阅读本协议的全部内容。一旦您注册、登录或使用本平台服务，即视为您已阅读并同意本协议的全部条款。</view>
+            <view class="section-text">欢迎使用白白叶叶奢侈品（以下简称“本平台”）。本协议是您与本平台之间就使用本平台服务所订立的协议。在使用本平台服务前，请您仔细阅读本协议的全部内容。一旦您注册、登录或使用本平台服务，即视为您已阅读并同意本协议的全部条款。</view>
         </view>
 
         <view class="agreement-section">

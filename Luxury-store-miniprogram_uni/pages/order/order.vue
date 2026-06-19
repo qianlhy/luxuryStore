@@ -31,7 +31,7 @@
             <view class="section-title">商品清单</view>
             <view class="goods-list">
                 <view class="goods-item" v-for="(item, index) in orderItems" :key="index">
-                    <image class="goods-image" :src="item.image" mode="aspectFill"></image>
+                    <image class="goods-image" :src="imgUrl(item.image)" mode="aspectFill"></image>
 
                     <view class="goods-info">
                         <text class="goods-name text-ellipsis">{{ item.name }}</text>
