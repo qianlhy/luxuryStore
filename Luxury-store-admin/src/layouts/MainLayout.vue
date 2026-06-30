@@ -51,6 +51,10 @@
           <el-icon><User /></el-icon>
           <span>用户管理</span>
         </el-menu-item>
+        <el-menu-item index="/page-config">
+          <el-icon><Picture /></el-icon>
+          <span>页面配置</span>
+        </el-menu-item>
         <el-menu-item index="/settings">
           <el-icon><Setting /></el-icon>
           <span>系统设置</span>

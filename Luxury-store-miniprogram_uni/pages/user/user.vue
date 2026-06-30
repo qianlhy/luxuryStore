@@ -325,7 +325,13 @@ export default {
     font-size: 28rpx;
 }
 .feature-item:last-child { border-bottom: none; }
-.feature-emoji { font-size: 32rpx; margin-right: 20rpx; }
+.feature-emoji {
+    font-size: 32rpx;
+    width: 48rpx;
+    margin-right: 20rpx;
+    text-align: center;
+    flex-shrink: 0;
+}
 .feature-item .arrow { margin-left: auto; color: #ccc; }
 .version-info { text-align: center; padding: 40rpx; color: #ccc; font-size: 22rpx; }
 </style>

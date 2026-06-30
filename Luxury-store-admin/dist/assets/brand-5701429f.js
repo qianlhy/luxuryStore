@@ -1,1 +1,0 @@
-import{r as t}from"./request-3a8ff0aa.js";function n(r){return t({url:"/brand/page",method:"get",params:r})}function a(){return t({url:"/brand/list",method:"get"})}function d(r){return t({url:"/brand",method:"post",data:r})}function u(r){return t({url:"/brand",method:"put",data:r})}function o(r){return t({url:`/brand/${r}`,method:"delete"})}export{n as a,d as b,o as d,a as g,u};

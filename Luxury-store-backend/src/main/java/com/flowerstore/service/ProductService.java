@@ -99,14 +99,25 @@ public class ProductService {
     }
 
     /**
-     * 获取热门商品（按销量排序）
+     * 获取超值爆款商品
+     * 优先返回后台手动标记（is_hot=1）的商品；若没有手动标记的，则回退按销量排序，保证首页不空白
      */
     public List<Product> getHotProducts(Integer limit) {
-        LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Product::getStatus, 1);
-        wrapper.orderByDesc(Product::getSales);
-        wrapper.last("LIMIT " + limit);
-        return productMapper.selectList(wrapper);
+        LambdaQueryWrapper<Product> hotWrapper = new LambdaQueryWrapper<>();
+        hotWrapper.eq(Product::getStatus, 1);
+        hotWrapper.eq(Product::getIsHot, 1);
+        hotWrapper.orderByDesc(Product::getCreateTime);
+        hotWrapper.last("LIMIT " + limit);
+        List<Product> list = productMapper.selectList(hotWrapper);
+        if (list != null && !list.isEmpty()) {
+            return list;
+        }
+        // 兜底：没有手动设置爆款时，按销量排序
+        LambdaQueryWrapper<Product> fallback = new LambdaQueryWrapper<>();
+        fallback.eq(Product::getStatus, 1);
+        fallback.orderByDesc(Product::getSales);
+        fallback.last("LIMIT " + limit);
+        return productMapper.selectList(fallback);
     }
 
     /**

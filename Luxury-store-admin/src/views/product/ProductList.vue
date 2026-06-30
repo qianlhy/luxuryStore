@@ -41,6 +41,12 @@
             </el-tag>
           </template>
         </el-table-column>
+        <el-table-column prop="isHot" label="超值爆款" width="100">
+          <template #default="{ row }">
+            <el-tag v-if="row.isHot === 1" type="warning">爆款</el-tag>
+            <span v-else style="color: #bbb">—</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="180" fixed="right">
           <template #default="{ row }">
             <el-button type="primary" text @click="handleEdit(row)">编辑</el-button>
@@ -149,6 +155,16 @@
             inactive-text="下架"
           />
         </el-form-item>
+        <el-form-item label="超值爆款" prop="isHot">
+          <el-switch
+            v-model="form.isHot"
+            :active-value="1"
+            :inactive-value="0"
+            active-text="是"
+            inactive-text="否"
+          />
+          <span style="color: #999; font-size: 12px; margin-left: 10px">开启后将在小程序首页“超值爆款”展示</span>
+        </el-form-item>
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
@@ -203,7 +219,8 @@ const form = ref({
   images: '',
   description: '',
   detail: '',
-  status: 1
+  status: 1,
+  isHot: 0
 })
 
 const rules = {
@@ -276,7 +293,8 @@ const handleAdd = () => {
     images: '',
     description: '',
     detail: '',
-    status: 1
+    status: 1,
+    isHot: 0
   }
   imageFileList.value = []
   dialogVisible.value = true

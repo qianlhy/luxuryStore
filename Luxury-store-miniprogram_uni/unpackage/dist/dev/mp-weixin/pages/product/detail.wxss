@@ -361,96 +361,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* pages/product/detail.wxss */
 .container {
     padding-bottom: 120rpx;
@@ -608,28 +518,35 @@
 .footer-right {
     display: flex;
     height: 80rpx;
+    flex: 1;
+    margin-left: 16rpx;
 }
 .add-cart-btn,
-.buy-now-btn {
+.contact-sales-btn {
     height: 80rpx;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 28rpx;
-    padding: 0 30rpx;
     margin: 0;
-    line-height: 1;
+    line-height: 1.2;
+    text-align: center;
 }
 .add-cart-btn {
+    width: 150rpx;
+    flex-shrink: 0;
+    font-size: 24rpx;
     background-color: #fff;
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
     border-radius: 40rpx 0 0 40rpx;
 }
-.buy-now-btn {
-    background-color: var(--primary-color);
+.contact-sales-btn {
+    flex: 1;
+    padding: 0 16rpx;
+    font-size: 28rpx;
+    font-weight: bold;
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
     color: #fff;
-    border: 1px solid var(--primary-color);
     border-radius: 0 40rpx 40rpx 0;
 }
 /* 加载状态 */

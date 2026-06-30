@@ -20,7 +20,18 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 // @ts-ignore
 wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
+// 全局图片地址处理：外链/缺失图统一兜底为本地品牌占位图
+var _require = __webpack_require__(/*! @/utils/image */ 45),
+  resolveImage = _require.resolveImage;
+var imageMixin = {
+  methods: {
+    imgUrl: function imgUrl(url) {
+      return resolveImage(url);
+    }
+  }
+};
 _vue.default.use(_index.default);
+_vue.default.mixin(imageMixin);
 _vue.default.config.productionTip = false;
 _App.default.mpType = 'app';
 var app = new _vue.default(_objectSpread({}, _App.default));

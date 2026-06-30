@@ -74,7 +74,7 @@ module.exports = _nonIterableRest, module.exports.__esModule = true, module.expo
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get,
   post = _require.post,
   del = _require.del;
@@ -128,7 +128,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   post = _require.post;
 module.exports = {
   recordBrowse: function recordBrowse(productId, userId, visitorId) {
@@ -150,7 +150,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get,
   post = _require.post,
   del = _require.del;
@@ -198,14 +198,31 @@ module.exports = _defineProperty, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 116:
+/***/ 12:
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
+var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ 14);
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof(i) ? i : i + "";
+}
+module.exports = toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 124:
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/address.js ***!
   \*********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get,
   post = _require.post,
   put = _require.put,
@@ -260,23 +277,6 @@ module.exports = {
   updateAddress: updateAddress,
   deleteAddress: deleteAddress
 };
-
-/***/ }),
-
-/***/ 12:
-/*!**************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ 14);
-function toPropertyKey(t) {
-  var i = toPrimitive(t, "string");
-  return "symbol" == _typeof(i) ? i : i + "";
-}
-module.exports = toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -360,14 +360,33 @@ module.exports = _setPrototypeOf, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 165:
+/***/ 17:
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _isNativeReflectConstruct() {
+  try {
+    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+  } catch (t) {}
+  return (module.exports = _isNativeReflectConstruct = function _isNativeReflectConstruct() {
+    return !!t;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
+}
+module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 173:
 /*!******************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/auth.js ***!
   \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   post = _require.post;
 
 /**
@@ -445,33 +464,32 @@ module.exports = {
 
 /***/ }),
 
-/***/ 17:
-/*!*************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js ***!
-  \*************************************************************************/
+/***/ 18:
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function _isNativeReflectConstruct() {
-  try {
-    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-  } catch (t) {}
-  return (module.exports = _isNativeReflectConstruct = function _isNativeReflectConstruct() {
-    return !!t;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles.js */ 19);
+var iterableToArray = __webpack_require__(/*! ./iterableToArray.js */ 20);
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread.js */ 21);
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
 }
-module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
-/***/ 174:
+/***/ 182:
 /*!******************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/user.js ***!
   \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get,
   put = _require.put;
 
@@ -492,24 +510,6 @@ module.exports = {
   getUserInfo: getUserInfo,
   updateUserInfo: updateUserInfo
 };
-
-/***/ }),
-
-/***/ 18:
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles.js */ 19);
-var iterableToArray = __webpack_require__(/*! ./iterableToArray.js */ 20);
-var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
-var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread.js */ 21);
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
-}
-module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -9711,7 +9711,18 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 252:
+/***/ 26:
+/*!*****************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/pages.json ***!
+  \*****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ 260:
 /*!************************************************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/components/region-picker/region-picker.js ***!
   \************************************************************************************************************************************************************/
@@ -24482,17 +24493,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ 26:
-/*!*****************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/pages.json ***!
-  \*****************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -25383,6 +25383,100 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ 45:
+/*!*********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/image.js ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * 图片地址工具
+ * 真实图走服务器；首页内置演示图与无法加载的外链统一兜底到本地小占位图（已压缩，体积极小）
+ */
+var _require = __webpack_require__(/*! ./config */ 46),
+  BASE_URL = _require.BASE_URL;
+var API_BASE = BASE_URL;
+var SEED_BASE = API_BASE + '/uploads/seed';
+
+// 本地兜底占位图（已压缩，打包进小程序，永远可加载，不影响主包体积）
+var LOCAL_PLACEHOLDER = '/static/placeholder/placeholder.jpg';
+var LOCAL_BANNER = '/static/placeholder/placeholder-banner.jpg';
+
+/**
+ * 首页内置演示图：直接用本地小占位图，保证不空白且不依赖服务器；
+ * 真实运营图请通过后台上传，会写入服务器地址并经 resolveImage 正常显示。
+ */
+function seedImage(name) {
+  if (name && name.indexOf('banner') !== -1) return LOCAL_BANNER;
+  return LOCAL_PLACEHOLDER;
+}
+
+/** 将外链或相对路径转为可访问的完整地址；无效来源回退到本地占位图 */
+function resolveImage(url) {
+  if (!url) return LOCAL_PLACEHOLDER;
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    // 外链（unsplash/alicdn 等）小程序无法加载 → 本地占位图
+    if (url.indexOf('unsplash.com') !== -1 || url.indexOf('alicdn.com') !== -1) {
+      return LOCAL_PLACEHOLDER;
+    }
+    return url;
+  }
+  if (url.startsWith('/api/')) return API_BASE.replace('/api', '') + url;
+  if (url.startsWith('/uploads/')) return API_BASE + url;
+  if (url.startsWith('/static/')) return url;
+  return url;
+}
+module.exports = {
+  API_BASE: API_BASE,
+  SEED_BASE: SEED_BASE,
+  LOCAL_PLACEHOLDER: LOCAL_PLACEHOLDER,
+  LOCAL_BANNER: LOCAL_BANNER,
+  seedImage: seedImage,
+  resolveImage: resolveImage
+};
+
+/***/ }),
+
+/***/ 46:
+/*!**********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/config.js ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * 全局环境配置
+ * 通过修改 ENV 切换开发/生产环境，避免在多处硬编码后端地址
+ */
+
+// 当前环境：'dev' | 'prod'
+var ENV = 'prod';
+var CONFIG = {
+  dev: {
+    // 后端接口地址（含 /api 前缀）
+    BASE_URL: 'http://localhost:8080/api'
+  },
+  prod: {
+    // 正式域名（微信小程序要求 https 且端口为 443）
+    // 注意：SSL 证书签的是 www.baibaiyeye.com.cn，真机会校验证书，必须带 www
+    BASE_URL: 'https://www.baibaiyeye.com.cn/api'
+  }
+};
+var current = CONFIG[ENV] || CONFIG.dev;
+
+// 接口基础地址
+var BASE_URL = current.BASE_URL;
+// 静态资源/上传文件基础地址（去掉 /api 后缀）
+var STATIC_BASE = BASE_URL.replace(/\/api$/, '');
+module.exports = {
+  ENV: ENV,
+  BASE_URL: BASE_URL,
+  STATIC_BASE: STATIC_BASE
+};
+
+/***/ }),
+
 /***/ 5:
 /*!**************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
@@ -25401,7 +25495,7 @@ module.exports = _slicedToArray, module.exports.__esModule = true, module.export
 
 /***/ }),
 
-/***/ 51:
+/***/ 53:
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/eventBus.js ***!
   \************************************************************************************************************************************/
@@ -25449,29 +25543,87 @@ module.exports = eventBus;
 
 /***/ }),
 
-/***/ 52:
-/*!**********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/category.js ***!
-  \**********************************************************************************************************************************/
+/***/ 54:
+/*!*********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/product.js ***!
+  \*********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get;
 
 /**
- * 获取分类列表
+ * 获取商品列表
  */
-function getCategoryList() {
-  return get('/category/list');
+function getProductList(categoryId) {
+  if (!categoryId) {
+    return get('/product/list');
+  }
+  return get('/product/list', {
+    categoryId: categoryId
+  });
+}
+
+/**
+ * 根据分类ID获取商品列表
+ */
+function getProductsByCategory(categoryId) {
+  return get('/product/category/' + categoryId);
+}
+
+/**
+ * 根据ID获取商品详情
+ */
+function getProductById(id) {
+  return get('/product/' + id);
+}
+
+/**
+ * 获取热门商品
+ */
+function getHotProducts(limit) {
+  return get('/product/hot', {
+    limit: limit || 6
+  });
+}
+
+/**
+ * 获取新品商品
+ */
+function getNewProducts(limit) {
+  return get('/product/new', {
+    limit: limit || 6
+  });
+}
+
+/**
+ * 搜索商品
+ */
+function searchProducts(keyword) {
+  return get('/product/search', {
+    keyword: keyword
+  });
+}
+function getProductsBySubCategory(categoryId, subCategoryId) {
+  return get('/product/sub-category', {
+    categoryId: categoryId,
+    subCategoryId: subCategoryId
+  });
 }
 module.exports = {
-  getCategoryList: getCategoryList
+  getProductList: getProductList,
+  getProductsByCategory: getProductsByCategory,
+  getProductById: getProductById,
+  getHotProducts: getHotProducts,
+  getNewProducts: getNewProducts,
+  searchProducts: searchProducts,
+  getProductsBySubCategory: getProductsBySubCategory
 };
 
 /***/ }),
 
-/***/ 53:
+/***/ 55:
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/request.js ***!
   \***********************************************************************************************************************************/
@@ -25482,7 +25634,7 @@ module.exports = {
  * 网络请求工具
  */
 
-var _require = __webpack_require__(/*! ./config */ 54),
+var _require = __webpack_require__(/*! ./config */ 46),
   BASE_URL = _require.BASE_URL;
 
 // 登录页路径，401 时统一跳转
@@ -25635,124 +25787,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ 54:
-/*!**********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/config.js ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * 全局环境配置
- * 通过修改 ENV 切换开发/生产环境，避免在多处硬编码后端地址
- */
-
-// 当前环境：'dev' | 'prod'
-var ENV = 'prod';
-var CONFIG = {
-  dev: {
-    // 后端接口地址（含 /api 前缀）
-    BASE_URL: 'http://localhost:8080/api'
-  },
-  prod: {
-    // 正式域名（微信小程序要求 https 且端口为 443）
-    BASE_URL: 'https://www.baibaiyeye.com.cn/api'
-  }
-};
-var current = CONFIG[ENV] || CONFIG.dev;
-
-// 接口基础地址
-var BASE_URL = current.BASE_URL;
-// 静态资源/上传文件基础地址（去掉 /api 后缀）
-var STATIC_BASE = BASE_URL.replace(/\/api$/, '');
-module.exports = {
-  ENV: ENV,
-  BASE_URL: BASE_URL,
-  STATIC_BASE: STATIC_BASE
-};
-
-/***/ }),
-
-/***/ 55:
-/*!*********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/product.js ***!
-  \*********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _require = __webpack_require__(/*! ../utils/request */ 53),
-  get = _require.get;
-
-/**
- * 获取商品列表
- */
-function getProductList(categoryId) {
-  if (!categoryId) {
-    return get('/product/list');
-  }
-  return get('/product/list', {
-    categoryId: categoryId
-  });
-}
-
-/**
- * 根据分类ID获取商品列表
- */
-function getProductsByCategory(categoryId) {
-  return get('/product/category/' + categoryId);
-}
-
-/**
- * 根据ID获取商品详情
- */
-function getProductById(id) {
-  return get('/product/' + id);
-}
-
-/**
- * 获取热门商品
- */
-function getHotProducts(limit) {
-  return get('/product/hot', {
-    limit: limit || 6
-  });
-}
-
-/**
- * 获取新品商品
- */
-function getNewProducts(limit) {
-  return get('/product/new', {
-    limit: limit || 6
-  });
-}
-
-/**
- * 搜索商品
- */
-function searchProducts(keyword) {
-  return get('/product/search', {
-    keyword: keyword
-  });
-}
-function getProductsBySubCategory(categoryId, subCategoryId) {
-  return get('/product/sub-category', {
-    categoryId: categoryId,
-    subCategoryId: subCategoryId
-  });
-}
-module.exports = {
-  getProductList: getProductList,
-  getProductsByCategory: getProductsByCategory,
-  getProductById: getProductById,
-  getHotProducts: getHotProducts,
-  getNewProducts: getNewProducts,
-  searchProducts: searchProducts,
-  getProductsBySubCategory: getProductsBySubCategory
-};
-
-/***/ }),
-
 /***/ 56:
 /*!*******************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/brand.js ***!
@@ -25760,7 +25794,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get;
 module.exports = {
   getBrandList: function getBrandList() {
@@ -25777,7 +25811,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get;
 module.exports = {
   getAll: function getAll() {
@@ -25791,55 +25825,13 @@ module.exports = {
 /***/ }),
 
 /***/ 58:
-/*!*********************************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/utils/image.js ***!
-  \*********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * 图片地址工具
- * 微信小程序无法加载 unsplash 等外网图，统一走后端本地静态资源
- */
-var _require = __webpack_require__(/*! ./config */ 54),
-  BASE_URL = _require.BASE_URL;
-var API_BASE = BASE_URL;
-var SEED_BASE = API_BASE + '/uploads/seed';
-function seedImage(name) {
-  return SEED_BASE + '/' + name;
-}
-
-/** 将外链或相对路径转为可访问的完整地址 */
-function resolveImage(url) {
-  if (!url) return '';
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    // 替换无法访问的外链为本地种子图
-    if (url.indexOf('unsplash.com') !== -1 || url.indexOf('alicdn.com') !== -1) {
-      return seedImage('product1.jpg');
-    }
-    return url;
-  }
-  if (url.startsWith('/api/')) return API_BASE.replace('/api', '') + url;
-  if (url.startsWith('/uploads/')) return API_BASE + url;
-  return url;
-}
-module.exports = {
-  API_BASE: API_BASE,
-  SEED_BASE: SEED_BASE,
-  seedImage: seedImage,
-  resolveImage: resolveImage
-};
-
-/***/ }),
-
-/***/ 59:
 /*!******************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/cart.js ***!
   \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get,
   post = _require.post,
   put = _require.put,
@@ -25906,6 +25898,28 @@ module.exports = _arrayWithHoles, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
+/***/ 67:
+/*!**********************************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/category.js ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! ../utils/request */ 55),
+  get = _require.get;
+
+/**
+ * 获取分类列表
+ */
+function getCategoryList() {
+  return get('/category/list');
+}
+module.exports = {
+  getCategoryList: getCategoryList
+};
+
+/***/ }),
+
 /***/ 68:
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/Administrator/Desktop/2026年1月7日/卡歌/名品汇商城/Luxury-store-backend-sb_uni/Luxury-store-miniprogram_uni/api/subCategory.js ***!
@@ -25913,7 +25927,7 @@ module.exports = _arrayWithHoles, module.exports.__esModule = true, module.expor
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get;
 module.exports = {
   getSubCategoryList: function getSubCategoryList(categoryId) {
@@ -25990,7 +26004,7 @@ module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get,
   post = _require.post;
 module.exports = {
@@ -26014,7 +26028,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get;
 module.exports = {
   getSalesList: function getSalesList() {
@@ -26049,7 +26063,7 @@ module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exp
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get,
   post = _require.post,
   put = _require.put;
@@ -26120,7 +26134,7 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(/*! ../utils/request */ 53),
+var _require = __webpack_require__(/*! ../utils/request */ 55),
   get = _require.get;
 module.exports = {
   getBalance: function getBalance() {

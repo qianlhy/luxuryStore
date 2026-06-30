@@ -80,7 +80,7 @@ var components
 try {
   components = {
     loadingState: function () {
-      return __webpack_require__.e(/*! import() | components/loading-state/loading-state */ "components/loading-state/loading-state").then(__webpack_require__.bind(null, /*! @/components/loading-state/loading-state.vue */ 233))
+      return __webpack_require__.e(/*! import() | components/loading-state/loading-state */ "components/loading-state/loading-state").then(__webpack_require__.bind(null, /*! @/components/loading-state/loading-state.vue */ 241))
     },
   }
 } catch (e) {
@@ -104,16 +104,23 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = !_vm.isLoading
+    ? _vm.__map(_vm.product.images, function (item, index) {
+        var $orig = _vm.__get_orig(item)
+        var m0 = _vm.imgUrl(item)
+        return {
+          $orig: $orig,
+          m0: m0,
+        }
+      })
+    : null
   var g0 = !_vm.isLoading ? _vm.product.images.length : null
-  var g1 = _vm.app.globalData.cart.length
-  var g2 = g1 > 0 ? _vm.app.globalData.cart.length : null
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
+        l0: l0,
         g0: g0,
-        g1: g1,
-        g2: g2,
       },
     }
   )
@@ -254,41 +261,17 @@ exports.default = void 0;
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 // pages/product/detail.js
 var app = getApp();
-var productApi = __webpack_require__(/*! ../../api/product */ 55);
+var productApi = __webpack_require__(/*! ../../api/product */ 54);
 var favoriteApi = __webpack_require__(/*! ../../api/favorite */ 105);
-var cartApi = __webpack_require__(/*! ../../api/cart */ 59);
+var cartApi = __webpack_require__(/*! ../../api/cart */ 58);
 var statisticsApi = __webpack_require__(/*! ../../api/statistics */ 106);
 var footprintApi = __webpack_require__(/*! ../../api/footprint */ 107);
+var salesApi = __webpack_require__(/*! ../../api/sales */ 86);
+var shareApi = __webpack_require__(/*! ../../api/share */ 85);
+var configApi = __webpack_require__(/*! ../../api/config */ 57);
 var _default = {
   data: function data() {
     return {
@@ -297,8 +280,8 @@ var _default = {
       isLoading: true,
       isAddedToCart: false,
       current: 0,
-      showActionSheet: false,
       isFavorite: false,
+      servicePhone: '',
       app: {
         globalData: {
           cart: []
@@ -311,6 +294,12 @@ var _default = {
    */
   ,
   onLoad: function onLoad(options) {
+    var _this = this;
+    configApi.getValue('service_phone').then(function (phone) {
+      if (phone) _this.setData({
+        servicePhone: phone
+      });
+    }).catch(function () {});
     var id = options.id;
     if (id) {
       this.loadProductDetail(parseInt(id));
@@ -362,7 +351,7 @@ var _default = {
   methods: {
     // 加载商品详情
     loadProductDetail: function loadProductDetail(productId) {
-      var _this = this;
+      var _this2 = this;
       this.setData({
         isLoading: true
       });
@@ -399,14 +388,14 @@ var _default = {
         // 如果已登录，检查是否已收藏
         if (token) {
           return favoriteApi.checkFavorite(productId).then(function (isFavorite) {
-            _this.setData({
+            _this2.setData({
               product: product,
               isLoading: false,
               isFavorite: isFavorite.isFavorite
             });
           });
         } else {
-          _this.setData({
+          _this2.setData({
             product: product,
             isLoading: false,
             isFavorite: false
@@ -414,7 +403,7 @@ var _default = {
         }
       }).catch(function (err) {
         console.error('加载商品详情失败', err);
-        _this.setData({
+        _this2.setData({
           isLoading: false
         });
         uni.showToast({
@@ -449,7 +438,7 @@ var _default = {
     },
     // 添加到购物车
     addToCart: function addToCart() {
-      var _this2 = this;
+      var _this3 = this;
       var product = this.product,
         count = this.count;
       var token = uni.getStorageSync('token');
@@ -466,109 +455,17 @@ var _default = {
         return;
       }
       cartApi.addToCart(product.id, count).then(function () {
-        _this2.setData({
+        _this3.setData({
           isAddedToCart: true
         });
         setTimeout(function () {
-          _this2.setData({
+          _this3.setData({
             isAddedToCart: false
           });
         }, 1500);
       }).catch(function (err) {
         console.error('添加购物车失败', err);
       });
-    },
-    // 立即购买
-    buyNow: function buyNow() {
-      var product = this.product,
-        count = this.count;
-      var token = uni.getStorageSync('token');
-      if (!token) {
-        uni.showToast({
-          title: '请先登录',
-          icon: 'none'
-        });
-        setTimeout(function () {
-          uni.navigateTo({
-            url: '/pages/login/login'
-          });
-        }, 1500);
-        return;
-      }
-
-      // 添加到购物车
-      cartApi.addToCart(product.id, count).then(function () {
-        // 跳转到购物车页面
-        uni.switchTab({
-          url: '/pages/cart/cart'
-        });
-      }).catch(function (err) {
-        console.error('添加购物车失败', err);
-      });
-    },
-    // 显示更多操作菜单
-    showMoreActions: function showMoreActions() {
-      this.setData({
-        showActionSheet: true
-      });
-    },
-    // 关闭更多操作菜单
-    closeActionSheet: function closeActionSheet() {
-      this.setData({
-        showActionSheet: false
-      });
-    },
-    // 收藏商品
-    collectProduct: function collectProduct() {
-      var _this3 = this;
-      var product = this.product,
-        isFavorite = this.isFavorite;
-      var token = uni.getStorageSync('token');
-
-      // 检查是否已登录
-      if (!token) {
-        uni.showModal({
-          title: '提示',
-          content: '请先登录后再收藏商品',
-          confirmText: '去登录',
-          success: function success(res) {
-            if (res.confirm) {
-              uni.navigateTo({
-                url: '/pages/login/login'
-              });
-            }
-          }
-        });
-        return;
-      }
-      if (isFavorite) {
-        // 如果已收藏，则取消收藏
-        favoriteApi.removeFavorite(product.id).then(function () {
-          _this3.setData({
-            isFavorite: false
-          });
-          uni.showToast({
-            title: '已取消收藏',
-            icon: 'success'
-          });
-        }).catch(function (err) {
-          console.error('取消收藏失败', err);
-        });
-      } else {
-        // 如果未收藏，则添加收藏
-        favoriteApi.addFavorite(product.id).then(function () {
-          _this3.setData({
-            isFavorite: true
-          });
-          uni.showToast({
-            title: '收藏成功',
-            icon: 'success'
-          });
-        }).catch(function (err) {
-          console.error('收藏失败', err);
-        });
-      }
-      this.closeActionSheet();
     },
     // 轮播图切换事件
     onSwiperChange: function onSwiperChange(e) {
@@ -578,14 +475,65 @@ var _default = {
     },
     // 联系客服
     contactService: function contactService() {
-      uni.showToast({
-        title: '正在连接客服',
-        icon: 'loading'
-      });
-      this.closeActionSheet();
+      var phone = this.servicePhone;
+      if (phone) {
+        uni.makePhoneCall({
+          phoneNumber: phone
+        });
+      } else {
+        uni.showToast({
+          title: '正在连接客服',
+          icon: 'none'
+        });
+      }
     },
-    shareProduct: function shareProduct() {
-      console.log('占位：函数 shareProduct 未声明');
+    // 下单请联系您的微信销售：复用「分享给销售」流程
+    contactSales: function contactSales() {
+      var _this4 = this;
+      var token = uni.getStorageSync('token');
+      if (!token) {
+        uni.showToast({
+          title: '请先登录',
+          icon: 'none'
+        });
+        setTimeout(function () {
+          return uni.navigateTo({
+            url: '/pages/login/login'
+          });
+        }, 1500);
+        return;
+      }
+      salesApi.getSalesList().then(function (sales) {
+        if (!sales || sales.length === 0) {
+          _this4.doShareToSales(null);
+          return;
+        }
+        uni.showActionSheet({
+          itemList: sales.map(function (s) {
+            return s.name;
+          }),
+          success: function success(res) {
+            _this4.doShareToSales(sales[res.tapIndex].id);
+          }
+        });
+      }).catch(function () {
+        _this4.doShareToSales(null);
+      });
+    },
+    doShareToSales: function doShareToSales(salesId) {
+      shareApi.createShare({
+        shareType: 1,
+        productIds: [this.product.id],
+        salesId: salesId
+      }).then(function (record) {
+        uni.showModal({
+          title: '已生成下单意向',
+          content: '分享码: ' + record.shareCode + '\n请把本商品分享给您的微信销售完成下单',
+          showCancel: false
+        });
+      }).catch(function (err) {
+        console.error('分享给销售失败', err);
+      });
     }
   }
 };

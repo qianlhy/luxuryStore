@@ -77,11 +77,7 @@
                 </view>
                 <text class="price-desc">不含运费</text>
             </view>
-            <view class="share-btns">
-                <view class="share-btn" @tap="shareToSales">分享给销售</view>
-                <view class="share-btn" @tap="shareToFriend">分享给好友</view>
-            </view>
-            <button class="checkout-btn" @tap="goToCheckout">结算({{ totalCount }})</button>
+            <button class="share-sales-btn" @tap="shareToSales">分享给销售({{ totalCount }})</button>
         </view>
         </block>
     </view>
@@ -277,34 +273,6 @@ export default {
             });
         },
 
-        // 去结算
-        goToCheckout: function () {
-            if (!this.isLogin) {
-                uni.navigateTo({
-                    url: '/pages/login/login'
-                });
-                return;
-            }
-            if (this.totalCount === 0) {
-                uni.showToast({
-                    title: '请选择商品',
-                    icon: 'none'
-                });
-                return;
-            }
-
-            // 获取选中的商品
-            const selectedItems = this.cartList.filter((item) => item.selected);
-
-            // 存储到缓存
-            uni.setStorageSync('checkoutItems', selectedItems);
-
-            // 跳转到结算页面
-            uni.navigateTo({
-                url: '/pages/order/order'
-            });
-        },
-
         // 继续购物
         goToShopping: function () {
             uni.switchTab({
@@ -338,16 +306,6 @@ export default {
             }).catch(() => {
                 this.doShare(1, null, selected);
             });
-        },
-
-        shareToFriend: function () {
-            if (!this.isLogin) { this.goToLogin(); return; }
-            const selected = this.cartList.filter((i) => i.selected && !i.invalid);
-            if (selected.length === 0) {
-                uni.showToast({ title: '请选择有效商品', icon: 'none' });
-                return;
-            }
-            this.doShare(2, null, selected);
         },
 
         doShare: function (shareType, salesId, items) {
@@ -601,25 +559,17 @@ export default {
 }
 .invalid-item { opacity: 0.5; }
 .invalid-label { font-size: 22rpx; color: #ff6b6b; display: block; margin-bottom: 8rpx; }
-.share-btns { display: flex; gap: 10rpx; margin-right: 10rpx; }
-.share-btn {
-    font-size: 22rpx;
-    color: #E14C82;
-    border: 1rpx solid #E14C82;
-    padding: 8rpx 16rpx;
-    border-radius: 20rpx;
-    white-space: nowrap;
-}
-.checkout-btn {
-    width: 180rpx;
+.share-sales-btn {
+    width: 280rpx;
     height: 100%;
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
     color: #fff;
-    font-size: 28rpx;
+    font-size: 30rpx;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0;
     margin: 0;
 }
+.share-sales-btn::after { border: none; }
 </style>

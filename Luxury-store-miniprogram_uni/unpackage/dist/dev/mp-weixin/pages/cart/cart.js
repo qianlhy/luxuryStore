@@ -101,10 +101,10 @@ var components
 try {
   components = {
     emptyState: function () {
-      return __webpack_require__.e(/*! import() | components/empty-state/empty-state */ "components/empty-state/empty-state").then(__webpack_require__.bind(null, /*! @/components/empty-state/empty-state.vue */ 240))
+      return __webpack_require__.e(/*! import() | components/empty-state/empty-state */ "components/empty-state/empty-state").then(__webpack_require__.bind(null, /*! @/components/empty-state/empty-state.vue */ 248))
     },
     loadingState: function () {
-      return __webpack_require__.e(/*! import() | components/loading-state/loading-state */ "components/loading-state/loading-state").then(__webpack_require__.bind(null, /*! @/components/loading-state/loading-state.vue */ 233))
+      return __webpack_require__.e(/*! import() | components/loading-state/loading-state */ "components/loading-state/loading-state").then(__webpack_require__.bind(null, /*! @/components/loading-state/loading-state.vue */ 241))
     },
   }
 } catch (e) {
@@ -128,6 +128,25 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 =
+    !!_vm.isLogin && !_vm.isLoading && !_vm.isEmpty
+      ? _vm.__map(_vm.cartList, function (item, index) {
+          var $orig = _vm.__get_orig(item)
+          var m0 = _vm.imgUrl(item.image)
+          return {
+            $orig: $orig,
+            m0: m0,
+          }
+        })
+      : null
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -256,13 +275,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 //
 //
 //
-//
-//
-//
-//
 
 var app = getApp();
-var cartApi = __webpack_require__(/*! ../../api/cart */ 59);
+var cartApi = __webpack_require__(/*! ../../api/cart */ 58);
 var shareApi = __webpack_require__(/*! ../../api/share */ 85);
 var salesApi = __webpack_require__(/*! ../../api/sales */ 86);
 var _default = {
@@ -453,35 +468,6 @@ var _default = {
         totalCount: totalCount
       });
     },
-    // 去结算
-    goToCheckout: function goToCheckout() {
-      if (!this.isLogin) {
-        uni.navigateTo({
-          url: '/pages/login/login'
-        });
-        return;
-      }
-      if (this.totalCount === 0) {
-        uni.showToast({
-          title: '请选择商品',
-          icon: 'none'
-        });
-        return;
-      }
-
-      // 获取选中的商品
-      var selectedItems = this.cartList.filter(function (item) {
-        return item.selected;
-      });
-
-      // 存储到缓存
-      uni.setStorageSync('checkoutItems', selectedItems);
-
-      // 跳转到结算页面
-      uni.navigateTo({
-        url: '/pages/order/order'
-      });
-    },
     // 继续购物
     goToShopping: function goToShopping() {
       uni.switchTab({
@@ -526,23 +512,6 @@ var _default = {
       }).catch(function () {
         _this5.doShare(1, null, selected);
       });
-    },
-    shareToFriend: function shareToFriend() {
-      if (!this.isLogin) {
-        this.goToLogin();
-        return;
-      }
-      var selected = this.cartList.filter(function (i) {
-        return i.selected && !i.invalid;
-      });
-      if (selected.length === 0) {
-        uni.showToast({
-          title: '请选择有效商品',
-          icon: 'none'
-        });
-        return;
-      }
-      this.doShare(2, null, selected);
     },
     doShare: function doShare(shareType, salesId, items) {
       var productIds = items.map(function (i) {

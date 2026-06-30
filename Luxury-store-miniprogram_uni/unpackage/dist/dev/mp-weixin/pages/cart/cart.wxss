@@ -322,48 +322,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* pages/cart/cart.wxss */
 .cart-container {
     display: flex;
@@ -572,26 +530,18 @@
 }
 .invalid-label { font-size: 22rpx; color: #ff6b6b; display: block; margin-bottom: 8rpx;
 }
-.share-btns { display: flex; gap: 10rpx; margin-right: 10rpx;
-}
-.share-btn {
-    font-size: 22rpx;
-    color: #E14C82;
-    border: 1rpx solid #E14C82;
-    padding: 8rpx 16rpx;
-    border-radius: 20rpx;
-    white-space: nowrap;
-}
-.checkout-btn {
-    width: 180rpx;
+.share-sales-btn {
+    width: 280rpx;
     height: 100%;
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
     color: #fff;
-    font-size: 28rpx;
+    font-size: 30rpx;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0;
     margin: 0;
+}
+.share-sales-btn::after { border: none;
 }
 

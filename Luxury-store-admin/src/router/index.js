@@ -82,6 +82,12 @@ const router = createRouter({
           meta: { title: '销售配置' }
         },
         {
+          path: '/page-config',
+          name: 'PageConfig',
+          component: () => import('@/views/config/PageConfig.vue'),
+          meta: { title: '页面配置' }
+        },
+        {
           path: '/settings',
           name: 'Settings',
           component: () => import('@/views/Settings.vue'),

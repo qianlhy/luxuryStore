@@ -43,6 +43,15 @@
 			}
 		},
 		{
+			"path": "pages/product/list",
+			"style": {
+				"navigationBarTitleText": "商品列表",
+				"enablePullDownRefresh": true,
+				"backgroundColor": "#FBF7F9",
+				"usingComponents": {}
+			}
+		},
+		{
 			"path": "pages/address/list",
 			"style": {
 				"navigationBarTitleText": "收货地址",

@@ -9,15 +9,32 @@
                 </view>
                 <view class="search-input-box" @tap="onTapSearch">
                     <view class="search-icon"></view>
-                    <text class="search-placeholder">请输入关键词</text>
+                    <swiper class="search-swiper" :vertical="true" :autoplay="true" :circular="true" :interval="2500" :duration="400" v-if="hotKeywords.length">
+                        <swiper-item v-for="(kw, i) in hotKeywords" :key="i">
+                            <text class="search-placeholder">{{ kw }}</text>
+                        </swiper-item>
+                    </swiper>
+                    <text class="search-placeholder" v-else>请输入关键词</text>
                 </view>
             </view>
 
-            <!-- 分类Tab -->
-            <scroll-view :scroll-x="true" class="nav-tabs">
-                <view class="nav-tab active">首页</view>
-                <view class="nav-tab" @tap="onTapCategory" :data-id="item.id" v-for="(item, index) in categories" :key="index">{{ item.name }}</view>
-            </scroll-view>
+            <!-- 背书条 -->
+            <view class="endorse-bar">
+                <view class="endorse-item">
+                    <text class="endorse-icon">🛡️</text>
+                    <text class="endorse-text">正品保障</text>
+                </view>
+                <view class="endorse-divider"></view>
+                <view class="endorse-item">
+                    <text class="endorse-icon">🔍</text>
+                    <text class="endorse-text">中检鉴定</text>
+                </view>
+                <view class="endorse-divider"></view>
+                <view class="endorse-item">
+                    <text class="endorse-icon">💎</text>
+                    <text class="endorse-text">假一赔三</text>
+                </view>
+            </view>
 
             <!-- 轮播图 -->
             <swiper class="banner" :indicator-dots="true" :autoplay="true" interval="4000" duration="500" :circular="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#E14C82">
@@ -48,6 +65,36 @@
                 </scroll-view>
             </view>
 
+            <!-- 捡漏促销条 -->
+            <view class="bargain-bar" @tap="onTapBargain">
+                <view class="bargain-left">
+                    <text class="bargain-icon">🔥</text>
+                    <view class="bargain-texts">
+                        <text class="bargain-title">捡漏专区</text>
+                        <text class="bargain-sub">{{ bargainText }}</text>
+                    </view>
+                </view>
+                <text class="bargain-more">查看更多 ›</text>
+            </view>
+
+            <!-- 爆款推荐 / 门店地址 入口 -->
+            <view class="entry-tiles">
+                <view class="entry-tile" @tap="onTapHotList">
+                    <image class="entry-tile-img" :src="hotTileImage" mode="aspectFill"></image>
+                    <view class="entry-tile-mask">
+                        <text class="entry-tile-title">爆款推荐</text>
+                        <text class="entry-tile-arrow">好价精选 ›</text>
+                    </view>
+                </view>
+                <view class="entry-tile" @tap="onTapStore">
+                    <image class="entry-tile-img" :src="storeTileImage" mode="aspectFill"></image>
+                    <view class="entry-tile-mask">
+                        <text class="entry-tile-title">门店地址</text>
+                        <text class="entry-tile-arrow">到店选购 ›</text>
+                    </view>
+                </view>
+            </view>
+
             <!-- 商品区加载中 -->
             <loading-state v-if="loading" skeleton :count="3" />
 
@@ -59,23 +106,6 @@
             </view>
 
             <block v-else>
-            <!-- 超值爆款 -->
-            <view class="section" v-if="recommendProducts.length">
-                <view class="section-header">
-                    <text class="section-title">超值爆款</text>
-                    <text class="section-sub">为您精选爆款</text>
-                </view>
-                <view class="hot-grid">
-                    <view class="hot-card" @tap="onTapProduct" :data-id="item.id" v-for="(item, index) in recommendProducts" :key="index">
-                        <image class="hot-img" :src="item.image" mode="aspectFill" lazy-load></image>
-                        <view class="hot-info">
-                            <text class="hot-name text-ellipsis">{{ item.name }}</text>
-                            <text class="hot-price">¥{{ item.price }}</text>
-                        </view>
-                    </view>
-                </view>
-            </view>
-
             <!-- 最近上新 -->
             <view class="section" v-if="newProducts.length">
                 <view class="section-header">
@@ -96,10 +126,20 @@
             </view>
 
             <!-- 商品区为空 -->
-            <view class="section" v-if="!recommendProducts.length && !newProducts.length">
+            <view class="section" v-if="!newProducts.length">
                 <empty-state text="暂无商品" sub-text="敬请期待更多好物" />
             </view>
             </block>
+
+            <!-- 门店地址弹窗 -->
+            <view class="store-mask" v-if="showStorePopup" @tap="closeStore">
+                <view class="store-popup" @tap.stop>
+                    <view class="store-close" @tap="closeStore">×</view>
+                    <text class="store-title">门店地址</text>
+                    <text class="store-address">{{ storeAddress }}</text>
+                    <view class="store-copy-btn" @tap="copyAddress">复制地址</view>
+                </view>
+            </view>
         </view>
 
         <!-- 联系客服悬浮按钮 -->
@@ -120,7 +160,6 @@
 <script>
 const app = getApp();
 const eventBus = require('../../utils/eventBus');
-const categoryApi = require('../../api/category');
 const productApi = require('../../api/product');
 const brandApi = require('../../api/brand');
 const configApi = require('../../api/config');
@@ -133,40 +172,31 @@ export default {
                 { image: seedImage('banner2.jpg'), title: '高奢珠宝', subtitle: '甄选国际大牌珠宝首饰' },
                 { image: seedImage('banner3.jpg'), title: '腕表系列', subtitle: '瑞士名表 品质之选' }
             ],
-            categories: [],
             brands: [],
             categoryTiles: [
                 { id: 2, name: '首饰系列', image: seedImage('tile2.jpg') },
                 { id: 3, name: '腕表系列', image: seedImage('tile3.jpg') },
                 { id: 1, name: '箱包系列', image: seedImage('tile1.jpg') }
             ],
-            recommendProducts: [],
             newProducts: [],
             loading: true,
             loadError: false,
             showToast: false,
-            servicePhone: '400-888-9999'
+            servicePhone: '400-888-9999',
+            hotKeywords: ['LV 经典老花', '香奈儿 链条包', '劳力士 腕表', '爱马仕 丝巾'],
+            bargainText: '每周六中午14点上新',
+            storeAddress: '上海市静安区南京西路1266号恒隆广场',
+            hotTileImage: seedImage('tile1.jpg'),
+            storeTileImage: seedImage('tile2.jpg'),
+            showStorePopup: false
         };
     },
     onLoad() {
-        this.getCategories();
         this.getBrands();
         this.loadProducts();
-        configApi.getValue('service_phone').then((phone) => {
-            if (phone) this.setData({ servicePhone: phone });
-        }).catch(() => {});
+        this.loadPageConfig();
     },
     methods: {
-        getCategories() {
-            categoryApi
-                .getCategoryList()
-                .then((data) => {
-                    this.setData({ categories: data || [] });
-                })
-                .catch((err) => {
-                    console.error('获取分类失败', err);
-                });
-        },
         getBrands() {
             brandApi
                 .getBrandList()
@@ -181,25 +211,38 @@ export default {
                     console.error('获取品牌失败', err);
                 });
         },
-        // 加载商品区（爆款 + 上新）
+        // 加载最近上新
         loadProducts() {
             this.setData({ loading: true, loadError: false });
-            Promise.all([productApi.getHotProducts(4), productApi.getNewProducts(6)])
-                .then(([hot, news]) => {
-                    const recommendProducts = (hot || []).map((item) => ({
-                        ...item,
-                        image: resolveImage(item.image)
-                    }));
+            productApi.getNewProducts(6)
+                .then((news) => {
                     const newProducts = (news || []).map((item) => ({
                         ...item,
                         image: resolveImage(item.image)
                     }));
-                    this.setData({ recommendProducts, newProducts, loading: false });
+                    this.setData({ newProducts, loading: false });
                 })
                 .catch((err) => {
                     console.error('获取商品失败', err);
                     this.setData({ loading: false, loadError: true });
                 });
+        },
+        // 读取首页运营配置（热搜词/捡漏文案/门店地址/入口图）
+        loadPageConfig() {
+            configApi.getAll().then((cfg) => {
+                cfg = cfg || {};
+                const patch = {};
+                if (cfg.service_phone) patch.servicePhone = cfg.service_phone;
+                if (cfg.hot_keywords) {
+                    const kws = cfg.hot_keywords.split(',').map((s) => s.trim()).filter(Boolean);
+                    if (kws.length) patch.hotKeywords = kws;
+                }
+                if (cfg.bargain_text) patch.bargainText = cfg.bargain_text;
+                if (cfg.store_address) patch.storeAddress = cfg.store_address;
+                if (cfg.home_hot_image) patch.hotTileImage = resolveImage(cfg.home_hot_image);
+                if (cfg.home_store_image) patch.storeTileImage = resolveImage(cfg.home_store_image);
+                this.setData(patch);
+            }).catch(() => {});
         },
         onTapSearch() {
             uni.navigateTo({ url: '/pages/search/search' });
@@ -221,6 +264,24 @@ export default {
         },
         onTapMore() {
             uni.switchTab({ url: '/pages/category/category' });
+        },
+        onTapBargain() {
+            uni.navigateTo({ url: '/pages/product/list?type=new&title=' + encodeURIComponent('捡漏专区') });
+        },
+        onTapHotList() {
+            uni.navigateTo({ url: '/pages/product/list?type=hot&title=' + encodeURIComponent('爆款推荐') });
+        },
+        onTapStore() {
+            this.setData({ showStorePopup: true });
+        },
+        closeStore() {
+            this.setData({ showStorePopup: false });
+        },
+        copyAddress() {
+            uni.setClipboardData({
+                data: this.storeAddress,
+                success: () => uni.showToast({ title: '地址已复制', icon: 'none' })
+            });
         },
         contactService() {
             uni.makePhoneCall({ phoneNumber: this.servicePhone });
@@ -293,16 +354,21 @@ export default {
     right: -7rpx;
 }
 .search-placeholder { color: #999; font-size: 26rpx; }
-.nav-tabs { white-space: nowrap; padding: 16rpx 30rpx; background: #fff; }
-.nav-tab {
-    display: inline-block;
-    padding: 10rpx 24rpx;
-    font-size: 28rpx;
-    color: #666;
-    margin-right: 10rpx;
+.search-swiper { flex: 1; height: 40rpx; }
+.search-swiper .search-placeholder { line-height: 40rpx; }
+.endorse-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #fff;
+    padding: 16rpx 30rpx;
+    border-top: 1rpx solid #F7ECF1;
 }
-.nav-tab.active { color: #1A1A1A; font-weight: bold; border-bottom: 4rpx solid #E14C82; }
-.banner { width: 100%; height: 380rpx; position: relative; }
+.endorse-item { display: flex; align-items: center; }
+.endorse-icon { font-size: 26rpx; margin-right: 8rpx; }
+.endorse-text { font-size: 24rpx; color: #8a6d5f; }
+.endorse-divider { width: 1rpx; height: 24rpx; background: #EADfE4; }
+.banner { width: 100%; height: 1000rpx; position: relative; }
 .banner-image { width: 100%; height: 100%; }
 .banner-overlay {
     position: absolute;
@@ -339,12 +405,40 @@ export default {
 .section-title { font-size: 32rpx; font-weight: bold; color: #1A1A1A; }
 .section-sub { font-size: 22rpx; color: #999; margin-left: 16rpx; }
 .section-more { float: right; font-size: 24rpx; color: #E14C82; }
-.hot-grid { display: flex; flex-wrap: wrap; gap: 16rpx; }
-.hot-card { width: calc(50% - 8rpx); border-radius: 12rpx; overflow: hidden; background: #FAFAFA; }
-.hot-img { width: 100%; height: 240rpx; }
-.hot-info { padding: 16rpx; }
-.hot-name { font-size: 24rpx; display: block; margin-bottom: 8rpx; }
-.hot-price { font-size: 28rpx; color: #E14C82; font-weight: bold; }
+.bargain-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20rpx;
+    padding: 24rpx 28rpx;
+    border-radius: 16rpx;
+    background: linear-gradient(135deg, #FFF1F6, #FCE3EC);
+}
+.bargain-left { display: flex; align-items: center; }
+.bargain-icon { font-size: 44rpx; margin-right: 16rpx; }
+.bargain-texts { display: flex; flex-direction: column; }
+.bargain-title { font-size: 30rpx; font-weight: bold; color: #C9275F; }
+.bargain-sub { font-size: 22rpx; color: #B96A86; margin-top: 4rpx; }
+.bargain-more { font-size: 24rpx; color: #C9275F; }
+.entry-tiles { display: flex; justify-content: space-between; margin: 0 20rpx 20rpx; }
+.entry-tile {
+    width: 48.5%;
+    height: 220rpx;
+    position: relative;
+    border-radius: 16rpx;
+    overflow: hidden;
+}
+.entry-tile-img { width: 100%; height: 100%; }
+.entry-tile-mask {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 20rpx;
+    background: linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0));
+    display: flex;
+    flex-direction: column;
+}
+.entry-tile-title { color: #fff; font-size: 30rpx; font-weight: bold; text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.4); }
+.entry-tile-arrow { color: rgba(255,255,255,0.92); font-size: 22rpx; margin-top: 4rpx; }
 .product-list { margin-top: 10rpx; }
 .product-item {
     display: flex;
@@ -395,5 +489,43 @@ export default {
     height: 72rpx;
     line-height: 72rpx;
     border-radius: 36rpx;
+}
+.store-mask {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+.store-popup {
+    width: 580rpx;
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 50rpx 40rpx 40rpx;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.store-close {
+    position: absolute;
+    top: 16rpx;
+    right: 28rpx;
+    font-size: 48rpx;
+    color: #bbb;
+    line-height: 1;
+}
+.store-title { font-size: 34rpx; font-weight: bold; color: #1A1A1A; }
+.store-address { font-size: 28rpx; color: #555; line-height: 1.6; text-align: center; margin: 30rpx 0; }
+.store-copy-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
+    color: #fff;
+    text-align: center;
+    padding: 22rpx;
+    border-radius: 40rpx;
+    font-size: 30rpx;
 }
 </style>

@@ -102,6 +102,21 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.cfg.tickers.length
+  var g1 = _vm.currentSteps.length
+  var g2 = _vm.cfg.faqs.length
+  var g3 = _vm.cfg.reviews.length
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        g0: g0,
+        g1: g1,
+        g2: g2,
+        g3: g3,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -137,14 +152,70 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {
 
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -199,46 +270,129 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 //
 //
 
-var brandApi = __webpack_require__(/*! ../../api/brand */ 56);
 var configApi = __webpack_require__(/*! ../../api/config */ 57);
-var _require = __webpack_require__(/*! ../../utils/image */ 58),
+var _require = __webpack_require__(/*! ../../utils/image */ 45),
   seedImage = _require.seedImage,
   resolveImage = _require.resolveImage;
+var DEFAULT_CONFIG = {
+  banner: seedImage('banner1.jpg'),
+  tickers: [{
+    text: '张** 卖出了 LV 手提包，收入 ￥***',
+    date: '06-03'
+  }, {
+    text: '李** 寄售了 香奈儿 链条包，成交 ￥***',
+    date: '06-05'
+  }, {
+    text: '王** 回收了 劳力士 腕表，到账 ￥***',
+    date: '06-08'
+  }],
+  team: [{
+    icon: '🧑‍🔬',
+    title: '资深鉴定师',
+    desc: '一对一服务，在线快速了解您的产品价值'
+  }, {
+    icon: '💼',
+    title: '省心省力',
+    desc: '售前0服务费，全程托管0费心，坐等收钱'
+  }, {
+    icon: '⚡',
+    title: '快速见真伪',
+    desc: '线上出价格交易成功，24小时极速到账'
+  }],
+  guardian: {
+    title: '扫码加管家 回收价更高',
+    desc: '长按图片识别二维码'
+  },
+  recycleSteps: ['咨询预约', '快递邮寄', '审核打款', '极速到账'],
+  consignSteps: ['咨询预约', '上架寄售', '成交结算', '货款到账'],
+  guaranteeText: '在白白叶叶抖音、微信、门店购买的订单，一年内85折兜底回收。\n例：售价8000元的包包，在购买日期一年内联系回收，8000×0.85=6800元。\n包包当前市场行情价低于6800，我们将启动85折兜底；高于6800元，将依照实际市场价格回收。',
+  faqs: [{
+    q: '回收/寄售完成后货款打到哪里？',
+    a: '货款会打到您的钱包内，可随时申请提现，提现24小时内到账，请务必确保登记时提供的账号信息准确。'
+  }, {
+    q: '估价完成后一定会交易成功吗？',
+    a: '因图片拍摄可能存在差异，收到货品后会进行实物质检并提供最终报价，实际交易以您的最终确认为准。'
+  }, {
+    q: '你们收到货后多久可以给我结果？',
+    a: '快递签收后两个工作日内会有客服专员致电或短信告知质检结果，若低于预估价可退回商品，运费由我司承担。'
+  }, {
+    q: '为什么全新正品回收价格这么低？',
+    a: '回收价格根据该商品当下二手市场行情给出，可作参考；不选择回收也可选择寄售，寄售价格相对较高。'
+  }],
+  reviews: [{
+    name: 'Sie***',
+    region: '北京',
+    content: '整个回收过程非常顺利，估价合理，打款迅速。'
+  }, {
+    name: 'Lin***',
+    region: '上海',
+    content: '鉴定师很专业，沟通耐心，会推荐给朋友。'
+  }]
+};
 var _default = {
   data: function data() {
     return {
-      bannerImage: seedImage('banner1.jpg'),
-      brands: [],
-      servicePhone: '400-888-9999'
+      cfg: DEFAULT_CONFIG,
+      qrcode: '',
+      servicePhone: '400-888-9999',
+      flowTab: 'recycle',
+      openFaq: -1,
+      showContact: false
     };
   },
+  computed: {
+    currentSteps: function currentSteps() {
+      return this.flowTab === 'recycle' ? this.cfg.recycleSteps || [] : this.cfg.consignSteps || [];
+    }
+  },
   onLoad: function onLoad() {
-    this.loadBrands();
     this.loadConfig();
   },
   methods: {
-    loadBrands: function loadBrands() {
-      var _this = this;
-      brandApi.getBrandList().then(function (data) {
-        var brands = (data || []).map(function (item) {
-          return _objectSpread(_objectSpread({}, item), {}, {
-            coverImage: resolveImage(item.coverImage)
-          });
-        });
-        _this.setData({
-          brands: brands
-        });
-      }).catch(function () {});
-    },
     loadConfig: function loadConfig() {
-      var _this2 = this;
-      configApi.getValue('service_phone').then(function (phone) {
-        if (phone) _this2.setData({
-          servicePhone: phone
+      var _this = this;
+      configApi.getAll().then(function (map) {
+        map = map || {};
+        var parsed = {};
+        if (map.recycle_config) {
+          try {
+            parsed = JSON.parse(map.recycle_config) || {};
+          } catch (e) {
+            parsed = {};
+          }
+        }
+        var cfg = Object.assign({}, DEFAULT_CONFIG, parsed);
+        cfg.guardian = Object.assign({}, DEFAULT_CONFIG.guardian, parsed.guardian || {});
+        if (cfg.banner) cfg.banner = resolveImage(cfg.banner);
+        _this.setData({
+          cfg: cfg,
+          servicePhone: map.service_phone || _this.servicePhone,
+          qrcode: map.recycle_qrcode ? resolveImage(map.recycle_qrcode) : parsed.guardian && parsed.guardian.qrcode ? resolveImage(parsed.guardian.qrcode) : ''
         });
       }).catch(function () {});
     },
-    contactRecycle: function contactRecycle() {
+    switchFlow: function switchFlow(e) {
+      this.setData({
+        flowTab: e.currentTarget.dataset.tab
+      });
+    },
+    toggleFaq: function toggleFaq(e) {
+      var index = e.currentTarget.dataset.index;
+      this.setData({
+        openFaq: this.openFaq === index ? -1 : index
+      });
+    },
+    openContact: function openContact() {
+      this.setData({
+        showContact: true
+      });
+    },
+    closeContact: function closeContact() {
+      this.setData({
+        showContact: false
+      });
+    },
+    callPhone: function callPhone() {
       uni.makePhoneCall({
         phoneNumber: this.servicePhone
       });

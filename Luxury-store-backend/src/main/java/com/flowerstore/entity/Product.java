@@ -74,6 +74,9 @@ public class Product implements Serializable {
     /** 失效类型：0-正常，1-下架，2-售罄，3-过期 */
     private Integer invalidType;
 
+    /** 超值爆款：0-否，1-是（首页“超值爆款”由后台手动设置） */
+    private Integer isHot;
+
     /** 品牌名称（非数据库字段） */
     @TableField(exist = false)
     private String brandName;

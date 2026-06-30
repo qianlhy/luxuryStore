@@ -70,10 +70,6 @@
         <!-- 底部操作栏 -->
         <view class="footer">
             <view class="footer-left">
-                <view class="footer-icon-btn" @tap="showMoreActions">
-                    <image src="/static/images/icons/more.png" class="footer-icon"></image>
-                    <text>更多</text>
-                </view>
                 <view class="footer-icon-btn" @tap="contactService">
                     <image src="/static/images/icons/service.png" class="footer-icon"></image>
                     <text>客服</text>
@@ -81,12 +77,11 @@
                 <navigator url="/pages/cart/cart" open-type="switchTab" class="footer-icon-btn">
                     <image src="/static/images/icons/cart.png" class="footer-icon"></image>
                     <text>购物车</text>
-                    <view class="cart-badge" v-if="app.globalData.cart.length > 0">{{ app.globalData.cart.length }}</view>
                 </navigator>
             </view>
             <view class="footer-right">
                 <view class="add-cart-btn" @tap="addToCart">加入购物车</view>
-                <view class="buy-now-btn" @tap="buyNow">立即购买</view>
+                <view class="contact-sales-btn" @tap="contactSales">下单请联系您的微信销售</view>
             </view>
         </view>
 
@@ -98,28 +93,6 @@
             </view>
         </view>
 
-        <!-- 更多操作菜单 -->
-        <view class="action-sheet-mask" v-if="showActionSheet" @tap="closeActionSheet"></view>
-        <view :class="'action-sheet ' + (showActionSheet ? 'show' : '')">
-            <view class="action-sheet-header">
-                <text>更多操作</text>
-                <view class="action-sheet-close" @tap="closeActionSheet">×</view>
-            </view>
-            <view class="action-sheet-body">
-                <view class="action-item" @tap="collectProduct">
-                    <image src="/static/images/icons/collect.png" class="action-icon"></image>
-                    <text>收藏商品</text>
-                </view>
-                <view class="action-item" @tap="shareProduct">
-                    <image src="/static/images/icons/share.png" class="action-icon"></image>
-                    <text>分享商品</text>
-                </view>
-                <button class="action-item share-btn" open-type="share">
-                    <image src="/static/images/icons/share.png" class="action-icon"></image>
-                    <text>分享给朋友</text>
-                </button>
-            </view>
-        </view>
     </view>
 </template>
 
@@ -131,6 +104,9 @@ const favoriteApi = require('../../api/favorite');
 const cartApi = require('../../api/cart');
 const statisticsApi = require('../../api/statistics');
 const footprintApi = require('../../api/footprint');
+const salesApi = require('../../api/sales');
+const shareApi = require('../../api/share');
+const configApi = require('../../api/config');
 export default {
     data() {
         return {
@@ -139,8 +115,8 @@ export default {
             isLoading: true,
             isAddedToCart: false,
             current: 0,
-            showActionSheet: false,
             isFavorite: false,
+            servicePhone: '',
 
             app: {
                 globalData: {
@@ -153,6 +129,9 @@ export default {
      * 生命周期函数--监听页面加载
      */,
     onLoad(options) {
+        configApi.getValue('service_phone').then((phone) => {
+            if (phone) this.setData({ servicePhone: phone });
+        }).catch(() => {});
         const { id } = options;
         if (id) {
             this.loadProductDetail(parseInt(id));
@@ -326,108 +305,6 @@ export default {
                 });
         },
 
-        // 立即购买
-        buyNow: function () {
-            const { product, count } = this;
-            const token = uni.getStorageSync('token');
-            if (!token) {
-                uni.showToast({
-                    title: '请先登录',
-                    icon: 'none'
-                });
-                setTimeout(() => {
-                    uni.navigateTo({
-                        url: '/pages/login/login'
-                    });
-                }, 1500);
-                return;
-            }
-
-            // 添加到购物车
-            cartApi
-                .addToCart(product.id, count)
-                .then(() => {
-                    // 跳转到购物车页面
-                    uni.switchTab({
-                        url: '/pages/cart/cart'
-                    });
-                })
-                .catch((err) => {
-                    console.error('添加购物车失败', err);
-                });
-        },
-
-        // 显示更多操作菜单
-        showMoreActions: function () {
-            this.setData({
-                showActionSheet: true
-            });
-        },
-
-        // 关闭更多操作菜单
-        closeActionSheet: function () {
-            this.setData({
-                showActionSheet: false
-            });
-        },
-
-        // 收藏商品
-        collectProduct: function () {
-            const { product, isFavorite } = this;
-            const token = uni.getStorageSync('token');
-
-            // 检查是否已登录
-            if (!token) {
-                uni.showModal({
-                    title: '提示',
-                    content: '请先登录后再收藏商品',
-                    confirmText: '去登录',
-                    success: (res) => {
-                        if (res.confirm) {
-                            uni.navigateTo({
-                                url: '/pages/login/login'
-                            });
-                        }
-                    }
-                });
-                return;
-            }
-            if (isFavorite) {
-                // 如果已收藏，则取消收藏
-                favoriteApi
-                    .removeFavorite(product.id)
-                    .then(() => {
-                        this.setData({
-                            isFavorite: false
-                        });
-                        uni.showToast({
-                            title: '已取消收藏',
-                            icon: 'success'
-                        });
-                    })
-                    .catch((err) => {
-                        console.error('取消收藏失败', err);
-                    });
-            } else {
-                // 如果未收藏，则添加收藏
-                favoriteApi
-                    .addFavorite(product.id)
-                    .then(() => {
-                        this.setData({
-                            isFavorite: true
-                        });
-                        uni.showToast({
-                            title: '收藏成功',
-                            icon: 'success'
-                        });
-                    })
-                    .catch((err) => {
-                        console.error('收藏失败', err);
-                    });
-            }
-            this.closeActionSheet();
-        },
-
         // 轮播图切换事件
         onSwiperChange: function (e) {
             this.setData({
@@ -437,15 +314,48 @@ export default {
 
         // 联系客服
         contactService: function () {
-            uni.showToast({
-                title: '正在连接客服',
-                icon: 'loading'
-            });
-            this.closeActionSheet();
+            const phone = this.servicePhone;
+            if (phone) {
+                uni.makePhoneCall({ phoneNumber: phone });
+            } else {
+                uni.showToast({ title: '正在连接客服', icon: 'none' });
+            }
         },
 
-        shareProduct() {
-            console.log('占位：函数 shareProduct 未声明');
+        // 下单请联系您的微信销售：复用「分享给销售」流程
+        contactSales: function () {
+            const token = uni.getStorageSync('token');
+            if (!token) {
+                uni.showToast({ title: '请先登录', icon: 'none' });
+                setTimeout(() => uni.navigateTo({ url: '/pages/login/login' }), 1500);
+                return;
+            }
+            salesApi.getSalesList().then((sales) => {
+                if (!sales || sales.length === 0) {
+                    this.doShareToSales(null);
+                    return;
+                }
+                uni.showActionSheet({
+                    itemList: sales.map((s) => s.name),
+                    success: (res) => {
+                        this.doShareToSales(sales[res.tapIndex].id);
+                    }
+                });
+            }).catch(() => {
+                this.doShareToSales(null);
+            });
+        },
+
+        doShareToSales: function (salesId) {
+            shareApi.createShare({ shareType: 1, productIds: [this.product.id], salesId }).then((record) => {
+                uni.showModal({
+                    title: '已生成下单意向',
+                    content: '分享码: ' + record.shareCode + '\n请把本商品分享给您的微信销售完成下单',
+                    showCancel: false
+                });
+            }).catch((err) => {
+                console.error('分享给销售失败', err);
+            });
         }
     }
 };
@@ -631,31 +541,38 @@ export default {
 .footer-right {
     display: flex;
     height: 80rpx;
+    flex: 1;
+    margin-left: 16rpx;
 }
 
 .add-cart-btn,
-.buy-now-btn {
+.contact-sales-btn {
     height: 80rpx;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 28rpx;
-    padding: 0 30rpx;
     margin: 0;
-    line-height: 1;
+    line-height: 1.2;
+    text-align: center;
 }
 
 .add-cart-btn {
+    width: 150rpx;
+    flex-shrink: 0;
+    font-size: 24rpx;
     background-color: #fff;
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
     border-radius: 40rpx 0 0 40rpx;
 }
 
-.buy-now-btn {
-    background-color: var(--primary-color);
+.contact-sales-btn {
+    flex: 1;
+    padding: 0 16rpx;
+    font-size: 28rpx;
+    font-weight: bold;
+    background: linear-gradient(135deg, #F79AC0, #E14C82);
     color: #fff;
-    border: 1px solid var(--primary-color);
     border-radius: 0 40rpx 40rpx 0;
 }
 
